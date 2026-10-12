@@ -1,42 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F8FAFC;
-  --foreground: #0F172A;
-  --navy: #0B192C;
-  --navy-light: #1E3E62;
-  --gold: #C8963E;
-  --gold-hover: #B5822F;
-  --gold-light: #FEF9F0;
-  --gold-border: #E8D3AE;
-  --emerald: #059669;
-  --amber: #D97706;
-  --rose: #DC2626;
+  --font-sans: var(--font-sans, system-ui, -apple-system, sans-serif);
+  --font-mono: var(--font-mono, monospace);
+  
+  --color-ground: #EDEFF2;
+  --color-ink: #11161C;
+  --color-line: #DDE1E7;
+  --color-muted: #5B6676;
+  --color-gold: #A8741A;
+  --color-pos: #067647;
+  --color-neg: #B42318;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  background-color: #EDEFF2;
+  color: #11161C;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
+.bg-ground { background-color: #EDEFF2; }
+.text-ink { color: #11161C; }
+.text-muted { color: #5B6676; }
+.border-line { border-color: #DDE1E7; }
+.text-gold { color: #A8741A; }
+.text-pos { color: #067647; }
+.text-neg { color: #B42318; }
+.bg-pos { background-color: #067647; }
+.bg-neg { background-color: #B42318; }
 
 .font-mono,
 code,
 kbd,
 samp,
 .tabular-nums {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom scrollbar for data tables */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #EDEFF2;
 }
 ::-webkit-scrollbar-thumb {
   background: #CBD5E1;

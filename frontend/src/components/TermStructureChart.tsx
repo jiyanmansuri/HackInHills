@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { TermStructureResponse } from "@/lib/types";
 import { formatINR, formatPct, formatDate } from "@/lib/utils";
+import { Card } from "@/components/ui";
 
 interface TermStructureChartProps {
   termStructure: TermStructureResponse | null;
@@ -38,40 +39,33 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
   const symbols = ["GOLDM", "GOLDTEN", "GOLDGUINEA", "GOLDPETAL"];
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs transition hover:shadow-md mb-6">
-      {/* Title & Badge */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-slate-100 gap-2">
+    <Card className="p-5 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-line gap-2">
         <div>
           <div className="flex items-center space-x-2">
-            <h2 className="text-base font-semibold text-slate-900">
+            <h3 className="text-[15px] font-semibold text-ink">
               Forward Term Structure Curve
-            </h2>
-            <span
-              className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${
-                isContango
-                  ? "bg-slate-100 text-slate-700 border-slate-200"
-                  : "bg-amber-50 text-amber-800 border-amber-200"
-              }`}
-            >
-              {isContango ? "Contango (Carry Positive)" : "Backwardation (Prompt Premium)"}
+            </h3>
+            <span className="font-mono text-xs text-muted">
+              ({isContango ? "Contango" : "Backwardation"})
             </span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Per-gram forward curve across active expiries. Slope reflects implied financing and convenience yield.
+          <p className="mt-0.5 text-[12.5px] text-muted">
+            Per-gram forward curve across active expiries. Slope reflects implied carry and convenience yield.
           </p>
         </div>
       </div>
 
-      {/* Contract Tabs below title */}
-      <div className="flex items-center space-x-1 my-3 bg-slate-100 p-0.5 rounded-lg text-xs font-medium w-fit">
+      {/* Contract selector tabs */}
+      <div className="flex items-center space-x-1 my-3 bg-ground p-0.5 rounded text-xs font-medium w-fit">
         {symbols.map((sym) => (
           <button
             key={sym}
             onClick={() => onSelectSymbol(sym)}
-            className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
+            className={`px-3 py-1 rounded cursor-pointer transition-all ${
               selectedSymbol === sym
-                ? "bg-white text-slate-900 shadow-2xs font-semibold"
-                : "text-slate-500 hover:text-slate-900"
+                ? "bg-white text-ink font-semibold shadow-xs"
+                : "text-muted hover:text-ink"
             }`}
           >
             {sym}
@@ -80,41 +74,30 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
-        {/* Term Structure Chart */}
         <div className="lg:col-span-2 h-[260px] min-h-[260px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={chartData} margin={{ top: 15, right: 15, left: 10, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
-              <XAxis dataKey="expiry" tick={{ fontSize: 11, fill: "#64748B" }} stroke="#E2E8F0" />
+            <LineChart data={chartData} margin={{ top: 15, right: 12, left: 0, bottom: 5 }}>
+              <CartesianGrid stroke="#EEF0F3" vertical={false} />
+              <XAxis dataKey="expiry" tick={{ fontSize: 11, fill: "#8A94A3" }} tickLine={false} axisLine={false} />
               <YAxis
                 domain={["auto", "auto"]}
                 tickFormatter={(v) => `₹${Math.round(v)}`}
-                tick={{ fontSize: 11, fill: "#64748B" }}
-                stroke="#E2E8F0"
+                tick={{ fontSize: 11, fill: "#8A94A3" }}
+                tickLine={false}
+                axisLine={false}
+                width={56}
                 orientation="right"
               />
               <Tooltip
-                content={({ active, payload }) => {
-                  if (!active || !payload || !payload.length) return null;
-                  const item = payload[0].payload;
-                  return (
-                    <div className="bg-white border border-slate-200 p-3 rounded-xl shadow-md text-xs">
-                      <div className="font-semibold text-slate-900 mb-1">{item.expiry}</div>
-                      <div className="space-y-1">
-                        <div>Price: <strong>{formatINR(item.price)}/g</strong></div>
-                        <div>Calendar Basis: <strong>{item.spread >= 0 ? "+" : ""}{item.spread} ₹/g</strong></div>
-                        <div>Annualized Carry: <strong>{formatPct(item.carry)}</strong></div>
-                      </div>
-                    </div>
-                  );
-                }}
+                contentStyle={{ border: "1px solid #DDE1E7", borderRadius: 6, fontSize: 12, boxShadow: "none" }}
+                formatter={(value: any) => [`₹${Number(value).toFixed(1)}/g`, "Settlement"]}
               />
               <Line
                 type="monotone"
                 dataKey="price"
-                stroke="#B8860B"
+                stroke="#A8741A"
                 strokeWidth={2}
-                dot={{ r: 4, fill: "#0F172A", stroke: "#B8860B" }}
+                dot={{ r: 4, fill: "#11161C", stroke: "#A8741A" }}
                 isAnimationActive={false}
               />
             </LineChart>
@@ -123,30 +106,30 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
 
         {/* Expiry Details */}
         <div className="space-y-2">
-          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-muted block">
             Calendar Expiry Details
           </span>
           {curve.map((pt, idx) => (
             <div
               key={pt.expiry_date}
-              className="p-2.5 rounded-xl border border-slate-100 bg-slate-50/70 flex items-center justify-between text-xs"
+              className="p-2.5 rounded border border-line bg-ground/40 flex items-center justify-between text-xs"
             >
               <div>
-                <div className="font-semibold text-slate-900">
+                <div className="font-medium text-ink">
                   {idx === 0 ? "Near Month (T1)" : idx === 1 ? "Middle Month (T2)" : "Far Month (T3)"}
                 </div>
-                <div className="text-[11px] text-slate-500">{formatDate(pt.expiry_date)}</div>
+                <div className="text-[11px] text-muted">{formatDate(pt.expiry_date)}</div>
               </div>
               <div className="text-right">
-                <div className="font-semibold text-slate-900 tabular-nums">{formatINR(pt.price_per_gram)}/g</div>
-                <div className="text-[11px] text-slate-500">
-                  Carry: <strong className="text-slate-700">{formatPct(pt.annualized_carry_pct)}</strong>
+                <div className="font-mono font-medium text-ink tabular-nums">{formatINR(pt.price_per_gram)}/g</div>
+                <div className="text-[11px] text-muted font-mono">
+                  Carry: {formatPct(pt.annualized_carry_pct)}
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
