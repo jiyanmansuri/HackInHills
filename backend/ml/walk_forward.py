@@ -305,7 +305,7 @@ def get_backtest_summary(target_date: Optional[str] = None) -> Dict[str, Any]:
         if not run:
             return {"status": "NO_RUN", "message": "No backtest runs found."}
 
-        trade_query = session.query(BacktestTrade).filter(BacktestTrade.run_id == run.id).order_by(BacktestTrade.entry_date.asc())
+        trade_query = session.query(BacktestTrade).filter(BacktestTrade.run_id == run.id).order_by(BacktestTrade.exit_date.asc(), BacktestTrade.id.asc())
         if target_date:
             trade_query = trade_query.filter(BacktestTrade.exit_date <= target_date)
         trades = trade_query.all()
@@ -326,7 +326,7 @@ def get_backtest_summary(target_date: Optional[str] = None) -> Dict[str, Any]:
             }
 
         # Build equity curve time series vs buy-and-hold gold
-        equity_series = []
+        daily_equity_map = {}
         running_equity = 100000.0  # Starting portfolio base INR 100k
         running_gold_equity = 100000.0
 
@@ -343,14 +343,17 @@ def get_backtest_summary(target_date: Optional[str] = None) -> Dict[str, Any]:
             gold_ret = (t.exit_gold_price - first_gold) / max(1.0, first_gold)
             running_gold_equity = 100000.0 * (1.0 + gold_ret)
 
-            equity_series.append({
-                "date": t.exit_date.isoformat(),
+            d_str = t.exit_date.isoformat()
+            daily_equity_map[d_str] = {
+                "date": d_str,
                 "strategy_equity": round(running_equity, 2),
                 "gold_buy_and_hold": round(running_gold_equity, 2),
                 "trade_pnl": round(trade_pnl, 2),
                 "symbol": t.symbol,
                 "direction": t.direction
-            })
+            }
+
+        equity_series = [daily_equity_map[d] for d in sorted(daily_equity_map.keys())]
 
         # Dynamically compute metrics for the subset
         total_trades = len(trades)

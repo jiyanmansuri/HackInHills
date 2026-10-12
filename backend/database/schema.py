@@ -198,6 +198,7 @@ class Signal(Base):
     confidence = Column(Float, nullable=False)  # 0.0 - 1.0 calibrated probability
     z_score = Column(Float, nullable=False)
     spread_pct = Column(Float, nullable=False)
+    spread_abs = Column(Float, nullable=True, default=0.0)
     regime = Column(String(50), nullable=True)  # MEAN_REVERTING, DISLOCATED, THIN_LIQUIDITY, ROLL_WINDOW
     stay_quiet_reason = Column(String(255), nullable=True)  # Rationale if NO_SIGNAL
     days_to_expiry = Column(Integer, nullable=False)
@@ -219,6 +220,7 @@ class Signal(Base):
             "confidence": round(self.confidence, 3),
             "z_score": round(self.z_score, 2),
             "spread_pct": round(self.spread_pct, 4),
+            "spread_abs": round(self.spread_abs, 2) if self.spread_abs is not None else 0.0,
             "regime": self.regime,
             "stay_quiet_reason": self.stay_quiet_reason,
             "days_to_expiry": self.days_to_expiry,
@@ -299,6 +301,8 @@ class BacktestTrade(Base):
             "direction": self.direction,
             "entry_spread": round(self.entry_spread, 3),
             "exit_spread": round(self.exit_spread, 3),
+            "entry_gold_price": round(self.entry_gold_price, 2),
+            "exit_gold_price": round(self.exit_gold_price, 2),
             "gross_pnl": round(self.gross_pnl, 2),
             "fees": round(self.fees, 2),
             "net_pnl": round(self.net_pnl, 2),

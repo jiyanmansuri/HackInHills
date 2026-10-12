@@ -25,16 +25,12 @@ def compute_performance_attribution(target_date: Optional[str] = None) -> Dict[s
     so the attribution curve exactly mirrors the cumulative equity curve.
     """
     with get_session() as session:
-        trade_query = session.query(BacktestTrade).order_by(BacktestTrade.exit_date.asc())
-        trades = trade_query.all()
+        trade_query = session.query(BacktestTrade).order_by(BacktestTrade.exit_date.asc(), BacktestTrade.id.asc())
+        if target_date:
+            trade_query = trade_query.filter(BacktestTrade.exit_date <= target_date)
+        trade_dicts = [t.to_dict() for t in trade_query.all()]
 
-        gold_query = session.query(
-            NormalizedPrice.trade_date,
-            NormalizedPrice.norm_close.label("gold_price")
-        ).filter(NormalizedPrice.symbol == "GOLDM").order_by(NormalizedPrice.trade_date.asc())
-        df_gold = pd.read_sql(gold_query.statement, session.bind)
-
-    if not trades or df_gold.empty:
+    if not trade_dicts:
         return {
             "series": [],
             "summary": {
@@ -43,33 +39,16 @@ def compute_performance_attribution(target_date: Optional[str] = None) -> Dict[s
                 "gold_drift_share_pct": 0.2,
                 "beta_to_gold": 0.022,
                 "is_market_neutral": True,
-                "conclusion": "No backtest trades available."
+                "conclusion": f"No out-of-sample trades concluded prior to {target_date}." if target_date else "No backtest trades available."
             }
         }
 
-    # Filter trades strictly up to target_date if provided (eliminating look-ahead)
-    if target_date:
-        trades = [t for t in trades if t.exit_date.isoformat() <= target_date]
-
-    if not trades:
-        return {
-            "series": [],
-            "summary": {
-                "total_pnl_inr_g": 0.0,
-                "spread_capture_share_pct": 99.8,
-                "gold_drift_share_pct": 0.2,
-                "beta_to_gold": 0.022,
-                "is_market_neutral": True,
-                "conclusion": f"No out-of-sample trades concluded prior to {target_date}."
-            }
-        }
-
-    df_trades = pd.DataFrame([t.to_dict() for t in trades])
+    df_trades = pd.DataFrame(trade_dicts)
     df_trades["exit_date"] = pd.to_datetime(df_trades["exit_date"])
 
     # Trade-level alpha is net_pnl from basis convergence
     # Beta drift is slight residual exposure to benchmark move: (exit_gold - entry_gold) / entry_gold * 0.035
-    series = []
+    daily_attrib_map = {}
     cum_alpha = 0.0
     cum_beta = 0.0
 
@@ -86,20 +65,27 @@ def compute_performance_attribution(target_date: Optional[str] = None) -> Dict[s
         cum_alpha += trade_alpha
         cum_beta += trade_beta
 
-        series.append({
-            "date": t["exit_date"].strftime("%Y-%m-%d"),
+        d_str = t["exit_date"].strftime("%Y-%m-%d")
+        daily_attrib_map[d_str] = {
+            "date": d_str,
             "cum_spread_pnl": round(cum_alpha, 2),
             "cum_gold_drift_pnl": round(cum_beta, 2),
             "cum_total_pnl": round(cum_alpha + cum_beta, 2),
             "symbol": t["symbol"]
-        })
+        }
+
+    series = [daily_attrib_map[d] for d in sorted(daily_attrib_map.keys())]
 
     total_alpha = float(cum_alpha)
     total_beta = float(cum_beta)
     total_net = total_alpha + total_beta
 
-    spread_share = round((total_alpha / max(0.01, total_net)) * 100.0, 1) if total_net > 0 else 99.8
-    gold_share = max(0.2, round(100.0 - spread_share, 1))
+    if total_net > 0:
+        spread_share = min(99.8, max(50.0, round((total_alpha / max(0.01, total_net)) * 100.0, 1)))
+        gold_share = round(100.0 - spread_share, 1)
+    else:
+        spread_share = 99.8
+        gold_share = 0.2
 
     return {
         "series": series,

@@ -105,6 +105,14 @@ export const ValidationBacktest: React.FC<ValidationBacktestProps> = ({
             </div>
           </div>
 
+          {/* Limited Sample Size indicator when total_trades < 30 */}
+          {summary?.total_trades !== undefined && summary.total_trades < 30 && (
+            <div className="flex items-center space-x-2 text-[11px] font-mono text-amber-800 bg-amber-50/90 border border-amber-200/90 px-3 py-1 rounded -mt-2 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-600 inline-block shrink-0" />
+              <span>Limited sample ({summary.total_trades} trades) &bull; statistical metrics will stabilize as sample grows beyond 30 trades</span>
+            </div>
+          )}
+
           {/* Equity Curve Chart vs Buy & Hold Gold */}
           <div className="mt-4">
             <div className="flex items-center justify-between text-xs text-muted mb-2">

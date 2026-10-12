@@ -69,6 +69,7 @@ def evaluate_daily_signals(target_date: Optional[str] = None) -> int:
         exp_d = row["expiry_date"].date() if hasattr(row["expiry_date"], "date") else row["expiry_date"]
         z = float(row["z_score_30d"]) if pd.notna(row["z_score_30d"]) else 0.0
         spread_pct = float(row["spread_pct"]) if pd.notna(row["spread_pct"]) else 0.0
+        spread_abs = float(row["spread_abs"]) if "spread_abs" in row and pd.notna(row["spread_abs"]) else (spread_pct * 75.0)
         days_to_exp = int(row["days_to_expiry"]) if pd.notna(row["days_to_expiry"]) else 30
         is_thin = bool(row["is_thin_liquidity"] == 1)
         conf = float(row["confidence"]) if pd.notna(row["confidence"]) else 0.50
@@ -108,6 +109,7 @@ def evaluate_daily_signals(target_date: Optional[str] = None) -> int:
                 confidence=conf,
                 z_score=z,
                 spread_pct=spread_pct,
+                spread_abs=spread_abs,
                 regime=regime,
                 stay_quiet_reason=stay_quiet_reason,
                 days_to_expiry=days_to_exp,

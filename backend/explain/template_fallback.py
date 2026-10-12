@@ -49,10 +49,7 @@ def generate_deterministic_explanation(payload: Dict[str, Any]) -> str:
         "delivery": "Lot size and specification differences."
     })
 
-    explanation = f"""### Relative Value Market Intelligence: {symbol} vs GOLDM
-**Expiry:** {expiry} | **Days to Expiry:** {days_to_exp}d | **Confidence:** {confidence:.1%}
-
-#### 1. Core Thesis
+    explanation = f"""#### 1. Core Thesis
 {symbol} is currently trading **{abs(spread_pct):.2f}% ({abs(spread_abs):.2f} INR/g) {direction_text}** relative to the benchmark GOLDM on matched expiry, registering a standardized **Z-score of {z_score:+.2f}**. Historical walk-forward backtesting indicates this spread regime demonstrates a strong empirical tendency to mean-revert toward the 30-day baseline within 3 to 5 trading sessions.
 
 #### 2. Structural Basis Drivers

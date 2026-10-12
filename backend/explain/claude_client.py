@@ -23,6 +23,10 @@ MANDATORY RULES:
 3. Keep the tone concise, incisive, and trader-friendly. Add the disclaimer: 'Decision-support analytics. Not investment advice.' at the end."""
 
 
+# In-memory explanation response cache
+_EXPLANATION_CACHE: Dict[str, Dict[str, Any]] = {}
+
+
 def explain_signal(payload: Dict[str, Any]) -> Dict[str, Any]:
     """
     Generate an AI-powered qualitative explanation for a given relative value signal.
@@ -34,14 +38,20 @@ def explain_signal(payload: Dict[str, Any]) -> Dict[str, Any]:
     Returns:
         Dict: {"explanation": str, "model_used": str, "is_fallback": bool}
     """
+    cache_key = f"{payload.get('symbol')}_{payload.get('expiry_date')}_{round(float(payload.get('z_score', 0)), 2)}_{round(float(payload.get('spread_pct', 0)), 3)}"
+    if cache_key in _EXPLANATION_CACHE:
+        return _EXPLANATION_CACHE[cache_key]
+
     if not ANTHROPIC_API_KEY:
         logger.info("ANTHROPIC_API_KEY not configured. Using deterministic quantitative template engine.")
         explanation = generate_deterministic_explanation(payload)
-        return {
+        res = {
             "explanation": explanation,
             "model_used": "deterministic-quant-engine",
             "is_fallback": True
         }
+        _EXPLANATION_CACHE[cache_key] = res
+        return res
 
     try:
         import anthropic
@@ -68,18 +78,22 @@ Provide your structured quantitative analysis for this trade."""
         )
 
         content = response.content[0].text
-        return {
+        res = {
             "explanation": content,
             "model_used": CLAUDE_MODEL,
             "is_fallback": False
         }
+        _EXPLANATION_CACHE[cache_key] = res
+        return res
 
     except Exception as e:
         logger.warning(f"Anthropic API call failed ({e}). Falling back to deterministic template engine.")
         explanation = generate_deterministic_explanation(payload)
-        return {
+        res = {
             "explanation": explanation,
             "model_used": "deterministic-quant-engine",
             "is_fallback": True,
             "error_note": str(e)
         }
+        _EXPLANATION_CACHE[cache_key] = res
+        return res

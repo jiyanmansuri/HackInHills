@@ -301,11 +301,79 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                   {/* Zero Baseline for Benchmark */}
                   <ReferenceLine y={0} stroke="#11161C" strokeWidth={1.5} />
                   
-                  {/* Clean reference boundaries with internal left placement to avoid Y-axis collision */}
-                  <ReferenceLine y={2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "+2σ Zone", position: "insideTopLeft", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
-                  <ReferenceLine y={1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "+1σ Zone", position: "insideTopLeft", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
-                  <ReferenceLine y={-1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "-1σ Zone", position: "insideBottomLeft", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
-                  <ReferenceLine y={-2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "-2σ Zone", position: "insideBottomLeft", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  {/* Clean reference boundaries with white-tagged label badges to prevent line-text collisions */}
+                  <ReferenceLine
+                    y={2}
+                    stroke="#CBD5E1"
+                    strokeDasharray="3 3"
+                    label={(props: any) => {
+                      const { viewBox } = props;
+                      const x = (viewBox?.x ?? 0) + 12;
+                      const y = (viewBox?.y ?? 0) - 18;
+                      return (
+                        <g>
+                          <rect x={x} y={y} width={50} height={14} fill="#FFFFFF" rx={2} stroke="#CBD5E1" strokeWidth={0.75} />
+                          <text x={x + 5} y={y + 10} fill="#5B6676" fontSize={9} fontWeight={600} fontFamily="var(--font-mono)">
+                            +2σ Zone
+                          </text>
+                        </g>
+                      );
+                    }}
+                  />
+                  <ReferenceLine
+                    y={1}
+                    stroke="#E2E8F0"
+                    strokeDasharray="2 2"
+                    label={(props: any) => {
+                      const { viewBox } = props;
+                      const x = (viewBox?.x ?? 0) + 12;
+                      const y = (viewBox?.y ?? 0) - 18;
+                      return (
+                        <g>
+                          <rect x={x} y={y} width={50} height={14} fill="#FFFFFF" rx={2} stroke="#E2E8F0" strokeWidth={0.75} />
+                          <text x={x + 5} y={y + 10} fill="#8A94A3" fontSize={9} fontWeight={600} fontFamily="var(--font-mono)">
+                            +1σ Zone
+                          </text>
+                        </g>
+                      );
+                    }}
+                  />
+                  <ReferenceLine
+                    y={-1}
+                    stroke="#E2E8F0"
+                    strokeDasharray="2 2"
+                    label={(props: any) => {
+                      const { viewBox } = props;
+                      const x = (viewBox?.x ?? 0) + 12;
+                      const y = (viewBox?.y ?? 0) + 4;
+                      return (
+                        <g>
+                          <rect x={x} y={y} width={50} height={14} fill="#FFFFFF" rx={2} stroke="#E2E8F0" strokeWidth={0.75} />
+                          <text x={x + 5} y={y + 10} fill="#8A94A3" fontSize={9} fontWeight={600} fontFamily="var(--font-mono)">
+                            -1σ Zone
+                          </text>
+                        </g>
+                      );
+                    }}
+                  />
+                  <ReferenceLine
+                    y={-2}
+                    stroke="#CBD5E1"
+                    strokeDasharray="3 3"
+                    label={(props: any) => {
+                      const { viewBox } = props;
+                      const x = (viewBox?.x ?? 0) + 12;
+                      const y = (viewBox?.y ?? 0) + 4;
+                      return (
+                        <g>
+                          <rect x={x} y={y} width={50} height={14} fill="#FFFFFF" rx={2} stroke="#CBD5E1" strokeWidth={0.75} />
+                          <text x={x + 5} y={y + 10} fill="#5B6676" fontSize={9} fontWeight={600} fontFamily="var(--font-mono)">
+                            -2σ Zone
+                          </text>
+                        </g>
+                      );
+                    }}
+                  />
 
                   <CartesianGrid stroke="#EEF0F3" vertical={false} />
                   <XAxis
@@ -318,7 +386,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                   />
                   <YAxis
                     domain={[-5, 5]}
-                    ticks={[-5, -4, -2, 0, 2, 4, 5]}
+                    ticks={[-4, -2, 0, 2, 4]}
                     tick={{ fontSize: 11, fill: "#5B6676", fontFamily: "var(--font-mono)" }}
                     tickLine={false}
                     axisLine={false}
