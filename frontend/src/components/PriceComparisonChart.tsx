@@ -14,32 +14,37 @@ import {
 } from "recharts";
 import { NormalizedPriceRecord } from "@/lib/types";
 import { formatINR, formatDate } from "@/lib/utils";
-import { Card, Label } from "@/components/ui";
+import { Card } from "@/components/ui";
 
 interface PriceComparisonChartProps {
   data: NormalizedPriceRecord[];
   asOfDate?: string;
+  defaultSymbol?: string;
+  hasActiveSignal?: boolean;
 }
 
-const SERIES = [
-  { key: "GOLDM", label: "GOLDM (100g Ref)", color: "#11161C" },
-  { key: "GOLDTEN", label: "GOLDTEN (10g)", color: "#A8741A" },
-  { key: "GOLDGUINEA", label: "GOLDGUINEA (8g)", color: "#5B6676" },
-  { key: "GOLDPETAL", label: "GOLDPETAL (1g)", color: "#067647" },
+const CONTRACT_PAIRS = [
+  { key: "GOLDTEN", name: "GOLDTEN vs GOLDM", shortName: "GOLDTEN (10g)", color: "#A8741A" },
+  { key: "GOLDGUINEA", name: "GOLDGUINEA vs GOLDM", shortName: "GOLDGUINEA (8g)", color: "#5B6676" },
+  { key: "GOLDPETAL", name: "GOLDPETAL vs GOLDM", shortName: "GOLDPETAL (1g)", color: "#067647" },
 ];
 
 export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
   data,
-  asOfDate = "2026-09-22",
+  asOfDate = "2026-08-12",
+  defaultSymbol = "GOLDTEN",
+  hasActiveSignal = false,
 }) => {
   const [selectedRange, setSelectedRange] = useState<"1M" | "3M" | "6M" | "ALL">("3M");
-  const [chartMode, setChartMode] = useState<"PRICE" | "ZSCORE">("ZSCORE");
-  const [activeSymbols, setActiveSymbols] = useState<Record<string, boolean>>({
-    GOLDM: true,
-    GOLDTEN: true,
-    GOLDGUINEA: true,
-    GOLDPETAL: true,
-  });
+  const [chartMode, setChartMode] = useState<"ZSCORE" | "PRICE">("ZSCORE");
+  const [focusedSymbol, setFocusedSymbol] = useState<string>(defaultSymbol);
+
+  // Synchronize focusedSymbol if defaultSymbol changes from parent
+  React.useEffect(() => {
+    if (defaultSymbol && defaultSymbol !== "GOLDM") {
+      setFocusedSymbol(defaultSymbol);
+    }
+  }, [defaultSymbol]);
 
   // Pivot data by trade_date for front-month contract per symbol and clip to asOfDate
   const chartData = useMemo(() => {
@@ -106,48 +111,45 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
     return sorted.slice(-daysCount);
   }, [data, selectedRange, asOfDate]);
 
-  const toggleSymbol = (sym: string) => {
-    setActiveSymbols((prev) => ({ ...prev, [sym]: !prev[sym] }));
-  };
-
   return (
     <Card className="p-5 h-full flex flex-col justify-between">
       <div>
+        {/* Top Header & Range Controls */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between pb-3 border-b border-line gap-2">
           <div>
             <h3 className="text-[15px] font-semibold text-ink">
-              {chartMode === "PRICE"
-                ? "Normalized Settlement Price Parity"
-                : "Basis Spread Z-Score & Statistical Bands (±1σ, ±2σ)"}
+              {chartMode === "ZSCORE"
+                ? "Basis Spread Z-Score & Statistical Bands (±1σ, ±2σ)"
+                : "Normalized Settlement Price Parity (₹/g)"}
             </h3>
             <p className="mt-0.5 text-[12.5px] text-muted">
-              {chartMode === "PRICE"
-                ? "All 4 contracts normalized to per-gram baseline (GOLDM ÷10g, GOLDTEN ÷1g, GOLDGUINEA ÷8g, GOLDPETAL ÷1g)."
-                : "Rolling 30-day standardized basis. Shaded ±1σ and ±2σ reference bands detect statistical mean-reversion zones."}
+              {chartMode === "ZSCORE"
+                ? "Rolling 30-day standardized basis relative to GOLDM zero baseline. Focus pair shown with statistical boundaries."
+                : "All 4 contracts normalized to per-gram baseline (GOLDM ÷10g, GOLDTEN ÷1g, GOLDGUINEA ÷8g, GOLDPETAL ÷1g)."}
             </p>
           </div>
 
-          <div className="flex items-center space-x-1.5 self-start sm:self-auto">
-            <div className="flex items-center space-x-0.5 bg-ground p-0.5 rounded text-xs font-medium">
-              <button
-                onClick={() => setChartMode("PRICE")}
-                className={`px-2 py-0.5 rounded cursor-pointer transition-all ${
-                  chartMode === "PRICE" ? "bg-white text-ink font-semibold shadow-xs" : "text-muted hover:text-ink"
-                }`}
-              >
-                Parity
-              </button>
+          <div className="flex items-center space-x-1.5 self-start sm:self-auto shrink-0">
+            <div className="flex items-center space-x-0.5 bg-ground p-0.5 rounded text-xs font-medium border border-line/60">
               <button
                 onClick={() => setChartMode("ZSCORE")}
-                className={`px-2 py-0.5 rounded cursor-pointer transition-all ${
+                className={`px-2.5 py-0.5 rounded cursor-pointer transition-all ${
                   chartMode === "ZSCORE" ? "bg-white text-ink font-semibold shadow-xs" : "text-muted hover:text-ink"
                 }`}
               >
                 ±Z Bands
               </button>
+              <button
+                onClick={() => setChartMode("PRICE")}
+                className={`px-2.5 py-0.5 rounded cursor-pointer transition-all ${
+                  chartMode === "PRICE" ? "bg-white text-ink font-semibold shadow-xs" : "text-muted hover:text-ink"
+                }`}
+              >
+                Parity
+              </button>
             </div>
 
-            <div className="flex items-center space-x-0.5 bg-ground p-0.5 rounded text-xs font-medium">
+            <div className="flex items-center space-x-0.5 bg-ground p-0.5 rounded text-xs font-medium border border-line/60">
               {(["1M", "3M", "6M", "ALL"] as const).map((rng) => (
                 <button
                   key={rng}
@@ -163,31 +165,73 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
           </div>
         </div>
 
-        {/* Series filters */}
-        <div className="flex flex-wrap items-center gap-1.5 my-3 text-xs">
-          <span className="text-[11px] font-medium uppercase tracking-wider text-muted mr-1">
-            Series:
-          </span>
-          {SERIES.map((s) => {
-            if (chartMode === "ZSCORE" && s.key === "GOLDM") return null;
-            return (
-              <button
-                key={s.key}
-                onClick={() => toggleSymbol(s.key)}
-                className={`inline-flex items-center space-x-1.5 px-2 py-0.5 rounded border text-xs cursor-pointer transition-all ${
-                  activeSymbols[s.key]
-                    ? "bg-white border-line text-ink font-medium"
-                    : "bg-ground border-dashed border-line text-muted opacity-60"
-                }`}
-              >
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: activeSymbols[s.key] ? s.color : "#94A3B8" }} />
-                <span>{s.key}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Pair Focus Selector & Legend */}
+        {chartMode === "ZSCORE" ? (
+          <div className="flex flex-wrap items-center justify-between gap-2 my-3 text-xs">
+            <div className="flex items-center space-x-1.5">
+              <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-muted mr-1">
+                Focus Pair:
+              </span>
+              {CONTRACT_PAIRS.map((p) => {
+                const isSelected = focusedSymbol === p.key;
+                return (
+                  <button
+                    key={p.key}
+                    onClick={() => setFocusedSymbol(p.key)}
+                    className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded text-xs cursor-pointer transition-all ${
+                      isSelected
+                        ? "bg-ink text-white font-semibold shadow-xs"
+                        : "bg-white border border-line text-muted hover:text-ink"
+                    }`}
+                  >
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ backgroundColor: isSelected ? "#C8963E" : p.color }}
+                    />
+                    <span>{p.shortName}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-        {/* 300px Recharts Container with explicit height */}
+            {/* Benchmark Zero Baseline & Band Legend */}
+            <div className="flex items-center space-x-3 text-[11px] font-mono text-muted">
+              <span className="inline-flex items-center space-x-1">
+                <span className="w-3 h-0.5 bg-[#11161C] inline-block" />
+                <span>GOLDM (0 Baseline)</span>
+              </span>
+              <span className="inline-flex items-center space-x-1">
+                <span className="w-2 h-2 bg-[#E2E8F0] border border-[#CBD5E1] inline-block" />
+                <span>±1σ Zone</span>
+              </span>
+              <span className="inline-flex items-center space-x-1">
+                <span className="w-2 h-2 bg-[#F1F5F9] border border-[#E2E8F0] inline-block" />
+                <span>±2σ Zone</span>
+              </span>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-center gap-2 my-3 text-xs">
+            <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-muted mr-1">
+              Series:
+            </span>
+            <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded bg-ground text-ink font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#11161C]" />
+              <span>GOLDM (100g Benchmark)</span>
+            </span>
+            {CONTRACT_PAIRS.map((p) => (
+              <span
+                key={p.key}
+                className="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded bg-ground text-ink font-medium"
+              >
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
+                <span>{p.shortName}</span>
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* 300px Recharts Container */}
         <div className="h-[300px] min-h-[300px] w-full mt-2">
           {chartData.length === 0 ? (
             <div className="grid h-full place-items-center text-sm text-muted">
@@ -196,22 +240,22 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
           ) : (
             <ResponsiveContainer width="100%" height="100%">
               {chartMode === "PRICE" ? (
-                <LineChart data={chartData} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
+                <LineChart data={chartData} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
                   <CartesianGrid stroke="#EEF0F3" vertical={false} />
                   <XAxis
                     dataKey="date"
-                    tick={{ fontSize: 11, fill: "#8A94A3" }}
+                    tick={{ fontSize: 11, fill: "#8A94A3", fontFamily: "var(--font-mono)" }}
                     tickLine={false}
                     axisLine={false}
-                    minTickGap={40}
+                    minTickGap={45}
                     tickFormatter={(d) => formatDate(d)}
                   />
                   <YAxis
                     domain={["auto", "auto"]}
-                    tick={{ fontSize: 11, fill: "#8A94A3" }}
+                    tick={{ fontSize: 11, fill: "#8A94A3", fontFamily: "var(--font-mono)" }}
                     tickLine={false}
                     axisLine={false}
-                    width={56}
+                    width={60}
                     orientation="right"
                     tickFormatter={(v) => `₹${Math.round(v)}`}
                   />
@@ -220,82 +264,111 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                     formatter={(value: any, name: any) => [`₹${Number(value).toFixed(1)}/g`, name]}
                     labelFormatter={(label: any) => formatDate(String(label))}
                   />
-                  {SERIES.map((s) =>
-                    activeSymbols[s.key] ? (
-                      <Line
-                        key={s.key}
-                        dataKey={s.key}
-                        stroke={s.color}
-                        strokeWidth={2}
-                        dot={false}
-                        isAnimationActive={false}
-                        type="monotone"
-                        name={s.label}
-                      />
-                    ) : null
-                  )}
+                  <Line
+                    dataKey="GOLDM"
+                    stroke="#11161C"
+                    strokeWidth={2.5}
+                    dot={false}
+                    isAnimationActive={false}
+                    type="monotone"
+                    name="GOLDM (Ref)"
+                  />
+                  {CONTRACT_PAIRS.map((p) => (
+                    <Line
+                      key={p.key}
+                      dataKey={p.key}
+                      stroke={p.color}
+                      strokeWidth={1.5}
+                      dot={false}
+                      isAnimationActive={false}
+                      type="monotone"
+                      name={p.shortName}
+                    />
+                  ))}
                 </LineChart>
               ) : (
-                <LineChart data={chartData} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
-                  <ReferenceArea y1={-2} y2={2} fill="#F3F5F8" />
-                  <ReferenceArea y1={-1} y2={1} fill="#E6EAF0" />
-                  <ReferenceLine y={0} stroke="#8A94A3" />
+                <LineChart data={chartData} margin={{ top: 12, right: 48, bottom: 12, left: 0 }}>
+                  {/* Outer ±2σ Band */}
+                  <ReferenceArea y1={-2} y2={2} fill="#F8FAFC" fillOpacity={0.8} />
+                  {/* Inner ±1σ Band */}
+                  <ReferenceArea y1={-1} y2={1} fill="#EEF2F6" fillOpacity={0.9} />
+                  
+                  {/* Zero Baseline for Benchmark */}
+                  <ReferenceLine y={0} stroke="#11161C" strokeWidth={1.5} />
+                  
+                  {/* Labeled Threshold Boundaries with Explicit Annotations */}
+                  <ReferenceLine y={2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "+2σ Zone", position: "right", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  <ReferenceLine y={1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "+1σ Zone", position: "right", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  <ReferenceLine y={-1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "-1σ Zone", position: "right", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  <ReferenceLine y={-2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "-2σ Zone", position: "right", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+
                   <CartesianGrid stroke="#EEF0F3" vertical={false} />
                   <XAxis
                     dataKey="date"
-                    tick={{ fontSize: 11, fill: "#8A94A3" }}
+                    tick={{ fontSize: 11, fill: "#8A94A3", fontFamily: "var(--font-mono)" }}
                     tickLine={false}
                     axisLine={false}
-                    minTickGap={40}
+                    minTickGap={50}
                     tickFormatter={(d) => formatDate(d)}
                   />
                   <YAxis
-                    domain={[-3, 3]}
-                    tick={{ fontSize: 11, fill: "#8A94A3" }}
+                    domain={[-4, 4]}
+                    ticks={[-4, -2, 0, 2, 4]}
+                    tick={{ fontSize: 11, fill: "#5B6676", fontFamily: "var(--font-mono)" }}
                     tickLine={false}
                     axisLine={false}
                     width={40}
                     orientation="right"
-                    tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}σ`}
+                    tickFormatter={(v) => (v === 0 ? "0σ" : `${v > 0 ? "+" : ""}${v}σ`)}
                   />
                   <Tooltip
                     contentStyle={{ border: "1px solid #DDE1E7", borderRadius: 6, fontSize: 12, boxShadow: "none" }}
                     formatter={(value: any, name: any) => [`${Number(value) > 0 ? "+" : ""}${Number(value).toFixed(2)}σ`, name]}
                     labelFormatter={(label: any) => formatDate(String(label))}
                   />
-                  {activeSymbols.GOLDTEN && (
+
+                  {/* Other background pairs as faint thin lines */}
+                  {CONTRACT_PAIRS.filter((p) => p.key !== focusedSymbol).map((p) => (
                     <Line
-                      dataKey="GOLDTEN_zscore"
-                      stroke="#A8741A"
-                      strokeWidth={2}
+                      key={p.key}
+                      dataKey={`${p.key}_zscore`}
+                      stroke={p.color}
+                      strokeWidth={1}
+                      strokeOpacity={0.25}
                       dot={false}
                       isAnimationActive={false}
                       type="monotone"
-                      name="GOLDTEN vs GOLDM (Z)"
+                      name={`${p.key} (Secondary)`}
                     />
-                  )}
-                  {activeSymbols.GOLDGUINEA && (
-                    <Line
-                      dataKey="GOLDGUINEA_zscore"
-                      stroke="#5B6676"
-                      strokeWidth={2}
-                      dot={false}
-                      isAnimationActive={false}
-                      type="monotone"
-                      name="GOLDGUINEA vs GOLDM (Z)"
-                    />
-                  )}
-                  {activeSymbols.GOLDPETAL && (
-                    <Line
-                      dataKey="GOLDPETAL_zscore"
-                      stroke="#067647"
-                      strokeWidth={2}
-                      dot={false}
-                      isAnimationActive={false}
-                      type="monotone"
-                      name="GOLDPETAL vs GOLDM (Z)"
-                    />
-                  )}
+                  ))}
+
+                  {/* Primary Focus Pair: Thick high-contrast line */}
+                  {(() => {
+                    const activePair = CONTRACT_PAIRS.find((p) => p.key === focusedSymbol) || CONTRACT_PAIRS[0];
+                    return (
+                      <Line
+                        dataKey={`${activePair.key}_zscore`}
+                        stroke={activePair.color}
+                        strokeWidth={2.75}
+                        dot={(props: any) => {
+                          const { cx, cy, payload } = props;
+                          // If current date matches asOfDate and a signal fired, draw red prominent beacon
+                          if (payload?.date === asOfDate && hasActiveSignal) {
+                            return (
+                              <g key={`marker-${payload.date}`}>
+                                <circle cx={cx} cy={cy} r={6} fill="#B42318" stroke="#FFFFFF" strokeWidth={2} />
+                                <circle cx={cx} cy={cy} r={9} fill="none" stroke="#B42318" strokeWidth={1.5} opacity={0.6} />
+                              </g>
+                            );
+                          }
+                          return <React.Fragment key={`dot-${props.key || Math.random()}`} />;
+                        }}
+                        isAnimationActive={false}
+                        type="monotone"
+                        name={`${activePair.name} (Z)`}
+                      />
+                    );
+                  })()}
                 </LineChart>
               )}
             </ResponsiveContainer>
@@ -304,7 +377,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
       </div>
 
       <div className="pt-3 border-t border-line flex items-center justify-between text-xs text-muted">
-        <span>Benchmark Reference: GOLDM (100g, Quoted per 10g)</span>
+        <span>Benchmark Reference: GOLDM (100g, Quoted per 10g) &bull; Zero Parity</span>
         <span className="font-mono">As of {asOfDate}</span>
       </div>
     </Card>

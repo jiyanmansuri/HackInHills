@@ -152,24 +152,32 @@ def get_active_signals(target_date: Optional[str] = None) -> Dict[str, Any]:
                 "best_opportunity": None
             }
 
-        signal_list = [s.to_dict() for s in signals]
-        active_signals = [s for s in signal_list if s["is_active"]]
+        # Group by symbol to strictly keep the front-month (shortest days_to_expiry) contract per symbol
+        # This guarantees 100% 1-to-1 parity with the front-month Relative Value table!
+        front_month_signals = {}
+        for s in signals:
+            sym = s.symbol
+            if sym not in front_month_signals or s.days_to_expiry < front_month_signals[sym].days_to_expiry:
+                front_month_signals[sym] = s
 
-        avg_conf = round(float(np.mean([s["confidence"] for s in signal_list])), 3) if signal_list else 0.0
+        front_signal_list = [s.to_dict() for s in front_month_signals.values()]
+        active_signals = [s for s in front_signal_list if s["is_active"]]
+
+        avg_conf = round(float(np.mean([s["confidence"] for s in front_signal_list])), 3) if front_signal_list else 0.0
 
         best_opp = None
         if active_signals:
             best_opp = max(active_signals, key=lambda x: (x["confidence"], abs(x["z_score"])))
         else:
-            # Select highest absolute z-score candidate even if staying quiet
-            best_opp = max(signal_list, key=lambda x: abs(x["z_score"]))
+            # Select highest absolute z-score candidate in front-month even if staying quiet
+            best_opp = max(front_signal_list, key=lambda x: abs(x["z_score"])) if front_signal_list else None
 
         return {
-            "signals": signal_list,
+            "signals": front_signal_list,
             "has_actionable_signals": len(active_signals) > 0,
             "discipline_status": "ACTIVE_OPPORTUNITY" if len(active_signals) > 0 else "STAY_QUIET",
             "active_count": len(active_signals),
-            "total_evaluated": len(signal_list),
+            "total_evaluated": len(front_signal_list),
             "avg_confidence": avg_conf,
             "best_opportunity": best_opp
         }

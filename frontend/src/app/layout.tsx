@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-ground text-ink antialiased font-sans">
         <main className="flex-1">{children}</main>
 
-        <footer className="border-t border-line bg-white py-6 mt-12">
+        <footer className="border-t border-line bg-white py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-muted gap-3">
             <div className="flex items-center space-x-2 font-medium">
               <span className="font-semibold text-ink">Commodity Derivatives Intelligence</span>

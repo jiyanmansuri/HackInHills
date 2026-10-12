@@ -50,11 +50,12 @@ export const Header: React.FC<HeaderProps> = ({
               <select
                 value={selectedDate}
                 onChange={(e) => onSelectDate(e.target.value)}
-                className="bg-white border border-line rounded px-2 py-0.5 text-xs text-ink font-medium cursor-pointer outline-none focus:border-ink transition-colors"
+                className="bg-white border border-line rounded px-2.5 py-1 text-xs text-ink font-mono font-medium cursor-pointer outline-none focus:border-ink transition-colors shadow-2xs"
               >
-                <option value="2026-09-22">2026-09-22 (Equilibrium &bull; 0 Signals)</option>
-                <option value="2026-03-17">2026-03-17 (High Dislocation &bull; Long GOLDTEN Z = -4.30σ)</option>
-                <option value="2026-08-10">2026-08-10 (High Dislocation &bull; Short GOLDGUINEA Z = +4.52σ)</option>
+                <option value="2026-08-12">🔴 2026-08-12 (Dislocation • 3 Active Signals)</option>
+                <option value="2026-08-10">🔴 2026-08-10 (Dislocation • Short GOLDGUINEA +4.52σ)</option>
+                <option value="2026-03-17">🔴 2026-03-17 (Dislocation • Long GOLDTEN -4.30σ)</option>
+                <option value="2026-09-22">⚪ 2026-09-22 (Equilibrium • Disciplined Flat)</option>
               </select>
             </div>
           )}

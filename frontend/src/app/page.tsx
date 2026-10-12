@@ -56,7 +56,7 @@ export default function DashboardPage() {
   // Interactive controls
   const [activeTab, setActiveTab] = useState<"overview" | "spreads" | "term-structure" | "validation">("overview");
   const [selectedTermSymbol, setSelectedTermSymbol] = useState<string>("GOLDM");
-  const [selectedDate, setSelectedDate] = useState<string>("2026-09-22");
+  const [selectedDate, setSelectedDate] = useState<string>("2026-08-12");
   const [explainSignal, setExplainSignal] = useState<Partial<SignalItem> | null>(null);
   const [isExplainOpen, setIsExplainOpen] = useState(false);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
@@ -123,7 +123,7 @@ export default function DashboardPage() {
 
   // Auto-open explain drawer when replaying a dislocation date
   useEffect(() => {
-    if (signalsData && (selectedDate === "2026-03-17" || selectedDate === "2026-08-10")) {
+    if (signalsData && (selectedDate === "2026-08-12" || selectedDate === "2026-08-10" || selectedDate === "2026-03-17")) {
       const activeSig = signalsData.signals.find((s) => s.is_active);
       if (activeSig) {
         setExplainSignal(activeSig);
@@ -193,7 +193,12 @@ export default function DashboardPage() {
             {/* 2. Primary Hero Visualizer (65% Parity / ±Z-Bands Chart + 35% ML Signal Discipline) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 items-stretch">
               <div className="lg:col-span-8">
-                <PriceComparisonChart data={prices} asOfDate={selectedDate} />
+                <PriceComparisonChart
+                  data={prices}
+                  asOfDate={selectedDate}
+                  defaultSymbol={signalsData?.best_opportunity?.symbol || "GOLDTEN"}
+                  hasActiveSignal={(signalsData?.active_count || 0) > 0}
+                />
               </div>
               <div className="lg:col-span-4">
                 <MarketSignals

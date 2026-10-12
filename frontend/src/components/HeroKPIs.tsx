@@ -90,7 +90,7 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
 
         <div className="mt-3 pt-2 border-t border-line text-[11px] text-muted flex justify-between items-center">
           <span className="font-mono font-medium">Hurdle: 62.0%</span>
-          <span className="text-[#A8741A] font-semibold">XGBoost Platt</span>
+          <span className="text-[#A8741A] font-semibold">Calibrated XGBoost</span>
         </div>
       </Card>
 
