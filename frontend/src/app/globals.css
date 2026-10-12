@@ -29,6 +29,7 @@ body {
 .text-neg { color: #B42318; }
 .bg-pos { background-color: #067647; }
 .bg-neg { background-color: #B42318; }
+.bg-gold { background-color: #A8741A; }
 
 .font-mono,
 code,

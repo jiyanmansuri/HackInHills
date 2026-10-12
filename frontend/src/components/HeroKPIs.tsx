@@ -56,25 +56,41 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
       <Card className="p-5 flex flex-col justify-between">
         <div>
           <Label>Reversion Confidence</Label>
-          <div className="mt-2 font-mono text-2xl tabular-nums text-ink">
-            {(avgConfidence * 100).toFixed(1)}%
+          <div className="mt-2 flex items-baseline justify-between">
+            <span className="font-mono text-2xl font-bold tabular-nums text-ink">
+              {(avgConfidence * 100).toFixed(1)}%
+            </span>
+            <span className="text-[11px] font-mono text-muted">
+              {avgConfidence >= 0.62 ? (
+                <span className="text-[#067647] font-semibold">Above Hurdle</span>
+              ) : (
+                <span className="text-[#5B6676]">Below 62% Hurdle</span>
+              )}
+            </span>
           </div>
-          <div className="relative w-full bg-ground rounded h-2 mt-2.5 overflow-hidden border border-line/60">
+
+          {/* Prominent High-Contrast Progress Bar with Hurdle Marker */}
+          <div className="relative w-full bg-[#E2E8F0] rounded-full h-3.5 mt-3 overflow-hidden border border-[#CBD5E1]">
             {/* 62% Hurdle Marker */}
             <div
-              className="absolute top-0 bottom-0 w-0.5 bg-ink/70 z-10"
+              className="absolute top-0 bottom-0 w-1 bg-[#11161C] z-20 shadow-xs"
               style={{ left: "62%" }}
               title="62% Reversion Hurdle"
             />
+            {/* Filled Progress Bar */}
             <div
-              className="bg-gold h-full rounded transition-all duration-300"
-              style={{ width: `${Math.min(100, Math.max(0, avgConfidence * 100))}%` }}
+              className="h-full rounded-full transition-all duration-500 ease-out flex items-center justify-end pr-1 text-[9px] font-bold text-white"
+              style={{
+                width: `${Math.min(100, Math.max(8, avgConfidence * 100))}%`,
+                backgroundColor: avgConfidence >= 0.62 ? "#067647" : "#A8741A",
+              }}
             />
           </div>
         </div>
+
         <div className="mt-3 pt-2 border-t border-line text-[11px] text-muted flex justify-between items-center">
-          <span className="font-mono">Hurdle: 62.0%</span>
-          <span className="text-gold font-medium">XGBoost Platt</span>
+          <span className="font-mono font-medium">Hurdle: 62.0%</span>
+          <span className="text-[#A8741A] font-semibold">XGBoost Platt</span>
         </div>
       </Card>
 

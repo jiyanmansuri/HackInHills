@@ -39,30 +39,33 @@ export const MarketSignals: React.FC<MarketSignalsProps> = ({
         </div>
 
         {/* Donut confidence gauge */}
-        <div className="mt-4 flex items-center justify-between p-3 bg-ground/60 rounded border border-line">
+        <div className="mt-4 flex items-center justify-between p-3.5 bg-ground/60 rounded border border-line">
           <div className="w-16 h-16 relative flex items-center justify-center shrink-0">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={gaugeData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={22}
-                  outerRadius={30}
-                  startAngle={90}
-                  endAngle={-270}
-                  dataKey="value"
-                  stroke="none"
-                  isAnimationActive={false}
-                >
-                  {gaugeData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="absolute text-center">
-              <span className="font-mono text-xs font-semibold text-ink tabular-nums block leading-tight">
+            {/* SVG Donut Ring that never collapses */}
+            <svg className="w-16 h-16 -rotate-90 transform" viewBox="0 0 64 64">
+              <circle
+                cx="32"
+                cy="32"
+                r="25"
+                stroke="#DDE1E7"
+                strokeWidth="6"
+                fill="none"
+              />
+              <circle
+                cx="32"
+                cy="32"
+                r="25"
+                stroke={avgConf >= 0.62 ? "#067647" : "#A8741A"}
+                strokeWidth="6"
+                strokeDasharray={157}
+                strokeDashoffset={157 - (157 * Math.min(100, Math.max(0, avgConf * 100))) / 100}
+                strokeLinecap="round"
+                fill="none"
+                className="transition-all duration-500"
+              />
+            </svg>
+            <div className="absolute text-center flex flex-col items-center justify-center">
+              <span className="font-mono text-[13px] font-bold text-ink tabular-nums leading-none">
                 {(avgConf * 100).toFixed(0)}%
               </span>
             </div>
