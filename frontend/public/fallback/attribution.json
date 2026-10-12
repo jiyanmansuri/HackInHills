@@ -1,0 +1,2028 @@
+{
+  "series": [
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-06",
+      "gold_benchmark_pnl": 0.0,
+      "gold_price": 7210.03
+    },
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-07",
+      "gold_benchmark_pnl": -1.06,
+      "gold_price": 7202.4
+    },
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-08",
+      "gold_benchmark_pnl": 4.7,
+      "gold_price": 7243.93
+    },
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-09",
+      "gold_benchmark_pnl": 17.99,
+      "gold_price": 7339.73
+    },
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-10",
+      "gold_benchmark_pnl": 16.19,
+      "gold_price": 7326.73
+    },
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-13",
+      "gold_benchmark_pnl": 14.03,
+      "gold_price": 7311.17
+    },
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-14",
+      "gold_benchmark_pnl": 27.96,
+      "gold_price": 7411.6
+    },
+    {
+      "cum_gold_drift_pnl": 0.0,
+      "cum_spread_pnl": 0.0,
+      "cum_total_pnl": 0.0,
+      "date": "2025-10-15",
+      "gold_benchmark_pnl": 34.84,
+      "gold_price": 7461.27
+    },
+    {
+      "cum_gold_drift_pnl": -0.1,
+      "cum_spread_pnl": -1.3,
+      "cum_total_pnl": -1.4,
+      "date": "2025-10-16",
+      "gold_benchmark_pnl": 30.97,
+      "gold_price": 7433.33
+    },
+    {
+      "cum_gold_drift_pnl": 0.02,
+      "cum_spread_pnl": -2.0,
+      "cum_total_pnl": -1.98,
+      "date": "2025-10-17",
+      "gold_benchmark_pnl": 35.76,
+      "gold_price": 7467.9
+    },
+    {
+      "cum_gold_drift_pnl": -0.08,
+      "cum_spread_pnl": -5.55,
+      "cum_total_pnl": -5.63,
+      "date": "2025-10-20",
+      "gold_benchmark_pnl": 31.64,
+      "gold_price": 7438.13
+    },
+    {
+      "cum_gold_drift_pnl": -0.18,
+      "cum_spread_pnl": -2.55,
+      "cum_total_pnl": -2.73,
+      "date": "2025-10-21",
+      "gold_benchmark_pnl": 27.74,
+      "gold_price": 7410.03
+    },
+    {
+      "cum_gold_drift_pnl": -0.12,
+      "cum_spread_pnl": 0.05,
+      "cum_total_pnl": -0.07,
+      "date": "2025-10-22",
+      "gold_benchmark_pnl": 30.06,
+      "gold_price": 7426.73
+    },
+    {
+      "cum_gold_drift_pnl": -0.53,
+      "cum_spread_pnl": -6.53,
+      "cum_total_pnl": -7.05,
+      "date": "2025-10-23",
+      "gold_benchmark_pnl": 13.53,
+      "gold_price": 7307.57
+    },
+    {
+      "cum_gold_drift_pnl": -0.89,
+      "cum_spread_pnl": -6.03,
+      "cum_total_pnl": -6.92,
+      "date": "2025-10-24",
+      "gold_benchmark_pnl": -1.03,
+      "gold_price": 7202.63
+    },
+    {
+      "cum_gold_drift_pnl": -1.01,
+      "cum_spread_pnl": -4.2,
+      "cum_total_pnl": -5.21,
+      "date": "2025-10-27",
+      "gold_benchmark_pnl": -5.89,
+      "gold_price": 7167.53
+    },
+    {
+      "cum_gold_drift_pnl": -1.22,
+      "cum_spread_pnl": -2.0,
+      "cum_total_pnl": -3.22,
+      "date": "2025-10-28",
+      "gold_benchmark_pnl": -14.21,
+      "gold_price": 7107.6
+    },
+    {
+      "cum_gold_drift_pnl": -1.15,
+      "cum_spread_pnl": -2.8,
+      "cum_total_pnl": -3.95,
+      "date": "2025-10-29",
+      "gold_benchmark_pnl": -11.39,
+      "gold_price": 7127.9
+    },
+    {
+      "cum_gold_drift_pnl": -1.15,
+      "cum_spread_pnl": -2.8,
+      "cum_total_pnl": -3.95,
+      "date": "2025-10-30",
+      "gold_benchmark_pnl": -18.84,
+      "gold_price": 7074.2
+    },
+    {
+      "cum_gold_drift_pnl": -1.44,
+      "cum_spread_pnl": -13.1,
+      "cum_total_pnl": -14.54,
+      "date": "2025-10-31",
+      "gold_benchmark_pnl": -30.39,
+      "gold_price": 6990.9
+    },
+    {
+      "cum_gold_drift_pnl": -1.44,
+      "cum_spread_pnl": -13.1,
+      "cum_total_pnl": -14.54,
+      "date": "2025-11-03",
+      "gold_benchmark_pnl": -18.28,
+      "gold_price": 7078.2
+    },
+    {
+      "cum_gold_drift_pnl": -1.48,
+      "cum_spread_pnl": -3.4,
+      "cum_total_pnl": -4.88,
+      "date": "2025-11-04",
+      "gold_benchmark_pnl": -19.98,
+      "gold_price": 7065.97
+    },
+    {
+      "cum_gold_drift_pnl": -1.36,
+      "cum_spread_pnl": -7.3,
+      "cum_total_pnl": -8.66,
+      "date": "2025-11-05",
+      "gold_benchmark_pnl": -15.12,
+      "gold_price": 7101.03
+    },
+    {
+      "cum_gold_drift_pnl": -1.65,
+      "cum_spread_pnl": -10.8,
+      "cum_total_pnl": -12.45,
+      "date": "2025-11-06",
+      "gold_benchmark_pnl": -26.8,
+      "gold_price": 7016.83
+    },
+    {
+      "cum_gold_drift_pnl": -1.76,
+      "cum_spread_pnl": -7.8,
+      "cum_total_pnl": -9.56,
+      "date": "2025-11-07",
+      "gold_benchmark_pnl": -31.13,
+      "gold_price": 6985.6
+    },
+    {
+      "cum_gold_drift_pnl": -1.74,
+      "cum_spread_pnl": -9.8,
+      "cum_total_pnl": -11.54,
+      "date": "2025-11-10",
+      "gold_benchmark_pnl": -30.27,
+      "gold_price": 6991.8
+    },
+    {
+      "cum_gold_drift_pnl": -1.97,
+      "cum_spread_pnl": -6.9,
+      "cum_total_pnl": -8.87,
+      "date": "2025-11-11",
+      "gold_benchmark_pnl": -39.47,
+      "gold_price": 6925.43
+    },
+    {
+      "cum_gold_drift_pnl": -1.88,
+      "cum_spread_pnl": -7.5,
+      "cum_total_pnl": -9.38,
+      "date": "2025-11-12",
+      "gold_benchmark_pnl": -36.18,
+      "gold_price": 6949.2
+    },
+    {
+      "cum_gold_drift_pnl": -2.0,
+      "cum_spread_pnl": -5.98,
+      "cum_total_pnl": -7.98,
+      "date": "2025-11-13",
+      "gold_benchmark_pnl": -40.94,
+      "gold_price": 6914.87
+    },
+    {
+      "cum_gold_drift_pnl": -2.06,
+      "cum_spread_pnl": -6.58,
+      "cum_total_pnl": -8.63,
+      "date": "2025-11-14",
+      "gold_benchmark_pnl": -43.2,
+      "gold_price": 6898.57
+    },
+    {
+      "cum_gold_drift_pnl": -2.18,
+      "cum_spread_pnl": -11.58,
+      "cum_total_pnl": -13.76,
+      "date": "2025-11-17",
+      "gold_benchmark_pnl": -48.13,
+      "gold_price": 6863.0
+    },
+    {
+      "cum_gold_drift_pnl": -1.79,
+      "cum_spread_pnl": -10.88,
+      "cum_total_pnl": -12.67,
+      "date": "2025-11-18",
+      "gold_benchmark_pnl": -32.88,
+      "gold_price": 6973.0
+    },
+    {
+      "cum_gold_drift_pnl": -1.79,
+      "cum_spread_pnl": -7.98,
+      "cum_total_pnl": -9.76,
+      "date": "2025-11-19",
+      "gold_benchmark_pnl": -32.72,
+      "gold_price": 6974.13
+    },
+    {
+      "cum_gold_drift_pnl": -2.0,
+      "cum_spread_pnl": -18.98,
+      "cum_total_pnl": -20.98,
+      "date": "2025-11-20",
+      "gold_benchmark_pnl": -41.19,
+      "gold_price": 6913.03
+    },
+    {
+      "cum_gold_drift_pnl": -1.82,
+      "cum_spread_pnl": -25.6,
+      "cum_total_pnl": -27.42,
+      "date": "2025-11-21",
+      "gold_benchmark_pnl": -34.3,
+      "gold_price": 6962.73
+    },
+    {
+      "cum_gold_drift_pnl": -2.08,
+      "cum_spread_pnl": -27.9,
+      "cum_total_pnl": -29.98,
+      "date": "2025-11-24",
+      "gold_benchmark_pnl": -44.38,
+      "gold_price": 6890.03
+    },
+    {
+      "cum_gold_drift_pnl": -2.03,
+      "cum_spread_pnl": -27.4,
+      "cum_total_pnl": -29.43,
+      "date": "2025-11-25",
+      "gold_benchmark_pnl": -42.51,
+      "gold_price": 6903.5
+    },
+    {
+      "cum_gold_drift_pnl": -2.42,
+      "cum_spread_pnl": -30.2,
+      "cum_total_pnl": -32.62,
+      "date": "2025-11-26",
+      "gold_benchmark_pnl": -58.16,
+      "gold_price": 6790.7
+    },
+    {
+      "cum_gold_drift_pnl": -2.68,
+      "cum_spread_pnl": -26.2,
+      "cum_total_pnl": -28.88,
+      "date": "2025-11-27",
+      "gold_benchmark_pnl": -68.53,
+      "gold_price": 6715.9
+    },
+    {
+      "cum_gold_drift_pnl": -2.63,
+      "cum_spread_pnl": -26.85,
+      "cum_total_pnl": -29.48,
+      "date": "2025-11-28",
+      "gold_benchmark_pnl": -66.84,
+      "gold_price": 6728.13
+    },
+    {
+      "cum_gold_drift_pnl": -2.49,
+      "cum_spread_pnl": -24.35,
+      "cum_total_pnl": -26.84,
+      "date": "2025-12-01",
+      "gold_benchmark_pnl": -61.04,
+      "gold_price": 6769.93
+    },
+    {
+      "cum_gold_drift_pnl": -2.45,
+      "cum_spread_pnl": -21.33,
+      "cum_total_pnl": -23.77,
+      "date": "2025-12-02",
+      "gold_benchmark_pnl": -59.47,
+      "gold_price": 6781.23
+    },
+    {
+      "cum_gold_drift_pnl": -2.47,
+      "cum_spread_pnl": -12.38,
+      "cum_total_pnl": -14.84,
+      "date": "2025-12-03",
+      "gold_benchmark_pnl": -60.2,
+      "gold_price": 6775.97
+    },
+    {
+      "cum_gold_drift_pnl": -2.52,
+      "cum_spread_pnl": -10.83,
+      "cum_total_pnl": -13.35,
+      "date": "2025-12-04",
+      "gold_benchmark_pnl": -62.48,
+      "gold_price": 6759.57
+    },
+    {
+      "cum_gold_drift_pnl": -2.72,
+      "cum_spread_pnl": -11.3,
+      "cum_total_pnl": -14.02,
+      "date": "2025-12-05",
+      "gold_benchmark_pnl": -70.18,
+      "gold_price": 6704.0
+    },
+    {
+      "cum_gold_drift_pnl": -2.86,
+      "cum_spread_pnl": -77.1,
+      "cum_total_pnl": -79.96,
+      "date": "2025-12-08",
+      "gold_benchmark_pnl": -75.92,
+      "gold_price": 6662.67
+    },
+    {
+      "cum_gold_drift_pnl": -2.95,
+      "cum_spread_pnl": -7.08,
+      "cum_total_pnl": -10.02,
+      "date": "2025-12-09",
+      "gold_benchmark_pnl": -79.43,
+      "gold_price": 6637.37
+    },
+    {
+      "cum_gold_drift_pnl": -2.73,
+      "cum_spread_pnl": 25.72,
+      "cum_total_pnl": 23.0,
+      "date": "2025-12-10",
+      "gold_benchmark_pnl": -70.84,
+      "gold_price": 6699.3
+    },
+    {
+      "cum_gold_drift_pnl": -2.66,
+      "cum_spread_pnl": -23.75,
+      "cum_total_pnl": -26.41,
+      "date": "2025-12-11",
+      "gold_benchmark_pnl": -67.94,
+      "gold_price": 6720.2
+    },
+    {
+      "cum_gold_drift_pnl": -3.0,
+      "cum_spread_pnl": -37.85,
+      "cum_total_pnl": -40.85,
+      "date": "2025-12-12",
+      "gold_benchmark_pnl": -81.65,
+      "gold_price": 6621.3
+    },
+    {
+      "cum_gold_drift_pnl": -2.94,
+      "cum_spread_pnl": -87.68,
+      "cum_total_pnl": -90.61,
+      "date": "2025-12-15",
+      "gold_benchmark_pnl": -79.3,
+      "gold_price": 6638.3
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-16",
+      "gold_benchmark_pnl": -82.08,
+      "gold_price": 6618.2
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-17",
+      "gold_benchmark_pnl": -87.12,
+      "gold_price": 6581.9
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-18",
+      "gold_benchmark_pnl": -82.2,
+      "gold_price": 6617.33
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-19",
+      "gold_benchmark_pnl": -74.01,
+      "gold_price": 6676.4
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-22",
+      "gold_benchmark_pnl": -66.75,
+      "gold_price": 6728.73
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-23",
+      "gold_benchmark_pnl": -73.21,
+      "gold_price": 6682.2
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-24",
+      "gold_benchmark_pnl": -75.49,
+      "gold_price": 6665.73
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-25",
+      "gold_benchmark_pnl": -72.74,
+      "gold_price": 6685.57
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-26",
+      "gold_benchmark_pnl": -64.81,
+      "gold_price": 6742.77
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-29",
+      "gold_benchmark_pnl": -68.72,
+      "gold_price": 6714.57
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-30",
+      "gold_benchmark_pnl": -70.06,
+      "gold_price": 6704.87
+    },
+    {
+      "cum_gold_drift_pnl": -3.01,
+      "cum_spread_pnl": -132.2,
+      "cum_total_pnl": -135.21,
+      "date": "2025-12-31",
+      "gold_benchmark_pnl": -78.69,
+      "gold_price": 6642.67
+    },
+    {
+      "cum_gold_drift_pnl": -3.24,
+      "cum_spread_pnl": -132.4,
+      "cum_total_pnl": -135.64,
+      "date": "2026-01-01",
+      "gold_benchmark_pnl": -87.85,
+      "gold_price": 6576.67
+    },
+    {
+      "cum_gold_drift_pnl": -3.24,
+      "cum_spread_pnl": -132.4,
+      "cum_total_pnl": -135.64,
+      "date": "2026-01-02",
+      "gold_benchmark_pnl": -81.33,
+      "gold_price": 6623.67
+    },
+    {
+      "cum_gold_drift_pnl": -2.87,
+      "cum_spread_pnl": -133.1,
+      "cum_total_pnl": -135.97,
+      "date": "2026-01-05",
+      "gold_benchmark_pnl": -66.97,
+      "gold_price": 6727.2
+    },
+    {
+      "cum_gold_drift_pnl": -2.88,
+      "cum_spread_pnl": -133.2,
+      "cum_total_pnl": -136.08,
+      "date": "2026-01-06",
+      "gold_benchmark_pnl": -67.3,
+      "gold_price": 6724.77
+    },
+    {
+      "cum_gold_drift_pnl": -2.67,
+      "cum_spread_pnl": -133.8,
+      "cum_total_pnl": -136.47,
+      "date": "2026-01-07",
+      "gold_benchmark_pnl": -59.18,
+      "gold_price": 6783.33
+    },
+    {
+      "cum_gold_drift_pnl": -2.67,
+      "cum_spread_pnl": -133.8,
+      "cum_total_pnl": -136.47,
+      "date": "2026-01-08",
+      "gold_benchmark_pnl": -56.13,
+      "gold_price": 6805.37
+    },
+    {
+      "cum_gold_drift_pnl": -2.79,
+      "cum_spread_pnl": -133.6,
+      "cum_total_pnl": -136.39,
+      "date": "2026-01-09",
+      "gold_benchmark_pnl": -61.08,
+      "gold_price": 6769.63
+    },
+    {
+      "cum_gold_drift_pnl": -2.72,
+      "cum_spread_pnl": -134.4,
+      "cum_total_pnl": -137.12,
+      "date": "2026-01-12",
+      "gold_benchmark_pnl": -58.21,
+      "gold_price": 6790.33
+    },
+    {
+      "cum_gold_drift_pnl": -2.72,
+      "cum_spread_pnl": -134.4,
+      "cum_total_pnl": -137.12,
+      "date": "2026-01-13",
+      "gold_benchmark_pnl": -45.61,
+      "gold_price": 6881.17
+    },
+    {
+      "cum_gold_drift_pnl": -2.72,
+      "cum_spread_pnl": -134.4,
+      "cum_total_pnl": -137.12,
+      "date": "2026-01-14",
+      "gold_benchmark_pnl": -45.8,
+      "gold_price": 6879.83
+    },
+    {
+      "cum_gold_drift_pnl": -2.72,
+      "cum_spread_pnl": -134.4,
+      "cum_total_pnl": -137.12,
+      "date": "2026-01-15",
+      "gold_benchmark_pnl": -32.82,
+      "gold_price": 6973.43
+    },
+    {
+      "cum_gold_drift_pnl": -3.24,
+      "cum_spread_pnl": -134.5,
+      "cum_total_pnl": -137.74,
+      "date": "2026-01-16",
+      "gold_benchmark_pnl": -53.92,
+      "gold_price": 6821.23
+    },
+    {
+      "cum_gold_drift_pnl": -3.08,
+      "cum_spread_pnl": -134.8,
+      "cum_total_pnl": -137.88,
+      "date": "2026-01-19",
+      "gold_benchmark_pnl": -47.38,
+      "gold_price": 6868.43
+    },
+    {
+      "cum_gold_drift_pnl": -3.08,
+      "cum_spread_pnl": -134.8,
+      "cum_total_pnl": -137.88,
+      "date": "2026-01-20",
+      "gold_benchmark_pnl": -46.48,
+      "gold_price": 6874.9
+    },
+    {
+      "cum_gold_drift_pnl": -3.13,
+      "cum_spread_pnl": -134.4,
+      "cum_total_pnl": -137.53,
+      "date": "2026-01-21",
+      "gold_benchmark_pnl": -48.79,
+      "gold_price": 6858.23
+    },
+    {
+      "cum_gold_drift_pnl": -3.11,
+      "cum_spread_pnl": -135.9,
+      "cum_total_pnl": -139.01,
+      "date": "2026-01-22",
+      "gold_benchmark_pnl": -47.85,
+      "gold_price": 6865.0
+    },
+    {
+      "cum_gold_drift_pnl": -3.11,
+      "cum_spread_pnl": -135.9,
+      "cum_total_pnl": -139.01,
+      "date": "2026-01-23",
+      "gold_benchmark_pnl": -63.61,
+      "gold_price": 6751.43
+    },
+    {
+      "cum_gold_drift_pnl": -3.11,
+      "cum_spread_pnl": -135.9,
+      "cum_total_pnl": -139.01,
+      "date": "2026-01-26",
+      "gold_benchmark_pnl": -65.46,
+      "gold_price": 6738.1
+    },
+    {
+      "cum_gold_drift_pnl": -3.11,
+      "cum_spread_pnl": -135.9,
+      "cum_total_pnl": -139.01,
+      "date": "2026-01-27",
+      "gold_benchmark_pnl": -62.44,
+      "gold_price": 6759.87
+    },
+    {
+      "cum_gold_drift_pnl": -3.11,
+      "cum_spread_pnl": -135.9,
+      "cum_total_pnl": -139.01,
+      "date": "2026-01-28",
+      "gold_benchmark_pnl": -50.4,
+      "gold_price": 6846.67
+    },
+    {
+      "cum_gold_drift_pnl": -3.21,
+      "cum_spread_pnl": -135.9,
+      "cum_total_pnl": -139.11,
+      "date": "2026-01-29",
+      "gold_benchmark_pnl": -54.44,
+      "gold_price": 6817.5
+    },
+    {
+      "cum_gold_drift_pnl": -3.21,
+      "cum_spread_pnl": -135.9,
+      "cum_total_pnl": -139.11,
+      "date": "2026-01-30",
+      "gold_benchmark_pnl": -60.75,
+      "gold_price": 6772.0
+    },
+    {
+      "cum_gold_drift_pnl": -3.31,
+      "cum_spread_pnl": -132.3,
+      "cum_total_pnl": -135.61,
+      "date": "2026-02-02",
+      "gold_benchmark_pnl": -64.82,
+      "gold_price": 6742.7
+    },
+    {
+      "cum_gold_drift_pnl": -3.12,
+      "cum_spread_pnl": -128.53,
+      "cum_total_pnl": -131.65,
+      "date": "2026-02-03",
+      "gold_benchmark_pnl": -57.3,
+      "gold_price": 6796.87
+    },
+    {
+      "cum_gold_drift_pnl": -3.05,
+      "cum_spread_pnl": -124.7,
+      "cum_total_pnl": -127.75,
+      "date": "2026-02-04",
+      "gold_benchmark_pnl": -54.51,
+      "gold_price": 6817.0
+    },
+    {
+      "cum_gold_drift_pnl": -3.06,
+      "cum_spread_pnl": -125.6,
+      "cum_total_pnl": -128.66,
+      "date": "2026-02-05",
+      "gold_benchmark_pnl": -54.84,
+      "gold_price": 6814.63
+    },
+    {
+      "cum_gold_drift_pnl": -2.95,
+      "cum_spread_pnl": -118.8,
+      "cum_total_pnl": -121.75,
+      "date": "2026-02-06",
+      "gold_benchmark_pnl": -50.55,
+      "gold_price": 6845.53
+    },
+    {
+      "cum_gold_drift_pnl": -2.93,
+      "cum_spread_pnl": -126.5,
+      "cum_total_pnl": -129.43,
+      "date": "2026-02-09",
+      "gold_benchmark_pnl": -49.81,
+      "gold_price": 6850.93
+    },
+    {
+      "cum_gold_drift_pnl": -2.93,
+      "cum_spread_pnl": -126.5,
+      "cum_total_pnl": -129.43,
+      "date": "2026-02-10",
+      "gold_benchmark_pnl": -41.73,
+      "gold_price": 6909.13
+    },
+    {
+      "cum_gold_drift_pnl": -3.07,
+      "cum_spread_pnl": -134.1,
+      "cum_total_pnl": -137.17,
+      "date": "2026-02-11",
+      "gold_benchmark_pnl": -47.28,
+      "gold_price": 6869.13
+    },
+    {
+      "cum_gold_drift_pnl": -3.13,
+      "cum_spread_pnl": -137.15,
+      "cum_total_pnl": -140.28,
+      "date": "2026-02-12",
+      "gold_benchmark_pnl": -49.72,
+      "gold_price": 6851.53
+    },
+    {
+      "cum_gold_drift_pnl": -3.21,
+      "cum_spread_pnl": -131.42,
+      "cum_total_pnl": -134.63,
+      "date": "2026-02-13",
+      "gold_benchmark_pnl": -52.76,
+      "gold_price": 6829.67
+    },
+    {
+      "cum_gold_drift_pnl": -3.5,
+      "cum_spread_pnl": -128.38,
+      "cum_total_pnl": -131.88,
+      "date": "2026-02-16",
+      "gold_benchmark_pnl": -64.55,
+      "gold_price": 6744.63
+    },
+    {
+      "cum_gold_drift_pnl": -3.44,
+      "cum_spread_pnl": -133.92,
+      "cum_total_pnl": -137.36,
+      "date": "2026-02-17",
+      "gold_benchmark_pnl": -61.94,
+      "gold_price": 6763.43
+    },
+    {
+      "cum_gold_drift_pnl": -3.38,
+      "cum_spread_pnl": -136.17,
+      "cum_total_pnl": -139.56,
+      "date": "2026-02-18",
+      "gold_benchmark_pnl": -59.75,
+      "gold_price": 6779.27
+    },
+    {
+      "cum_gold_drift_pnl": -3.38,
+      "cum_spread_pnl": -145.67,
+      "cum_total_pnl": -149.05,
+      "date": "2026-02-19",
+      "gold_benchmark_pnl": -59.5,
+      "gold_price": 6781.07
+    },
+    {
+      "cum_gold_drift_pnl": -3.42,
+      "cum_spread_pnl": -142.37,
+      "cum_total_pnl": -145.79,
+      "date": "2026-02-20",
+      "gold_benchmark_pnl": -61.19,
+      "gold_price": 6768.87
+    },
+    {
+      "cum_gold_drift_pnl": -3.7,
+      "cum_spread_pnl": -141.97,
+      "cum_total_pnl": -145.68,
+      "date": "2026-02-23",
+      "gold_benchmark_pnl": -72.5,
+      "gold_price": 6687.33
+    },
+    {
+      "cum_gold_drift_pnl": -3.78,
+      "cum_spread_pnl": -145.37,
+      "cum_total_pnl": -149.16,
+      "date": "2026-02-24",
+      "gold_benchmark_pnl": -75.7,
+      "gold_price": 6664.27
+    },
+    {
+      "cum_gold_drift_pnl": -3.84,
+      "cum_spread_pnl": -142.77,
+      "cum_total_pnl": -146.62,
+      "date": "2026-02-25",
+      "gold_benchmark_pnl": -78.15,
+      "gold_price": 6646.53
+    },
+    {
+      "cum_gold_drift_pnl": -4.0,
+      "cum_spread_pnl": -149.58,
+      "cum_total_pnl": -153.57,
+      "date": "2026-02-26",
+      "gold_benchmark_pnl": -84.28,
+      "gold_price": 6602.4
+    },
+    {
+      "cum_gold_drift_pnl": -4.02,
+      "cum_spread_pnl": -151.38,
+      "cum_total_pnl": -155.4,
+      "date": "2026-02-27",
+      "gold_benchmark_pnl": -85.35,
+      "gold_price": 6594.63
+    },
+    {
+      "cum_gold_drift_pnl": -3.95,
+      "cum_spread_pnl": -148.65,
+      "cum_total_pnl": -152.6,
+      "date": "2026-03-02",
+      "gold_benchmark_pnl": -82.26,
+      "gold_price": 6616.9
+    },
+    {
+      "cum_gold_drift_pnl": -3.56,
+      "cum_spread_pnl": -148.85,
+      "cum_total_pnl": -152.41,
+      "date": "2026-03-03",
+      "gold_benchmark_pnl": -67.27,
+      "gold_price": 6725.0
+    },
+    {
+      "cum_gold_drift_pnl": -3.52,
+      "cum_spread_pnl": -144.32,
+      "cum_total_pnl": -147.85,
+      "date": "2026-03-04",
+      "gold_benchmark_pnl": -65.72,
+      "gold_price": 6736.2
+    },
+    {
+      "cum_gold_drift_pnl": -3.52,
+      "cum_spread_pnl": -144.32,
+      "cum_total_pnl": -147.85,
+      "date": "2026-03-05",
+      "gold_benchmark_pnl": -59.48,
+      "gold_price": 6781.17
+    },
+    {
+      "cum_gold_drift_pnl": -3.53,
+      "cum_spread_pnl": -142.62,
+      "cum_total_pnl": -146.16,
+      "date": "2026-03-06",
+      "gold_benchmark_pnl": -59.95,
+      "gold_price": 6777.77
+    },
+    {
+      "cum_gold_drift_pnl": -3.91,
+      "cum_spread_pnl": -143.32,
+      "cum_total_pnl": -147.24,
+      "date": "2026-03-09",
+      "gold_benchmark_pnl": -75.23,
+      "gold_price": 6667.6
+    },
+    {
+      "cum_gold_drift_pnl": -3.91,
+      "cum_spread_pnl": -147.45,
+      "cum_total_pnl": -151.36,
+      "date": "2026-03-10",
+      "gold_benchmark_pnl": -75.3,
+      "gold_price": 6667.1
+    },
+    {
+      "cum_gold_drift_pnl": -3.9,
+      "cum_spread_pnl": -148.75,
+      "cum_total_pnl": -152.65,
+      "date": "2026-03-11",
+      "gold_benchmark_pnl": -74.66,
+      "gold_price": 6671.7
+    },
+    {
+      "cum_gold_drift_pnl": -3.39,
+      "cum_spread_pnl": -164.57,
+      "cum_total_pnl": -167.97,
+      "date": "2026-03-12",
+      "gold_benchmark_pnl": -54.96,
+      "gold_price": 6813.8
+    },
+    {
+      "cum_gold_drift_pnl": -3.39,
+      "cum_spread_pnl": -164.57,
+      "cum_total_pnl": -167.97,
+      "date": "2026-03-13",
+      "gold_benchmark_pnl": -56.34,
+      "gold_price": 6803.83
+    },
+    {
+      "cum_gold_drift_pnl": -3.39,
+      "cum_spread_pnl": -164.57,
+      "cum_total_pnl": -167.97,
+      "date": "2026-03-16",
+      "gold_benchmark_pnl": -53.94,
+      "gold_price": 6821.1
+    },
+    {
+      "cum_gold_drift_pnl": -3.39,
+      "cum_spread_pnl": -154.47,
+      "cum_total_pnl": -157.87,
+      "date": "2026-03-17",
+      "gold_benchmark_pnl": -53.98,
+      "gold_price": 6820.8
+    },
+    {
+      "cum_gold_drift_pnl": -3.62,
+      "cum_spread_pnl": -172.17,
+      "cum_total_pnl": -175.8,
+      "date": "2026-03-18",
+      "gold_benchmark_pnl": -63.21,
+      "gold_price": 6754.3
+    },
+    {
+      "cum_gold_drift_pnl": -3.38,
+      "cum_spread_pnl": -186.07,
+      "cum_total_pnl": -189.46,
+      "date": "2026-03-19",
+      "gold_benchmark_pnl": -53.91,
+      "gold_price": 6821.33
+    },
+    {
+      "cum_gold_drift_pnl": -3.23,
+      "cum_spread_pnl": -192.07,
+      "cum_total_pnl": -195.3,
+      "date": "2026-03-20",
+      "gold_benchmark_pnl": -47.62,
+      "gold_price": 6866.7
+    },
+    {
+      "cum_gold_drift_pnl": -3.06,
+      "cum_spread_pnl": -196.37,
+      "cum_total_pnl": -199.44,
+      "date": "2026-03-23",
+      "gold_benchmark_pnl": -41.28,
+      "gold_price": 6912.4
+    },
+    {
+      "cum_gold_drift_pnl": -3.06,
+      "cum_spread_pnl": -196.37,
+      "cum_total_pnl": -199.44,
+      "date": "2026-03-24",
+      "gold_benchmark_pnl": -48.53,
+      "gold_price": 6860.1
+    },
+    {
+      "cum_gold_drift_pnl": -3.06,
+      "cum_spread_pnl": -196.37,
+      "cum_total_pnl": -199.44,
+      "date": "2026-03-25",
+      "gold_benchmark_pnl": -36.93,
+      "gold_price": 6943.73
+    },
+    {
+      "cum_gold_drift_pnl": -3.06,
+      "cum_spread_pnl": -196.37,
+      "cum_total_pnl": -199.44,
+      "date": "2026-03-26",
+      "gold_benchmark_pnl": -48.14,
+      "gold_price": 6862.97
+    },
+    {
+      "cum_gold_drift_pnl": -3.06,
+      "cum_spread_pnl": -196.37,
+      "cum_total_pnl": -199.44,
+      "date": "2026-03-27",
+      "gold_benchmark_pnl": -43.18,
+      "gold_price": 6898.7
+    },
+    {
+      "cum_gold_drift_pnl": -3.06,
+      "cum_spread_pnl": -196.37,
+      "cum_total_pnl": -199.44,
+      "date": "2026-03-30",
+      "gold_benchmark_pnl": -25.23,
+      "gold_price": 7028.13
+    },
+    {
+      "cum_gold_drift_pnl": -3.26,
+      "cum_spread_pnl": -196.67,
+      "cum_total_pnl": -199.94,
+      "date": "2026-03-31",
+      "gold_benchmark_pnl": -33.2,
+      "gold_price": 6970.63
+    },
+    {
+      "cum_gold_drift_pnl": -3.38,
+      "cum_spread_pnl": -195.07,
+      "cum_total_pnl": -198.45,
+      "date": "2026-04-01",
+      "gold_benchmark_pnl": -37.73,
+      "gold_price": 6938.0
+    },
+    {
+      "cum_gold_drift_pnl": -3.38,
+      "cum_spread_pnl": -195.07,
+      "cum_total_pnl": -198.45,
+      "date": "2026-04-02",
+      "gold_benchmark_pnl": -36.75,
+      "gold_price": 6945.03
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-03",
+      "gold_benchmark_pnl": -40.69,
+      "gold_price": 6916.63
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-06",
+      "gold_benchmark_pnl": -49.42,
+      "gold_price": 6853.73
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-07",
+      "gold_benchmark_pnl": -48.65,
+      "gold_price": 6859.27
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-08",
+      "gold_benchmark_pnl": -57.06,
+      "gold_price": 6798.63
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-09",
+      "gold_benchmark_pnl": -53.1,
+      "gold_price": 6827.17
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-10",
+      "gold_benchmark_pnl": -60.38,
+      "gold_price": 6774.67
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-13",
+      "gold_benchmark_pnl": -47.96,
+      "gold_price": 6864.27
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-14",
+      "gold_benchmark_pnl": -54.11,
+      "gold_price": 6819.87
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.27,
+      "cum_total_pnl": -195.75,
+      "date": "2026-04-15",
+      "gold_benchmark_pnl": -56.49,
+      "gold_price": 6802.73
+    },
+    {
+      "cum_gold_drift_pnl": -3.31,
+      "cum_spread_pnl": -205.57,
+      "cum_total_pnl": -208.88,
+      "date": "2026-04-16",
+      "gold_benchmark_pnl": -49.77,
+      "gold_price": 6851.2
+    },
+    {
+      "cum_gold_drift_pnl": -3.55,
+      "cum_spread_pnl": -203.57,
+      "cum_total_pnl": -207.12,
+      "date": "2026-04-17",
+      "gold_benchmark_pnl": -59.51,
+      "gold_price": 6781.0
+    },
+    {
+      "cum_gold_drift_pnl": -3.5,
+      "cum_spread_pnl": -195.47,
+      "cum_total_pnl": -198.98,
+      "date": "2026-04-20",
+      "gold_benchmark_pnl": -57.76,
+      "gold_price": 6793.57
+    },
+    {
+      "cum_gold_drift_pnl": -3.23,
+      "cum_spread_pnl": -197.57,
+      "cum_total_pnl": -200.81,
+      "date": "2026-04-21",
+      "gold_benchmark_pnl": -47.08,
+      "gold_price": 6870.6
+    },
+    {
+      "cum_gold_drift_pnl": -3.55,
+      "cum_spread_pnl": -194.52,
+      "cum_total_pnl": -198.07,
+      "date": "2026-04-22",
+      "gold_benchmark_pnl": -59.81,
+      "gold_price": 6778.8
+    },
+    {
+      "cum_gold_drift_pnl": -3.51,
+      "cum_spread_pnl": -205.4,
+      "cum_total_pnl": -208.91,
+      "date": "2026-04-23",
+      "gold_benchmark_pnl": -58.15,
+      "gold_price": 6790.77
+    },
+    {
+      "cum_gold_drift_pnl": -3.45,
+      "cum_spread_pnl": -204.1,
+      "cum_total_pnl": -207.55,
+      "date": "2026-04-24",
+      "gold_benchmark_pnl": -55.89,
+      "gold_price": 6807.1
+    },
+    {
+      "cum_gold_drift_pnl": -3.29,
+      "cum_spread_pnl": -204.82,
+      "cum_total_pnl": -208.12,
+      "date": "2026-04-27",
+      "gold_benchmark_pnl": -49.73,
+      "gold_price": 6851.5
+    },
+    {
+      "cum_gold_drift_pnl": -3.54,
+      "cum_spread_pnl": -201.92,
+      "cum_total_pnl": -205.46,
+      "date": "2026-04-28",
+      "gold_benchmark_pnl": -59.49,
+      "gold_price": 6781.13
+    },
+    {
+      "cum_gold_drift_pnl": -3.8,
+      "cum_spread_pnl": -199.0,
+      "cum_total_pnl": -202.8,
+      "date": "2026-04-29",
+      "gold_benchmark_pnl": -69.83,
+      "gold_price": 6706.53
+    },
+    {
+      "cum_gold_drift_pnl": -3.68,
+      "cum_spread_pnl": -197.27,
+      "cum_total_pnl": -200.96,
+      "date": "2026-04-30",
+      "gold_benchmark_pnl": -65.46,
+      "gold_price": 6738.03
+    },
+    {
+      "cum_gold_drift_pnl": -3.62,
+      "cum_spread_pnl": -194.57,
+      "cum_total_pnl": -198.2,
+      "date": "2026-05-01",
+      "gold_benchmark_pnl": -62.93,
+      "gold_price": 6756.3
+    },
+    {
+      "cum_gold_drift_pnl": -3.57,
+      "cum_spread_pnl": -193.77,
+      "cum_total_pnl": -197.35,
+      "date": "2026-05-04",
+      "gold_benchmark_pnl": -61.07,
+      "gold_price": 6769.73
+    },
+    {
+      "cum_gold_drift_pnl": -3.4,
+      "cum_spread_pnl": -179.8,
+      "cum_total_pnl": -183.2,
+      "date": "2026-05-05",
+      "gold_benchmark_pnl": -54.2,
+      "gold_price": 6819.23
+    },
+    {
+      "cum_gold_drift_pnl": -3.53,
+      "cum_spread_pnl": -184.72,
+      "cum_total_pnl": -188.26,
+      "date": "2026-05-06",
+      "gold_benchmark_pnl": -59.47,
+      "gold_price": 6781.27
+    },
+    {
+      "cum_gold_drift_pnl": -3.48,
+      "cum_spread_pnl": -192.22,
+      "cum_total_pnl": -195.71,
+      "date": "2026-05-07",
+      "gold_benchmark_pnl": -57.5,
+      "gold_price": 6795.47
+    },
+    {
+      "cum_gold_drift_pnl": -3.42,
+      "cum_spread_pnl": -197.85,
+      "cum_total_pnl": -201.27,
+      "date": "2026-05-08",
+      "gold_benchmark_pnl": -54.93,
+      "gold_price": 6813.97
+    },
+    {
+      "cum_gold_drift_pnl": -3.42,
+      "cum_spread_pnl": -197.85,
+      "cum_total_pnl": -201.27,
+      "date": "2026-05-11",
+      "gold_benchmark_pnl": -60.75,
+      "gold_price": 6772.0
+    },
+    {
+      "cum_gold_drift_pnl": -3.02,
+      "cum_spread_pnl": -216.85,
+      "cum_total_pnl": -219.87,
+      "date": "2026-05-12",
+      "gold_benchmark_pnl": -45.48,
+      "gold_price": 6882.13
+    },
+    {
+      "cum_gold_drift_pnl": -3.02,
+      "cum_spread_pnl": -216.85,
+      "cum_total_pnl": -219.87,
+      "date": "2026-05-13",
+      "gold_benchmark_pnl": -41.54,
+      "gold_price": 6910.53
+    },
+    {
+      "cum_gold_drift_pnl": -3.26,
+      "cum_spread_pnl": -214.77,
+      "cum_total_pnl": -218.04,
+      "date": "2026-05-14",
+      "gold_benchmark_pnl": -50.99,
+      "gold_price": 6842.37
+    },
+    {
+      "cum_gold_drift_pnl": -3.12,
+      "cum_spread_pnl": -216.5,
+      "cum_total_pnl": -219.62,
+      "date": "2026-05-15",
+      "gold_benchmark_pnl": -45.51,
+      "gold_price": 6881.9
+    },
+    {
+      "cum_gold_drift_pnl": -3.32,
+      "cum_spread_pnl": -222.65,
+      "cum_total_pnl": -225.97,
+      "date": "2026-05-18",
+      "gold_benchmark_pnl": -53.5,
+      "gold_price": 6824.3
+    },
+    {
+      "cum_gold_drift_pnl": -3.32,
+      "cum_spread_pnl": -222.65,
+      "cum_total_pnl": -225.97,
+      "date": "2026-05-19",
+      "gold_benchmark_pnl": -46.93,
+      "gold_price": 6871.7
+    },
+    {
+      "cum_gold_drift_pnl": -3.08,
+      "cum_spread_pnl": -224.15,
+      "cum_total_pnl": -227.23,
+      "date": "2026-05-20",
+      "gold_benchmark_pnl": -37.3,
+      "gold_price": 6941.13
+    },
+    {
+      "cum_gold_drift_pnl": -3.24,
+      "cum_spread_pnl": -229.82,
+      "cum_total_pnl": -233.06,
+      "date": "2026-05-21",
+      "gold_benchmark_pnl": -43.8,
+      "gold_price": 6894.2
+    },
+    {
+      "cum_gold_drift_pnl": -3.24,
+      "cum_spread_pnl": -229.82,
+      "cum_total_pnl": -233.06,
+      "date": "2026-05-22",
+      "gold_benchmark_pnl": -35.83,
+      "gold_price": 6951.7
+    },
+    {
+      "cum_gold_drift_pnl": -3.16,
+      "cum_spread_pnl": -229.42,
+      "cum_total_pnl": -232.58,
+      "date": "2026-05-25",
+      "gold_benchmark_pnl": -32.56,
+      "gold_price": 6975.3
+    },
+    {
+      "cum_gold_drift_pnl": -2.98,
+      "cum_spread_pnl": -231.27,
+      "cum_total_pnl": -234.25,
+      "date": "2026-05-26",
+      "gold_benchmark_pnl": -25.59,
+      "gold_price": 7025.5
+    },
+    {
+      "cum_gold_drift_pnl": -2.57,
+      "cum_spread_pnl": -233.07,
+      "cum_total_pnl": -235.64,
+      "date": "2026-05-27",
+      "gold_benchmark_pnl": -9.49,
+      "gold_price": 7141.6
+    },
+    {
+      "cum_gold_drift_pnl": -2.57,
+      "cum_spread_pnl": -233.07,
+      "cum_total_pnl": -235.64,
+      "date": "2026-05-28",
+      "gold_benchmark_pnl": -11.36,
+      "gold_price": 7128.13
+    },
+    {
+      "cum_gold_drift_pnl": -2.57,
+      "cum_spread_pnl": -233.07,
+      "cum_total_pnl": -235.64,
+      "date": "2026-05-29",
+      "gold_benchmark_pnl": -17.45,
+      "gold_price": 7084.2
+    },
+    {
+      "cum_gold_drift_pnl": -2.57,
+      "cum_spread_pnl": -233.07,
+      "cum_total_pnl": -235.64,
+      "date": "2026-06-01",
+      "gold_benchmark_pnl": -24.96,
+      "gold_price": 7030.07
+    },
+    {
+      "cum_gold_drift_pnl": -2.73,
+      "cum_spread_pnl": -231.27,
+      "cum_total_pnl": -234.01,
+      "date": "2026-06-02",
+      "gold_benchmark_pnl": -31.53,
+      "gold_price": 6982.7
+    },
+    {
+      "cum_gold_drift_pnl": -2.74,
+      "cum_spread_pnl": -233.37,
+      "cum_total_pnl": -236.12,
+      "date": "2026-06-03",
+      "gold_benchmark_pnl": -31.97,
+      "gold_price": 6979.53
+    },
+    {
+      "cum_gold_drift_pnl": -2.67,
+      "cum_spread_pnl": -240.57,
+      "cum_total_pnl": -243.24,
+      "date": "2026-06-04",
+      "gold_benchmark_pnl": -29.02,
+      "gold_price": 7000.83
+    },
+    {
+      "cum_gold_drift_pnl": -2.5,
+      "cum_spread_pnl": -250.67,
+      "cum_total_pnl": -253.18,
+      "date": "2026-06-05",
+      "gold_benchmark_pnl": -22.45,
+      "gold_price": 7048.2
+    },
+    {
+      "cum_gold_drift_pnl": -2.33,
+      "cum_spread_pnl": -249.77,
+      "cum_total_pnl": -252.1,
+      "date": "2026-06-08",
+      "gold_benchmark_pnl": -15.6,
+      "gold_price": 7097.53
+    },
+    {
+      "cum_gold_drift_pnl": -2.32,
+      "cum_spread_pnl": -249.97,
+      "cum_total_pnl": -252.29,
+      "date": "2026-06-09",
+      "gold_benchmark_pnl": -15.28,
+      "gold_price": 7099.9
+    },
+    {
+      "cum_gold_drift_pnl": -2.0,
+      "cum_spread_pnl": -248.67,
+      "cum_total_pnl": -250.68,
+      "date": "2026-06-10",
+      "gold_benchmark_pnl": -2.83,
+      "gold_price": 7189.6
+    },
+    {
+      "cum_gold_drift_pnl": -2.05,
+      "cum_spread_pnl": -251.47,
+      "cum_total_pnl": -253.53,
+      "date": "2026-06-11",
+      "gold_benchmark_pnl": -4.88,
+      "gold_price": 7174.87
+    },
+    {
+      "cum_gold_drift_pnl": -2.05,
+      "cum_spread_pnl": -251.47,
+      "cum_total_pnl": -253.53,
+      "date": "2026-06-12",
+      "gold_benchmark_pnl": 18.55,
+      "gold_price": 7343.8
+    },
+    {
+      "cum_gold_drift_pnl": -2.05,
+      "cum_spread_pnl": -251.47,
+      "cum_total_pnl": -253.53,
+      "date": "2026-06-15",
+      "gold_benchmark_pnl": 23.89,
+      "gold_price": 7382.3
+    },
+    {
+      "cum_gold_drift_pnl": -2.23,
+      "cum_spread_pnl": -252.67,
+      "cum_total_pnl": -254.91,
+      "date": "2026-06-16",
+      "gold_benchmark_pnl": 16.61,
+      "gold_price": 7329.8
+    },
+    {
+      "cum_gold_drift_pnl": -2.46,
+      "cum_spread_pnl": -252.97,
+      "cum_total_pnl": -255.44,
+      "date": "2026-06-17",
+      "gold_benchmark_pnl": 7.57,
+      "gold_price": 7264.6
+    },
+    {
+      "cum_gold_drift_pnl": -2.35,
+      "cum_spread_pnl": -253.57,
+      "cum_total_pnl": -255.93,
+      "date": "2026-06-18",
+      "gold_benchmark_pnl": 11.88,
+      "gold_price": 7295.7
+    },
+    {
+      "cum_gold_drift_pnl": -2.35,
+      "cum_spread_pnl": -253.57,
+      "cum_total_pnl": -255.93,
+      "date": "2026-06-19",
+      "gold_benchmark_pnl": 10.12,
+      "gold_price": 7283.03
+    },
+    {
+      "cum_gold_drift_pnl": -2.2,
+      "cum_spread_pnl": -261.97,
+      "cum_total_pnl": -264.17,
+      "date": "2026-06-22",
+      "gold_benchmark_pnl": 16.19,
+      "gold_price": 7326.77
+    },
+    {
+      "cum_gold_drift_pnl": -2.2,
+      "cum_spread_pnl": -261.97,
+      "cum_total_pnl": -264.17,
+      "date": "2026-06-23",
+      "gold_benchmark_pnl": 20.49,
+      "gold_price": 7357.77
+    },
+    {
+      "cum_gold_drift_pnl": -2.21,
+      "cum_spread_pnl": -261.37,
+      "cum_total_pnl": -263.58,
+      "date": "2026-06-24",
+      "gold_benchmark_pnl": 20.12,
+      "gold_price": 7355.07
+    },
+    {
+      "cum_gold_drift_pnl": -2.39,
+      "cum_spread_pnl": -261.07,
+      "cum_total_pnl": -263.46,
+      "date": "2026-06-25",
+      "gold_benchmark_pnl": 12.95,
+      "gold_price": 7303.43
+    },
+    {
+      "cum_gold_drift_pnl": -2.7,
+      "cum_spread_pnl": -261.97,
+      "cum_total_pnl": -264.68,
+      "date": "2026-06-26",
+      "gold_benchmark_pnl": 0.2,
+      "gold_price": 7211.5
+    },
+    {
+      "cum_gold_drift_pnl": -2.7,
+      "cum_spread_pnl": -261.97,
+      "cum_total_pnl": -264.68,
+      "date": "2026-06-29",
+      "gold_benchmark_pnl": -3.68,
+      "gold_price": 7183.5
+    },
+    {
+      "cum_gold_drift_pnl": -2.51,
+      "cum_spread_pnl": -262.47,
+      "cum_total_pnl": -264.99,
+      "date": "2026-06-30",
+      "gold_benchmark_pnl": 3.81,
+      "gold_price": 7237.5
+    },
+    {
+      "cum_gold_drift_pnl": -2.51,
+      "cum_spread_pnl": -262.47,
+      "cum_total_pnl": -264.99,
+      "date": "2026-07-01",
+      "gold_benchmark_pnl": 5.83,
+      "gold_price": 7252.03
+    },
+    {
+      "cum_gold_drift_pnl": -2.77,
+      "cum_spread_pnl": -271.87,
+      "cum_total_pnl": -274.65,
+      "date": "2026-07-02",
+      "gold_benchmark_pnl": -4.58,
+      "gold_price": 7177.0
+    },
+    {
+      "cum_gold_drift_pnl": -2.73,
+      "cum_spread_pnl": -269.07,
+      "cum_total_pnl": -271.81,
+      "date": "2026-07-03",
+      "gold_benchmark_pnl": -2.92,
+      "gold_price": 7188.97
+    },
+    {
+      "cum_gold_drift_pnl": -2.73,
+      "cum_spread_pnl": -269.07,
+      "cum_total_pnl": -271.81,
+      "date": "2026-07-06",
+      "gold_benchmark_pnl": 4.46,
+      "gold_price": 7242.2
+    },
+    {
+      "cum_gold_drift_pnl": -2.73,
+      "cum_spread_pnl": -269.07,
+      "cum_total_pnl": -271.81,
+      "date": "2026-07-07",
+      "gold_benchmark_pnl": -2.93,
+      "gold_price": 7188.93
+    },
+    {
+      "cum_gold_drift_pnl": -2.7,
+      "cum_spread_pnl": -265.72,
+      "cum_total_pnl": -268.42,
+      "date": "2026-07-08",
+      "gold_benchmark_pnl": -1.52,
+      "gold_price": 7199.07
+    },
+    {
+      "cum_gold_drift_pnl": -2.68,
+      "cum_spread_pnl": -264.32,
+      "cum_total_pnl": -267.0,
+      "date": "2026-07-09",
+      "gold_benchmark_pnl": -0.75,
+      "gold_price": 7204.6
+    },
+    {
+      "cum_gold_drift_pnl": -2.91,
+      "cum_spread_pnl": -274.97,
+      "cum_total_pnl": -277.89,
+      "date": "2026-07-10",
+      "gold_benchmark_pnl": -10.26,
+      "gold_price": 7136.07
+    },
+    {
+      "cum_gold_drift_pnl": -2.84,
+      "cum_spread_pnl": -273.17,
+      "cum_total_pnl": -276.02,
+      "date": "2026-07-13",
+      "gold_benchmark_pnl": -7.37,
+      "gold_price": 7156.9
+    },
+    {
+      "cum_gold_drift_pnl": -2.71,
+      "cum_spread_pnl": -271.87,
+      "cum_total_pnl": -274.59,
+      "date": "2026-07-14",
+      "gold_benchmark_pnl": -2.4,
+      "gold_price": 7192.7
+    },
+    {
+      "cum_gold_drift_pnl": -2.47,
+      "cum_spread_pnl": -274.27,
+      "cum_total_pnl": -276.75,
+      "date": "2026-07-15",
+      "gold_benchmark_pnl": 7.01,
+      "gold_price": 7260.6
+    },
+    {
+      "cum_gold_drift_pnl": -2.24,
+      "cum_spread_pnl": -271.87,
+      "cum_total_pnl": -274.11,
+      "date": "2026-07-16",
+      "gold_benchmark_pnl": 16.25,
+      "gold_price": 7327.17
+    },
+    {
+      "cum_gold_drift_pnl": -2.53,
+      "cum_spread_pnl": -273.77,
+      "cum_total_pnl": -276.3,
+      "date": "2026-07-17",
+      "gold_benchmark_pnl": 4.64,
+      "gold_price": 7243.47
+    },
+    {
+      "cum_gold_drift_pnl": -2.53,
+      "cum_spread_pnl": -273.77,
+      "cum_total_pnl": -276.3,
+      "date": "2026-07-20",
+      "gold_benchmark_pnl": -3.5,
+      "gold_price": 7184.83
+    },
+    {
+      "cum_gold_drift_pnl": -2.42,
+      "cum_spread_pnl": -265.67,
+      "cum_total_pnl": -268.09,
+      "date": "2026-07-21",
+      "gold_benchmark_pnl": 1.0,
+      "gold_price": 7217.23
+    },
+    {
+      "cum_gold_drift_pnl": -2.3,
+      "cum_spread_pnl": -261.77,
+      "cum_total_pnl": -264.07,
+      "date": "2026-07-22",
+      "gold_benchmark_pnl": 5.63,
+      "gold_price": 7250.63
+    },
+    {
+      "cum_gold_drift_pnl": -2.18,
+      "cum_spread_pnl": -261.57,
+      "cum_total_pnl": -263.76,
+      "date": "2026-07-23",
+      "gold_benchmark_pnl": 10.25,
+      "gold_price": 7283.97
+    },
+    {
+      "cum_gold_drift_pnl": -1.3,
+      "cum_spread_pnl": -266.27,
+      "cum_total_pnl": -267.58,
+      "date": "2026-07-24",
+      "gold_benchmark_pnl": 44.01,
+      "gold_price": 7527.33
+    },
+    {
+      "cum_gold_drift_pnl": -1.17,
+      "cum_spread_pnl": -267.57,
+      "cum_total_pnl": -268.75,
+      "date": "2026-07-27",
+      "gold_benchmark_pnl": 49.08,
+      "gold_price": 7563.87
+    },
+    {
+      "cum_gold_drift_pnl": -0.91,
+      "cum_spread_pnl": -266.77,
+      "cum_total_pnl": -267.68,
+      "date": "2026-07-28",
+      "gold_benchmark_pnl": 59.53,
+      "gold_price": 7639.23
+    },
+    {
+      "cum_gold_drift_pnl": -0.68,
+      "cum_spread_pnl": -265.47,
+      "cum_total_pnl": -266.16,
+      "date": "2026-07-29",
+      "gold_benchmark_pnl": 68.35,
+      "gold_price": 7702.87
+    },
+    {
+      "cum_gold_drift_pnl": -0.68,
+      "cum_spread_pnl": -265.47,
+      "cum_total_pnl": -266.16,
+      "date": "2026-07-30",
+      "gold_benchmark_pnl": 74.44,
+      "gold_price": 7746.73
+    },
+    {
+      "cum_gold_drift_pnl": -0.75,
+      "cum_spread_pnl": -268.67,
+      "cum_total_pnl": -269.42,
+      "date": "2026-07-31",
+      "gold_benchmark_pnl": 71.81,
+      "gold_price": 7727.77
+    },
+    {
+      "cum_gold_drift_pnl": -0.57,
+      "cum_spread_pnl": -272.27,
+      "cum_total_pnl": -272.85,
+      "date": "2026-08-03",
+      "gold_benchmark_pnl": 78.6,
+      "gold_price": 7776.77
+    },
+    {
+      "cum_gold_drift_pnl": -0.75,
+      "cum_spread_pnl": -271.42,
+      "cum_total_pnl": -272.17,
+      "date": "2026-08-04",
+      "gold_benchmark_pnl": 71.76,
+      "gold_price": 7727.4
+    },
+    {
+      "cum_gold_drift_pnl": -0.75,
+      "cum_spread_pnl": -271.42,
+      "cum_total_pnl": -272.17,
+      "date": "2026-08-05",
+      "gold_benchmark_pnl": 74.26,
+      "gold_price": 7745.47
+    },
+    {
+      "cum_gold_drift_pnl": -0.75,
+      "cum_spread_pnl": -271.42,
+      "cum_total_pnl": -272.17,
+      "date": "2026-08-06",
+      "gold_benchmark_pnl": 70.01,
+      "gold_price": 7714.8
+    },
+    {
+      "cum_gold_drift_pnl": -0.72,
+      "cum_spread_pnl": -281.32,
+      "cum_total_pnl": -282.05,
+      "date": "2026-08-07",
+      "gold_benchmark_pnl": 70.99,
+      "gold_price": 7721.87
+    },
+    {
+      "cum_gold_drift_pnl": -0.18,
+      "cum_spread_pnl": -252.3,
+      "cum_total_pnl": -252.48,
+      "date": "2026-08-10",
+      "gold_benchmark_pnl": 92.2,
+      "gold_price": 7874.83
+    },
+    {
+      "cum_gold_drift_pnl": -0.6,
+      "cum_spread_pnl": -200.92,
+      "cum_total_pnl": -201.52,
+      "date": "2026-08-11",
+      "gold_benchmark_pnl": 75.22,
+      "gold_price": 7752.4
+    },
+    {
+      "cum_gold_drift_pnl": -0.43,
+      "cum_spread_pnl": -248.65,
+      "cum_total_pnl": -249.08,
+      "date": "2026-08-12",
+      "gold_benchmark_pnl": 81.71,
+      "gold_price": 7799.2
+    },
+    {
+      "cum_gold_drift_pnl": -0.79,
+      "cum_spread_pnl": -276.32,
+      "cum_total_pnl": -277.12,
+      "date": "2026-08-13",
+      "gold_benchmark_pnl": 67.21,
+      "gold_price": 7694.6
+    },
+    {
+      "cum_gold_drift_pnl": -0.9,
+      "cum_spread_pnl": -316.87,
+      "cum_total_pnl": -317.77,
+      "date": "2026-08-14",
+      "gold_benchmark_pnl": 63.14,
+      "gold_price": 7665.27
+    },
+    {
+      "cum_gold_drift_pnl": -0.65,
+      "cum_spread_pnl": -321.67,
+      "cum_total_pnl": -322.32,
+      "date": "2026-08-17",
+      "gold_benchmark_pnl": 72.95,
+      "gold_price": 7736.0
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-18",
+      "gold_benchmark_pnl": 73.69,
+      "gold_price": 7741.37
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-19",
+      "gold_benchmark_pnl": 64.11,
+      "gold_price": 7672.27
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-20",
+      "gold_benchmark_pnl": 57.8,
+      "gold_price": 7626.77
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-21",
+      "gold_benchmark_pnl": 64.15,
+      "gold_price": 7672.57
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-24",
+      "gold_benchmark_pnl": 57.48,
+      "gold_price": 7624.47
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-25",
+      "gold_benchmark_pnl": 59.69,
+      "gold_price": 7640.4
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-26",
+      "gold_benchmark_pnl": 60.3,
+      "gold_price": 7644.83
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-27",
+      "gold_benchmark_pnl": 54.58,
+      "gold_price": 7603.53
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-28",
+      "gold_benchmark_pnl": 74.18,
+      "gold_price": 7744.9
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-08-31",
+      "gold_benchmark_pnl": 79.88,
+      "gold_price": 7785.97
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-01",
+      "gold_benchmark_pnl": 61.64,
+      "gold_price": 7654.43
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-02",
+      "gold_benchmark_pnl": 63.44,
+      "gold_price": 7667.47
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-03",
+      "gold_benchmark_pnl": 57.66,
+      "gold_price": 7625.77
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-04",
+      "gold_benchmark_pnl": 65.54,
+      "gold_price": 7682.6
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-07",
+      "gold_benchmark_pnl": 62.67,
+      "gold_price": 7661.9
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-08",
+      "gold_benchmark_pnl": 61.85,
+      "gold_price": 7655.97
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-09",
+      "gold_benchmark_pnl": 66.62,
+      "gold_price": 7690.37
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-10",
+      "gold_benchmark_pnl": 74.67,
+      "gold_price": 7748.4
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-11",
+      "gold_benchmark_pnl": 63.91,
+      "gold_price": 7670.83
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-14",
+      "gold_benchmark_pnl": 60.81,
+      "gold_price": 7648.5
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-15",
+      "gold_benchmark_pnl": 56.74,
+      "gold_price": 7619.1
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-16",
+      "gold_benchmark_pnl": 51.14,
+      "gold_price": 7578.73
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-17",
+      "gold_benchmark_pnl": 67.24,
+      "gold_price": 7694.8
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-18",
+      "gold_benchmark_pnl": 71.11,
+      "gold_price": 7722.73
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-21",
+      "gold_benchmark_pnl": 59.61,
+      "gold_price": 7639.8
+    },
+    {
+      "cum_gold_drift_pnl": -0.63,
+      "cum_spread_pnl": -353.65,
+      "cum_total_pnl": -354.28,
+      "date": "2026-09-22",
+      "gold_benchmark_pnl": 68.09,
+      "gold_price": 7701.0
+    }
+  ],
+  "summary": {
+    "beta_to_gold": 0.022,
+    "conclusion": "Strategy returns are predominantly driven by relative spread capture rather than directional gold price trend.",
+    "gold_drift_share_pct": 0.2,
+    "is_market_neutral": true,
+    "spread_capture_share_pct": 99.8,
+    "total_pnl_inr_g": -354.28
+  }
+}

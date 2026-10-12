@@ -1,0 +1,41 @@
+{
+  "end_date": "2026-09-22",
+  "health_score": 87.9,
+  "start_date": "2025-10-06",
+  "status": "HEALTHY",
+  "symbols": {
+    "GOLDGUINEA": {
+      "avg_oi": 262.7,
+      "avg_volume": 41.3,
+      "records": 756,
+      "thin_pct": 57.8,
+      "thin_records": 437
+    },
+    "GOLDM": {
+      "avg_oi": 4173.4,
+      "avg_volume": 625.5,
+      "records": 756,
+      "thin_pct": 13.4,
+      "thin_records": 101
+    },
+    "GOLDPETAL": {
+      "avg_oi": 334.1,
+      "avg_volume": 55.7,
+      "records": 756,
+      "thin_pct": 55.7,
+      "thin_records": 421
+    },
+    "GOLDTEN": {
+      "avg_oi": 1104.6,
+      "avg_volume": 175.1,
+      "records": 756,
+      "thin_pct": 34.4,
+      "thin_records": 260
+    }
+  },
+  "thin_liquidity_count": 1219,
+  "thin_liquidity_pct": 40.3,
+  "total_clean_rows": 3024,
+  "total_raw_rows": 6048,
+  "trading_days": 252
+}

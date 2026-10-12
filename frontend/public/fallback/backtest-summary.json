@@ -1,0 +1,610 @@
+{
+  "cost_bps": 3.0,
+  "end_date": "2026-09-15",
+  "equity_series": [
+    {
+      "date": "2026-02-17",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 97892.7,
+      "strategy_equity": 99703.73,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -296.27
+    },
+    {
+      "date": "2026-02-18",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 98119.0,
+      "strategy_equity": 99892.38,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 188.64
+    },
+    {
+      "date": "2026-02-17",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 97892.7,
+      "strategy_equity": 99609.58,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -282.8
+    },
+    {
+      "date": "2026-02-18",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 98119.0,
+      "strategy_equity": 100050.6,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 441.02
+    },
+    {
+      "date": "2026-02-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 97892.7,
+      "strategy_equity": 100519.12,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 468.52
+    },
+    {
+      "date": "2026-02-23",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 96790.05,
+      "strategy_equity": 100740.56,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 221.44
+    },
+    {
+      "date": "2026-02-26",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 95560.55,
+      "strategy_equity": 100292.0,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -448.56
+    },
+    {
+      "date": "2026-02-25",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 96200.52,
+      "strategy_equity": 99874.19,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -417.81
+    },
+    {
+      "date": "2026-03-02",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 95772.44,
+      "strategy_equity": 99661.28,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -212.91
+    },
+    {
+      "date": "2026-03-02",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 95772.44,
+      "strategy_equity": 99469.76,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -191.52
+    },
+    {
+      "date": "2026-03-02",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 95772.44,
+      "strategy_equity": 99479.31,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 9.55
+    },
+    {
+      "date": "2026-03-02",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 95772.44,
+      "strategy_equity": 99281.52,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -197.79
+    },
+    {
+      "date": "2026-03-12",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 98624.92,
+      "strategy_equity": 99165.44,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": -116.08
+    },
+    {
+      "date": "2026-03-13",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 98480.79,
+      "strategy_equity": 99384.56,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 219.12
+    },
+    {
+      "date": "2026-03-12",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98624.92,
+      "strategy_equity": 99776.18,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 391.62
+    },
+    {
+      "date": "2026-03-13",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98480.79,
+      "strategy_equity": 99217.8,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -558.38
+    },
+    {
+      "date": "2026-03-16",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98730.15,
+      "strategy_equity": 101016.07,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 1798.26
+    },
+    {
+      "date": "2026-03-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98727.26,
+      "strategy_equity": 103164.36,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 2148.29
+    },
+    {
+      "date": "2026-03-18",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 97764.42,
+      "strategy_equity": 104482.39,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 1318.02
+    },
+    {
+      "date": "2026-03-23",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 100053.33,
+      "strategy_equity": 104741.4,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 259.02
+    },
+    {
+      "date": "2026-03-24",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 99296.61,
+      "strategy_equity": 106200.43,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 1459.03
+    },
+    {
+      "date": "2026-03-24",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 99296.61,
+      "strategy_equity": 106893.47,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 693.04
+    },
+    {
+      "date": "2026-03-24",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 99296.61,
+      "strategy_equity": 107162.47,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 269.0
+    },
+    {
+      "date": "2026-03-25",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 100505.92,
+      "strategy_equity": 107858.74,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 696.26
+    },
+    {
+      "date": "2026-04-22",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98114.68,
+      "strategy_equity": 109448.88,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 1590.14
+    },
+    {
+      "date": "2026-04-27",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 99165.44,
+      "strategy_equity": 109449.57,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 0.69
+    },
+    {
+      "date": "2026-05-07",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98359.71,
+      "strategy_equity": 108878.6,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": -570.97
+    },
+    {
+      "date": "2026-05-08",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98626.37,
+      "strategy_equity": 108529.04,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": -349.56
+    },
+    {
+      "date": "2026-05-11",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98019.55,
+      "strategy_equity": 109028.16,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 499.13
+    },
+    {
+      "date": "2026-05-11",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 98019.55,
+      "strategy_equity": 109166.22,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 138.06
+    },
+    {
+      "date": "2026-05-20",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 100467.01,
+      "strategy_equity": 108537.35,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": -628.88
+    },
+    {
+      "date": "2026-05-20",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 100467.01,
+      "strategy_equity": 108320.97,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -216.38
+    },
+    {
+      "date": "2026-05-21",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 99789.56,
+      "strategy_equity": 108821.21,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 500.23
+    },
+    {
+      "date": "2026-05-21",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 99789.56,
+      "strategy_equity": 109146.56,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 325.35
+    },
+    {
+      "date": "2026-05-26",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 101686.41,
+      "strategy_equity": 108592.53,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -554.03
+    },
+    {
+      "date": "2026-05-28",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103173.92,
+      "strategy_equity": 108273.68,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -318.85
+    },
+    {
+      "date": "2026-05-28",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103173.92,
+      "strategy_equity": 107953.42,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -320.26
+    },
+    {
+      "date": "2026-05-28",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103173.92,
+      "strategy_equity": 107760.13,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -193.29
+    },
+    {
+      "date": "2026-06-02",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 101069.5,
+      "strategy_equity": 107556.55,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -203.58
+    },
+    {
+      "date": "2026-06-11",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 103857.13,
+      "strategy_equity": 109484.75,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 1928.19
+    },
+    {
+      "date": "2026-06-12",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 106301.71,
+      "strategy_equity": 109050.05,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -434.69
+    },
+    {
+      "date": "2026-06-15",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 106859.52,
+      "strategy_equity": 108602.39,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -447.66
+    },
+    {
+      "date": "2026-06-16",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 106098.48,
+      "strategy_equity": 108174.59,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -427.81
+    },
+    {
+      "date": "2026-06-17",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 105154.37,
+      "strategy_equity": 107901.37,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -273.21
+    },
+    {
+      "date": "2026-06-22",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 106053.79,
+      "strategy_equity": 107616.55,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -284.82
+    },
+    {
+      "date": "2026-06-30",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 104763.76,
+      "strategy_equity": 107183.21,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -433.34
+    },
+    {
+      "date": "2026-07-01",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 104974.2,
+      "strategy_equity": 106790.03,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -393.18
+    },
+    {
+      "date": "2026-07-02",
+      "direction": "LONG_SPREAD",
+      "gold_buy_and_hold": 103888.84,
+      "strategy_equity": 106639.97,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -150.06
+    },
+    {
+      "date": "2026-07-02",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103888.84,
+      "strategy_equity": 107167.12,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 527.15
+    },
+    {
+      "date": "2026-07-13",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103586.15,
+      "strategy_equity": 107490.79,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 323.66
+    },
+    {
+      "date": "2026-07-10",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103284.9,
+      "strategy_equity": 107217.65,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -273.13
+    },
+    {
+      "date": "2026-07-13",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103586.15,
+      "strategy_equity": 107938.91,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 721.26
+    },
+    {
+      "date": "2026-07-10",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103284.9,
+      "strategy_equity": 107605.17,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -333.74
+    },
+    {
+      "date": "2026-07-10",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 103284.9,
+      "strategy_equity": 107411.1,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -194.08
+    },
+    {
+      "date": "2026-07-22",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 104942.49,
+      "strategy_equity": 107043.65,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -367.45
+    },
+    {
+      "date": "2026-07-23",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 105425.35,
+      "strategy_equity": 106652.19,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -391.46
+    },
+    {
+      "date": "2026-07-27",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 109475.63,
+      "strategy_equity": 106377.37,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -274.83
+    },
+    {
+      "date": "2026-07-27",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 109475.63,
+      "strategy_equity": 106120.52,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -256.84
+    },
+    {
+      "date": "2026-07-27",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 109475.63,
+      "strategy_equity": 105877.02,
+      "symbol": "GOLDTEN",
+      "trade_pnl": -243.5
+    },
+    {
+      "date": "2026-08-06",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111665.08,
+      "strategy_equity": 105837.84,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": -39.18
+    },
+    {
+      "date": "2026-08-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111974.98,
+      "strategy_equity": 107738.37,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 1900.53
+    },
+    {
+      "date": "2026-08-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111974.98,
+      "strategy_equity": 109713.89,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 1975.53
+    },
+    {
+      "date": "2026-08-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111974.98,
+      "strategy_equity": 109839.42,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 125.53
+    },
+    {
+      "date": "2026-08-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111974.98,
+      "strategy_equity": 113234.82,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 3395.4
+    },
+    {
+      "date": "2026-08-18",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 112052.81,
+      "strategy_equity": 119257.72,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 6022.9
+    },
+    {
+      "date": "2026-08-18",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 112052.81,
+      "strategy_equity": 120130.62,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 872.9
+    },
+    {
+      "date": "2026-08-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111974.98,
+      "strategy_equity": 122300.7,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 2170.08
+    },
+    {
+      "date": "2026-08-18",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 112052.81,
+      "strategy_equity": 125660.78,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 3360.08
+    },
+    {
+      "date": "2026-08-18",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 112052.81,
+      "strategy_equity": 126120.86,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 460.08
+    },
+    {
+      "date": "2026-08-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111974.98,
+      "strategy_equity": 127379.74,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 1258.88
+    },
+    {
+      "date": "2026-08-18",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 112052.81,
+      "strategy_equity": 129666.12,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 2286.38
+    },
+    {
+      "date": "2026-08-18",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 112052.81,
+      "strategy_equity": 129802.5,
+      "symbol": "GOLDTEN",
+      "trade_pnl": 136.38
+    },
+    {
+      "date": "2026-08-17",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111974.98,
+      "strategy_equity": 130568.14,
+      "symbol": "GOLDGUINEA",
+      "trade_pnl": 765.64
+    },
+    {
+      "date": "2026-08-19",
+      "direction": "SHORT_SPREAD",
+      "gold_buy_and_hold": 111052.5,
+      "strategy_equity": 132806.29,
+      "symbol": "GOLDPETAL",
+      "trade_pnl": 2238.14
+    }
+  ],
+  "id": 1,
+  "max_drawdown_pct": 15.96,
+  "model_name": "xgboost",
+  "run_name": "Walk-Forward XGBOOST (80d/20d)",
+  "sharpe_ratio": 2.77,
+  "start_date": "2025-10-06",
+  "test_window_days": 20,
+  "total_return_pct": 4.36,
+  "total_trades": 74,
+  "train_window_days": 80,
+  "win_rate": 0.527,
+  "winning_trades": 39
+}

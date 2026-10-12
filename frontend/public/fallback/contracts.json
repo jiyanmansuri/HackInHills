@@ -1,0 +1,46 @@
+[
+  {
+    "contract_size_g": 100.0,
+    "description": "",
+    "name": "Gold Mini Futures",
+    "purity": 0.995,
+    "quotation_base_g": 10.0,
+    "quote_unit": "INR / 10g",
+    "symbol": "GOLDM",
+    "tick_size": 1.0,
+    "trading_unit": "100 grams"
+  },
+  {
+    "contract_size_g": 10.0,
+    "description": "",
+    "name": "Gold Ten Futures",
+    "purity": 0.995,
+    "quotation_base_g": 1.0,
+    "quote_unit": "INR / 1g",
+    "symbol": "GOLDTEN",
+    "tick_size": 0.5,
+    "trading_unit": "10 grams"
+  },
+  {
+    "contract_size_g": 8.0,
+    "description": "",
+    "name": "Gold Guinea Futures",
+    "purity": 0.995,
+    "quotation_base_g": 8.0,
+    "quote_unit": "INR / 8g",
+    "symbol": "GOLDGUINEA",
+    "tick_size": 1.0,
+    "trading_unit": "8 grams"
+  },
+  {
+    "contract_size_g": 1.0,
+    "description": "",
+    "name": "Gold Petal Futures",
+    "purity": 0.999,
+    "quotation_base_g": 1.0,
+    "quote_unit": "INR / 1g",
+    "symbol": "GOLDPETAL",
+    "tick_size": 1.0,
+    "trading_unit": "1 gram"
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "comparison_curve": [
+    {
+      "days_to_expiry": 25,
+      "expiry_date": "2026-09-05",
+      "price_per_gram": 7720.2
+    },
+    {
+      "days_to_expiry": 55,
+      "expiry_date": "2026-10-05",
+      "price_per_gram": 7752.0
+    },
+    {
+      "days_to_expiry": 86,
+      "expiry_date": "2026-11-05",
+      "price_per_gram": 7785.0
+    }
+  ],
+  "curve": [
+    {
+      "annualized_carry_pct": 0.0,
+      "calendar_spread_inr": 0.0,
+      "days_to_expiry": 13,
+      "expiry_date": "2026-10-05",
+      "is_roll_window": false,
+      "is_thin_liquidity": false,
+      "oi_grams": 1359200.0,
+      "price_per_gram": 7668.7,
+      "volume_grams": 87200.0
+    },
+    {
+      "annualized_carry_pct": 5.01,
+      "calendar_spread_inr": 32.6,
+      "days_to_expiry": 44,
+      "expiry_date": "2026-11-05",
+      "is_roll_window": false,
+      "is_thin_liquidity": false,
+      "oi_grams": 293100.0,
+      "price_per_gram": 7701.3,
+      "volume_grams": 60900.0
+    },
+    {
+      "annualized_carry_pct": 5.02,
+      "calendar_spread_inr": 64.3,
+      "days_to_expiry": 74,
+      "expiry_date": "2026-12-05",
+      "is_roll_window": false,
+      "is_thin_liquidity": true,
+      "oi_grams": 108400.0,
+      "price_per_gram": 7733.0,
+      "volume_grams": 9900.0
+    }
+  ],
+  "is_contango": true,
+  "symbol": "GOLDM",
+  "trade_date": "2026-09-22"
+}

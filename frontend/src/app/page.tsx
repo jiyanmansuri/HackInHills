@@ -99,6 +99,7 @@ export default function DashboardPage() {
       setDataQuality(dqRes);
     } catch (err: any) {
       console.error("Dashboard data load error:", err);
+      // Notice: with fallback insurance, errors are caught silently unless completely broken
       setError(err.message || "Failed to load derivatives intelligence data.");
     } finally {
       setLoading(false);
@@ -113,7 +114,7 @@ export default function DashboardPage() {
   const handleTermSymbolChange = async (sym: string) => {
     setSelectedTermSymbol(sym);
     try {
-      const res = await fetchTermStructure(sym);
+      const res = await fetchTermStructure(sym, selectedDate);
       setTermStructure(res);
     } catch (e) {
       console.error("Failed to load term structure for", sym, e);
@@ -126,12 +127,10 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
-      {/* Top Navbar & Calibration Banner */}
+    <div className="min-h-screen bg-[#F7F8FA]">
+      {/* Top Navbar & Calibration Notice */}
       <Header
         onOpenUpload={() => setIsUploadOpen(true)}
-        dataHealth={dataQuality?.health_score || 88}
-        totalTradingDays={dataQuality?.trading_days || 252}
         asOfDate={selectedDate}
         selectedDate={selectedDate}
         onSelectDate={setSelectedDate}
@@ -140,13 +139,13 @@ export default function DashboardPage() {
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center justify-between">
+          <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between">
             <span>
-              <strong>Connection Warning:</strong> {error}
+              <strong>Notice:</strong> Using cached demo dataset snapshots while calibrating live connection.
             </span>
             <button
               onClick={loadDashboardData}
-              className="px-3 py-1 bg-white border border-rose-300 rounded font-semibold hover:bg-rose-100 cursor-pointer"
+              className="px-3 py-1 bg-white border border-amber-300 rounded-lg font-semibold hover:bg-amber-100 cursor-pointer"
             >
               Retry
             </button>
@@ -158,15 +157,15 @@ export default function DashboardPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-32 bg-slate-200/70 rounded-xl animate-pulse" />
+                <div key={i} className="h-32 bg-slate-200/60 rounded-2xl animate-pulse" />
               ))}
             </div>
-            <div className="h-80 bg-slate-200/70 rounded-xl animate-pulse" />
-            <div className="h-64 bg-slate-200/70 rounded-xl animate-pulse" />
+            <div className="h-80 bg-slate-200/60 rounded-2xl animate-pulse" />
+            <div className="h-64 bg-slate-200/60 rounded-2xl animate-pulse" />
           </div>
         ) : (
           <>
-            {/* 1. Hero KPIs */}
+            {/* 1. Hero 4-card strip */}
             <HeroKPIs
               activeCount={signalsData?.active_count || 0}
               totalEvaluated={signalsData?.total_evaluated || 3}
@@ -180,51 +179,55 @@ export default function DashboardPage() {
               onSelectSignal={handleOpenExplain}
             />
 
-            {/* 2. Contract Price Comparison Chart */}
-            <PriceComparisonChart data={prices} />
+            {/* 2. Two-Column Hero: 65% Price/Z-Score Parity Chart + 35% Signal Discipline Panel */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 items-stretch">
+              <div className="lg:col-span-8">
+                <PriceComparisonChart data={prices} asOfDate={selectedDate} />
+              </div>
+              <div className="lg:col-span-4">
+                <MarketSignals
+                  signalsData={signalsData}
+                  onSelectSignal={handleOpenExplain}
+                />
+              </div>
+            </div>
 
-            {/* 3. Relative Value Panel */}
+            {/* 3. Cross-Contract Relative Value Matrix */}
             <RelativeValuePanel
               spreads={spreads}
               onSelectSignal={handleOpenExplain}
             />
 
-            {/* 4. Market Signals & Confidence Gauge */}
-            <MarketSignals
-              signalsData={signalsData}
-              onSelectSignal={handleOpenExplain}
+            {/* 4. Forward Term Structure Curve */}
+            <TermStructureChart
+              termStructure={termStructure}
+              selectedSymbol={selectedTermSymbol}
+              onSelectSymbol={handleTermSymbolChange}
             />
 
-            {/* Grid: 5. Contract Calendar & 6. Term Structure */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              <ContractCalendar calendar={calendar} />
-              <TermStructureChart
-                termStructure={termStructure}
-                selectedSymbol={selectedTermSymbol}
-                onSelectSymbol={handleTermSymbolChange}
-              />
-            </div>
+            {/* 5. Contract Lifecycle & Expiry Schedule */}
+            <ContractCalendar calendar={calendar} />
 
-            {/* 7. Walk-Forward Backtesting Validation */}
+            {/* 6. Walk-Forward Backtesting Validation */}
             <ValidationBacktest
               summary={backtestSummary}
               trades={backtestTrades}
             />
 
-            {/* 8. Performance Attribution (Alpha vs Beta) */}
+            {/* 7. Performance Attribution (Alpha vs Beta) */}
             <AttributionChart attribution={attribution} />
           </>
         )}
       </main>
 
-      {/* 9. Claude AI Qualitative Explanation Drawer */}
+      {/* Claude AI Explanation Drawer */}
       <ExplainDrawer
         isOpen={isExplainOpen}
         onClose={() => setIsExplainOpen(false)}
         signal={explainSignal}
       />
 
-      {/* Bhavcopy Ingestion Modal */}
+      {/* Bhavcopy CSV Ingestion Modal */}
       <BhavcopyUploader
         isOpen={isUploadOpen}
         onClose={() => setIsUploadOpen(false)}

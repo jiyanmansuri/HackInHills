@@ -1,6 +1,5 @@
 /**
- * Typed REST API Client connecting Next.js to Flask backend.
- * Hack in Hills '26 - Team Holyknight
+ * Typed REST API Client connecting Next.js to Flask backend with demo JSON fallback insurance.
  */
 
 import {
@@ -17,24 +16,39 @@ import {
   ExplainResponse,
 } from "./types";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-
-async function handleResponse<T>(res: Response): Promise<T> {
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(`API Error [${res.status}]: ${errorText || res.statusText}`);
+async function fetchWithFallback<T>(url: string, fallbackPath: string): Promise<T> {
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) {
+      throw new Error(`API error ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    console.warn(`Fetch to ${url} failed; loading fallback ${fallbackPath}:`, err);
+    try {
+      const fallbackRes = await fetch(fallbackPath);
+      if (fallbackRes.ok) {
+        return await fallbackRes.json();
+      }
+    } catch (fallbackErr) {
+      console.error(`Fallback failed for ${fallbackPath}:`, fallbackErr);
+    }
+    throw err;
   }
-  return res.json();
 }
 
 export async function fetchHealth(): Promise<{ status: string; database: string }> {
-  const res = await fetch(`${BASE_URL}/api/health`, { cache: "no-store" });
-  return handleResponse(res);
+  return fetchWithFallback<{ status: string; database: string }>(
+    "/api/health",
+    "/fallback/health.json"
+  );
 }
 
 export async function fetchContracts(): Promise<ContractSpec[]> {
-  const res = await fetch(`${BASE_URL}/api/contracts`, { credentials: "omit" });
-  return handleResponse(res);
+  return fetchWithFallback<ContractSpec[]>(
+    "/api/contracts",
+    "/fallback/contracts.json"
+  );
 }
 
 export async function fetchNormalizedPrices(
@@ -49,16 +63,22 @@ export async function fetchNormalizedPrices(
   if (toDate) params.append("to", toDate);
   if (expiry) params.append("expiry", expiry);
 
-  const res = await fetch(`${BASE_URL}/api/prices/normalized?${params.toString()}`);
-  return handleResponse(res);
+  const query = params.toString() ? `?${params.toString()}` : "";
+  return fetchWithFallback<NormalizedPriceRecord[]>(
+    `/api/prices/normalized${query}`,
+    "/fallback/prices-normalized.json"
+  );
 }
 
 export async function fetchRelativeValue(targetDate?: string): Promise<RelativeValueRecord[]> {
   const params = new URLSearchParams();
   if (targetDate) params.append("date", targetDate);
 
-  const res = await fetch(`${BASE_URL}/api/relative-value?${params.toString()}`);
-  return handleResponse(res);
+  const query = params.toString() ? `?${params.toString()}` : "";
+  return fetchWithFallback<RelativeValueRecord[]>(
+    `/api/relative-value${query}`,
+    "/fallback/relative-value.json"
+  );
 }
 
 export async function fetchTermStructure(
@@ -68,56 +88,85 @@ export async function fetchTermStructure(
   const params = new URLSearchParams({ symbol });
   if (targetDate) params.append("date", targetDate);
 
-  const res = await fetch(`${BASE_URL}/api/term-structure?${params.toString()}`);
-  return handleResponse(res);
+  const query = `?${params.toString()}`;
+  return fetchWithFallback<TermStructureResponse>(
+    `/api/term-structure${query}`,
+    "/fallback/term-structure.json"
+  );
 }
 
 export async function fetchCalendar(): Promise<CalendarItem[]> {
-  const res = await fetch(`${BASE_URL}/api/calendar`);
-  return handleResponse(res);
+  return fetchWithFallback<CalendarItem[]>(
+    "/api/calendar",
+    "/fallback/calendar.json"
+  );
 }
 
 export async function fetchSignals(): Promise<SignalsResponse> {
-  const res = await fetch(`${BASE_URL}/api/signals`);
-  return handleResponse(res);
+  return fetchWithFallback<SignalsResponse>(
+    "/api/signals",
+    "/fallback/signals.json"
+  );
 }
 
 export async function fetchBacktestSummary(): Promise<BacktestSummaryResponse> {
-  const res = await fetch(`${BASE_URL}/api/backtest/summary`);
-  return handleResponse(res);
+  return fetchWithFallback<BacktestSummaryResponse>(
+    "/api/backtest/summary",
+    "/fallback/backtest-summary.json"
+  );
 }
 
 export async function fetchBacktestTrades(limit: number = 50): Promise<BacktestTrade[]> {
-  const res = await fetch(`${BASE_URL}/api/backtest/trades?limit=${limit}`);
-  return handleResponse(res);
+  return fetchWithFallback<BacktestTrade[]>(
+    `/api/backtest/trades?limit=${limit}`,
+    "/fallback/backtest-trades.json"
+  );
 }
 
 export async function fetchAttribution(): Promise<AttributionResponse> {
-  const res = await fetch(`${BASE_URL}/api/attribution`);
-  return handleResponse(res);
+  return fetchWithFallback<AttributionResponse>(
+    "/api/attribution",
+    "/fallback/attribution.json"
+  );
 }
 
 export async function fetchDataQuality(): Promise<DataQualityReport> {
-  const res = await fetch(`${BASE_URL}/api/data-quality`);
-  return handleResponse(res);
+  return fetchWithFallback<DataQualityReport>(
+    "/api/data-quality",
+    "/fallback/data-quality.json"
+  );
 }
 
 export async function requestExplanation(signalPayload: any): Promise<ExplainResponse> {
-  const res = await fetch(`${BASE_URL}/api/explain`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(signalPayload),
-  });
-  return handleResponse(res);
+  try {
+    const res = await fetch("/api/explain", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(signalPayload),
+    });
+    if (!res.ok) throw new Error(`API error ${res.status}`);
+    return await res.json();
+  } catch (e) {
+    return {
+      explanation: `Cross-contract basis dislocation observed in ${signalPayload.symbol} (${signalPayload.spread_abs > 0 ? "+" : ""}${signalPayload.spread_abs?.toFixed(2)} ₹/g). Z-score dislocation (${signalPayload.z_score?.toFixed(2)}σ) driven by localized liquidity imbalance against front GOLDM benchmark. Invalidation: divergence beyond ±2.5σ or volume collapse.`,
+      model_used: "claude-3-5-sonnet-20241022 (fallback)",
+      is_fallback: true,
+      error_note: "Running local demo fallback explanation",
+    };
+  }
 }
 
 export async function uploadBhavcopyFile(file: File): Promise<any> {
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch(`${BASE_URL}/api/upload-bhavcopy`, {
+  const res = await fetch("/api/upload-bhavcopy", {
     method: "POST",
     body: formData,
   });
-  return handleResponse(res);
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`API Error [${res.status}]: ${errorText || res.statusText}`);
+  }
+  return res.json();
 }
