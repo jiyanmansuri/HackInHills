@@ -86,42 +86,65 @@ export const MarketSignals: React.FC<MarketSignalsProps> = ({
             activeSignals.map((sig) => (
               <div
                 key={`${sig.symbol}-${sig.expiry_date}`}
-                className="p-3 rounded border border-pos/20 bg-pos/5 flex items-center justify-between text-xs"
+                className="p-3.5 rounded border border-pos/30 bg-pos/5 text-xs flex flex-col justify-between"
               >
-                <div>
+                <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-1.5 font-medium text-ink">
-                    <span className="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-pos text-white">
+                    <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-pos text-white">
                       {sig.signal_type}
                     </span>
-                    <span>{sig.symbol} vs GOLDM</span>
-                    <span className="font-mono text-muted tabular-nums">
+                    <span className="font-semibold">{sig.symbol} vs GOLDM</span>
+                    <span className="font-mono text-ink font-semibold tabular-nums">
                       {formatZScore(sig.z_score)}
                     </span>
                   </div>
-                  <div className="text-muted mt-0.5 font-mono text-[11px] tabular-nums">
-                    Basis: {formatPct(sig.spread_pct)} &bull; Conf: {(sig.confidence * 100).toFixed(1)}%
+                  <span className="text-[11px] font-mono text-pos font-semibold">
+                    Conf: {(sig.confidence * 100).toFixed(1)}%
+                  </span>
+                </div>
+
+                {/* 4 Quantitative Operational Metric Rows */}
+                <div className="mt-2.5 pt-2 border-t border-pos/20 grid grid-cols-2 gap-2 text-[11px] font-mono">
+                  <div className="flex justify-between pr-2">
+                    <span className="text-muted">Basis:</span>
+                    <span className="text-ink font-medium">{formatPct(sig.spread_pct)}</span>
+                  </div>
+                  <div className="flex justify-between pl-2 border-l border-pos/20">
+                    <span className="text-muted">Liquidity:</span>
+                    <span className="text-ink font-medium">₹100k+ Vol</span>
+                  </div>
+                  <div className="flex justify-between pr-2">
+                    <span className="text-muted">Roll Window:</span>
+                    <span className="text-ink font-medium">{sig.days_to_expiry}d exp</span>
+                  </div>
+                  <div className="flex justify-between pl-2 border-l border-pos/20">
+                    <span className="text-muted">Invalidation:</span>
+                    <span className="text-neg font-medium">&gt; 1.5&times; ATR</span>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => onSelectSignal(sig)}
-                  className="inline-flex items-center space-x-1 text-xs font-medium text-gold hover:underline cursor-pointer"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <ArrowRight className="w-3 h-3" />
-                </button>
+                <div className="mt-3 pt-2 border-t border-pos/20 flex justify-end">
+                  <button
+                    onClick={() => onSelectSignal(sig)}
+                    className="inline-flex items-center space-x-1.5 text-xs font-semibold text-gold hover:text-ink cursor-pointer transition-colors"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Explain Thesis with Claude</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </button>
+                </div>
               </div>
             ))
           ) : (
-            <div className="p-3 rounded border border-line bg-white text-xs">
-              <div className="font-medium text-ink mb-1.5 flex items-center justify-between">
+            <div className="p-3.5 rounded border border-line bg-white text-xs">
+              <div className="font-medium text-ink mb-2 flex items-center justify-between">
                 <span>Filter Rationales</span>
-                <span className="text-[11px] text-muted font-normal">3 pairs scanned</span>
+                <span className="text-[11px] text-muted font-mono font-normal">3 pairs scanned</span>
               </div>
-              <div className="text-muted space-y-1.5 text-[11.5px]">
+              <div className="text-muted space-y-2 text-[11.5px]">
                 {stayQuietSignals.slice(0, 3).map((s, idx) => (
-                  <div key={idx} className="flex items-start space-x-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1 shrink-0" />
+                  <div key={idx} className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 shrink-0" />
                     <span className="leading-tight">
                       <strong className="text-ink font-medium">{s.symbol}:</strong> {s.stay_quiet_reason}
                     </span>

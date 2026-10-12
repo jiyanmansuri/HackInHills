@@ -39,18 +39,22 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Right-aligned action controls */}
-        <div className="flex items-center space-x-2 self-start md:self-auto">
+        <div className="flex items-center space-x-2.5 self-start md:self-auto">
+          <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10.5px] font-mono font-medium bg-ground text-muted border border-line">
+            Demo dataset &bull; 2026
+          </span>
+
           {onSelectDate && (
-            <div className="flex items-center space-x-1.5 bg-ground px-2.5 py-1 rounded text-xs font-mono">
+            <div className="flex items-center space-x-1.5 bg-ground px-2.5 py-1 rounded border border-line text-xs font-mono">
               <span className="text-muted text-[11px]">Replay:</span>
               <select
                 value={selectedDate}
                 onChange={(e) => onSelectDate(e.target.value)}
-                className="bg-white border border-line rounded px-1.5 py-0.5 text-xs text-ink font-medium cursor-pointer outline-none"
+                className="bg-white border border-line rounded px-2 py-0.5 text-xs text-ink font-medium cursor-pointer outline-none focus:border-ink transition-colors"
               >
-                <option value="2026-09-22">2026-09-22 (Equilibrium)</option>
-                <option value="2026-09-15">2026-09-15 (Dislocation &bull; Z = -1.46σ)</option>
-                <option value="2026-08-17">2026-08-17 (High Dislocation &bull; +4.2% Alpha)</option>
+                <option value="2026-09-22">2026-09-22 (Equilibrium &bull; 0 Signals)</option>
+                <option value="2026-03-17">2026-03-17 (High Dislocation &bull; Long GOLDTEN Z = -4.30σ)</option>
+                <option value="2026-08-10">2026-08-10 (High Dislocation &bull; Short GOLDGUINEA Z = +4.52σ)</option>
               </select>
             </div>
           )}

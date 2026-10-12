@@ -10,79 +10,78 @@ interface ContractCalendarProps {
 }
 
 export const ContractCalendar: React.FC<ContractCalendarProps> = ({ calendar }) => {
+  // Group contracts by expiry month for compact timeline display
+  const monthsGroup = React.useMemo(() => {
+    const map = new Map<string, CalendarItem[]>();
+    calendar.forEach((item) => {
+      const expDate = new Date(item.expiry_date);
+      const monthKey = expDate.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+      if (!map.has(monthKey)) {
+        map.set(monthKey, []);
+      }
+      map.get(monthKey)!.push(item);
+    });
+    return Array.from(map.entries());
+  }, [calendar]);
+
   return (
     <Card className="p-5 mb-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-line gap-2">
         <div>
           <h3 className="text-[15px] font-semibold text-ink">
-            Contract Lifecycle &amp; Expiry Schedule
+            Contract Expiry Timeline &amp; Delivery Calendar
           </h3>
           <p className="mt-0.5 text-[12.5px] text-muted">
-            Active MCX futures contracts, days to maturity, and per-gram settlement.
+            Grouped contract lifecycle maturities across active settlement cycles.
           </p>
         </div>
         <span className="text-[11px] font-mono text-muted self-start sm:self-auto">
-          Tender window: &le; 5 days
+          Tender Window: &le; 5 days
         </span>
       </div>
 
-      <div className="overflow-x-auto mt-3">
-        <table className="w-full text-left text-xs whitespace-nowrap">
-          <thead>
-            <tr className="border-b border-line text-muted font-medium uppercase tracking-wider text-[11px]">
-              <th className="pb-2.5 pr-4">Symbol</th>
-              <th className="pb-2.5 px-3">Expiry Date</th>
-              <th className="pb-2.5 px-3">Days to Expiry</th>
-              <th className="pb-2.5 px-3">Lifecycle Status</th>
-              <th className="pb-2.5 pl-3 text-right">Settlement / g</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-line">
-            {calendar.map((item) => {
-              const isRoll = item.is_roll_window;
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        {monthsGroup.map(([month, items]) => (
+          <div key={month} className="p-3.5 rounded border border-line bg-ground/40 flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-2 border-b border-line/60">
+              <span className="font-semibold text-ink text-xs">{month} Cycle</span>
+              <span className="text-[11px] font-mono text-muted">{items.length} contracts</span>
+            </div>
 
-              return (
-                <tr
-                  key={`${item.symbol}-${item.expiry_date}`}
-                  className="hover:bg-ground/50 transition-colors"
-                >
-                  <td className="py-2.5 pr-4 font-medium text-ink">
-                    <div className="flex items-center space-x-2">
-                      <span className="w-2 h-2 rounded-full bg-ink" />
-                      <span>{item.symbol}</span>
+            <div className="grid grid-cols-2 gap-2 mt-3">
+              {items.map((item) => {
+                const isRoll = item.is_roll_window;
+                return (
+                  <div
+                    key={`${item.symbol}-${item.expiry_date}`}
+                    className={`p-2 rounded border bg-white flex flex-col justify-between ${
+                      isRoll ? "border-neg/40 bg-neg/5" : "border-line"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-xs text-ink">{item.symbol}</span>
+                      <span
+                        className={`font-mono text-[10px] tabular-nums px-1 py-0.2 rounded ${
+                          isRoll ? "text-neg bg-neg/10 font-medium" : "text-muted bg-ground"
+                        }`}
+                      >
+                        {item.days_to_expiry}d
+                      </span>
                     </div>
-                  </td>
 
-                  <td className="py-2.5 px-3 text-muted">
-                    {formatDate(item.expiry_date)}
-                  </td>
+                    <div className="mt-1 text-[11px] font-mono text-ink tabular-nums">
+                      {formatINR(item.price_per_gram)}/g
+                    </div>
 
-                  <td className="py-2.5 px-3 font-mono tabular-nums text-ink">
-                    <span className={isRoll ? "text-neg font-semibold" : ""}>
-                      {item.days_to_expiry}d
-                    </span>
-                  </td>
-
-                  <td className="py-2.5 px-3">
-                    {isRoll ? (
-                      <span className="text-neg font-medium text-xs">
-                        Tender / Roll Window
-                      </span>
-                    ) : (
-                      <span className="text-muted text-xs">
-                        Active Trading
-                      </span>
-                    )}
-                  </td>
-
-                  <td className="py-2.5 pl-3 text-right font-mono font-medium text-ink tabular-nums">
-                    {formatINR(item.price_per_gram)}/g
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    <div className="text-[10px] text-muted mt-0.5">
+                      {isRoll ? "Tender Active" : "Active"}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </Card>
   );

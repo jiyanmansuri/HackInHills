@@ -33,7 +33,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
   asOfDate = "2026-09-22",
 }) => {
   const [selectedRange, setSelectedRange] = useState<"1M" | "3M" | "6M" | "ALL">("3M");
-  const [chartMode, setChartMode] = useState<"PRICE" | "ZSCORE">("PRICE");
+  const [chartMode, setChartMode] = useState<"PRICE" | "ZSCORE">("ZSCORE");
   const [activeSymbols, setActiveSymbols] = useState<Record<string, boolean>>({
     GOLDM: true,
     GOLDTEN: true,

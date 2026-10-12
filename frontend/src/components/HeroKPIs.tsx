@@ -59,15 +59,21 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
           <div className="mt-2 font-mono text-2xl tabular-nums text-ink">
             {(avgConfidence * 100).toFixed(1)}%
           </div>
-          <div className="w-full bg-ground rounded h-1.5 mt-2 overflow-hidden">
+          <div className="relative w-full bg-ground rounded h-2 mt-2.5 overflow-hidden border border-line/60">
+            {/* 62% Hurdle Marker */}
             <div
-              className="bg-gold h-1.5 rounded transition-all duration-300"
-              style={{ width: `${Math.min(100, avgConfidence * 100)}%` }}
+              className="absolute top-0 bottom-0 w-0.5 bg-ink/70 z-10"
+              style={{ left: "62%" }}
+              title="62% Reversion Hurdle"
+            />
+            <div
+              className="bg-gold h-full rounded transition-all duration-300"
+              style={{ width: `${Math.min(100, Math.max(0, avgConfidence * 100))}%` }}
             />
           </div>
         </div>
-        <div className="mt-3 pt-2 border-t border-line text-[11px] text-muted flex justify-between">
-          <span>Hurdle: 62.0%</span>
+        <div className="mt-3 pt-2 border-t border-line text-[11px] text-muted flex justify-between items-center">
+          <span className="font-mono">Hurdle: 62.0%</span>
           <span className="text-gold font-medium">XGBoost Platt</span>
         </div>
       </Card>

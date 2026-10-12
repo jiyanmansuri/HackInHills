@@ -121,6 +121,17 @@ export default function DashboardPage() {
     }
   };
 
+  // Auto-open explain drawer when replaying a dislocation date
+  useEffect(() => {
+    if (signalsData && (selectedDate === "2026-03-17" || selectedDate === "2026-08-10")) {
+      const activeSig = signalsData.signals.find((s) => s.is_active);
+      if (activeSig) {
+        setExplainSignal(activeSig);
+        setIsExplainOpen(true);
+      }
+    }
+  }, [selectedDate, signalsData]);
+
   const handleOpenExplain = (signal: Partial<SignalItem>) => {
     setExplainSignal(signal);
     setIsExplainOpen(true);
