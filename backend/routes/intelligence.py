@@ -32,9 +32,12 @@ def signals_route():
 def backtest_summary_route():
     """
     Get out-of-sample walk-forward backtest summary, performance metrics, and equity curve.
+    Query params:
+        date: Target trade date (optional, defaults to full period)
     """
     try:
-        summary = get_backtest_summary()
+        target_date = request.args.get("date")
+        summary = get_backtest_summary(target_date=target_date)
         return jsonify(summary), 200
     except Exception as e:
         logger.error(f"Error in /api/backtest/summary: {e}")
@@ -47,10 +50,12 @@ def backtest_trades_route():
     Get out-of-sample simulated trades list.
     Query params:
         limit: Max trades to return (default 100)
+        date: Target trade date (optional)
     """
     try:
         limit = int(request.args.get("limit", 100))
-        trades = get_backtest_trades(limit=limit)
+        target_date = request.args.get("date")
+        trades = get_backtest_trades(limit=limit, target_date=target_date)
         return jsonify(trades), 200
     except Exception as e:
         logger.error(f"Error in /api/backtest/trades: {e}")

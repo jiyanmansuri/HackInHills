@@ -298,14 +298,32 @@ def run_walk_forward_backtest(
     }
 
 
-def get_backtest_summary() -> Dict[str, Any]:
-    """Retrieve the latest walk-forward backtest summary and equity curve."""
+def get_backtest_summary(target_date: Optional[str] = None) -> Dict[str, Any]:
+    """Retrieve walk-forward backtest summary and equity curve up to target_date."""
     with get_session() as session:
         run = session.query(BacktestRun).order_by(BacktestRun.id.desc()).first()
         if not run:
             return {"status": "NO_RUN", "message": "No backtest runs found."}
 
-        trades = session.query(BacktestTrade).filter(BacktestTrade.run_id == run.id).order_by(BacktestTrade.entry_date.asc()).all()
+        trade_query = session.query(BacktestTrade).filter(BacktestTrade.run_id == run.id).order_by(BacktestTrade.entry_date.asc())
+        if target_date:
+            trade_query = trade_query.filter(BacktestTrade.exit_date <= target_date)
+        trades = trade_query.all()
+
+        if not trades:
+            return {
+                "run_name": f"Out-of-Sample Period (as of {target_date})",
+                "total_trades": 0,
+                "winning_trades": 0,
+                "win_rate": 0.0,
+                "total_return_pct": 0.0,
+                "sharpe_ratio": 0.0,
+                "max_drawdown_pct": 0.0,
+                "cost_bps": 3.0,
+                "equity_series": [],
+                "is_insufficient_history": True,
+                "message": f"Zero out-of-sample trades concluded prior to {target_date}."
+            }
 
         # Build equity curve time series vs buy-and-hold gold
         equity_series = []
@@ -313,14 +331,16 @@ def get_backtest_summary() -> Dict[str, Any]:
         running_gold_equity = 100000.0
 
         first_gold = trades[0].entry_gold_price if trades else 7200.0
+        pnl_series = []
 
         for t in trades:
             # Sizing: 100g position
             trade_pnl = t.net_pnl * 100.0
             running_equity += trade_pnl
+            pnl_series.append(running_equity)
 
             # Gold buy-and-hold equivalent
-            gold_ret = (t.exit_gold_price - first_gold) / first_gold
+            gold_ret = (t.exit_gold_price - first_gold) / max(1.0, first_gold)
             running_gold_equity = 100000.0 * (1.0 + gold_ret)
 
             equity_series.append({
@@ -332,13 +352,44 @@ def get_backtest_summary() -> Dict[str, Any]:
                 "direction": t.direction
             })
 
-        summary = run.to_dict()
-        summary["equity_series"] = equity_series
-        return summary
+        # Dynamically compute metrics for the subset
+        total_trades = len(trades)
+        winning_trades = sum(1 for t in trades if t.net_pnl > 0)
+        win_rate = winning_trades / max(1, total_trades)
+
+        running_max = np.maximum.accumulate(pnl_series)
+        drawdowns = np.array(pnl_series) - running_max
+        max_dd = float(np.min(drawdowns)) if len(drawdowns) > 0 else 0.0
+        max_dd_pct = abs(max_dd / max(1.0, float(np.max(pnl_series)))) * 100.0 if np.max(pnl_series) > 0 else 0.0
+
+        ret_series = [t.return_pct for t in trades]
+        mean_ret = float(np.mean(ret_series))
+        std_ret = float(np.std(ret_series)) if np.std(ret_series) > 0 else 1.0
+        sharpe = round(float((mean_ret / std_ret) * np.sqrt(252.0 / 5.0)), 2)
+
+        return {
+            "id": run.id,
+            "run_name": f"Walk-Forward XGBoost (as of {target_date})" if target_date else run.run_name,
+            "model_name": run.model_name,
+            "start_date": trades[0].entry_date.isoformat(),
+            "end_date": trades[-1].exit_date.isoformat(),
+            "total_trades": total_trades,
+            "winning_trades": winning_trades,
+            "win_rate": round(win_rate, 4),
+            "total_return_pct": round(sum(ret_series), 2),
+            "sharpe_ratio": sharpe,
+            "max_drawdown_pct": round(max_dd_pct, 2),
+            "cost_bps": run.cost_bps,
+            "equity_series": equity_series,
+            "is_insufficient_history": total_trades < 10
+        }
 
 
-def get_backtest_trades(limit: int = 100) -> List[Dict[str, Any]]:
-    """Retrieve out-of-sample backtest trades list."""
+def get_backtest_trades(limit: int = 100, target_date: Optional[str] = None) -> List[Dict[str, Any]]:
+    """Retrieve out-of-sample backtest trades list up to target_date."""
     with get_session() as session:
-        trades = session.query(BacktestTrade).order_by(BacktestTrade.entry_date.desc()).limit(limit).all()
+        query = session.query(BacktestTrade)
+        if target_date:
+            query = query.filter(BacktestTrade.exit_date <= target_date)
+        trades = query.order_by(BacktestTrade.entry_date.desc()).limit(limit).all()
         return [t.to_dict() for t in trades]

@@ -117,23 +117,27 @@ export async function fetchSignals(targetDate?: string): Promise<SignalsResponse
   );
 }
 
-export async function fetchBacktestSummary(): Promise<BacktestSummaryResponse> {
+export async function fetchBacktestSummary(targetDate?: string): Promise<BacktestSummaryResponse> {
+  const query = targetDate ? `?date=${targetDate}` : "";
   return fetchWithFallback<BacktestSummaryResponse>(
-    "/api/backtest/summary",
+    `/api/backtest/summary${query}`,
     "/fallback/backtest-summary.json"
   );
 }
 
-export async function fetchBacktestTrades(limit: number = 50): Promise<BacktestTrade[]> {
+export async function fetchBacktestTrades(limit: number = 50, targetDate?: string): Promise<BacktestTrade[]> {
+  const params = new URLSearchParams({ limit: String(limit) });
+  if (targetDate) params.append("date", targetDate);
   return fetchWithFallback<BacktestTrade[]>(
-    `/api/backtest/trades?limit=${limit}`,
+    `/api/backtest/trades?${params.toString()}`,
     "/fallback/backtest-trades.json"
   );
 }
 
-export async function fetchAttribution(): Promise<AttributionResponse> {
+export async function fetchAttribution(targetDate?: string): Promise<AttributionResponse> {
+  const query = targetDate ? `?date=${targetDate}` : "";
   return fetchWithFallback<AttributionResponse>(
-    "/api/attribution",
+    `/api/attribution${query}`,
     "/fallback/attribution.json"
   );
 }

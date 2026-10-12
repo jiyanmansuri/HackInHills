@@ -2,6 +2,7 @@
 Signal Generation and Discipline Engine.
 Enforces the core rule: "The system must be allowed to stay quiet."
 Filters signals on confidence hurdles, liquidity regimes, and roll window safety.
+Detects Benchmark (GOLDM) dislocations when all pairs dislocate in the same direction.
 Hack in Hills '26 - Team Holyknight
 """
 
@@ -66,11 +67,11 @@ def evaluate_daily_signals(target_date: Optional[str] = None) -> int:
     for _, row in today_slice.iterrows():
         sym = str(row["symbol"])
         exp_d = row["expiry_date"].date() if hasattr(row["expiry_date"], "date") else row["expiry_date"]
-        z = float(row["z_score_30d"])
-        spread_pct = float(row["spread_pct"])
-        days_to_exp = int(row["days_to_expiry"])
+        z = float(row["z_score_30d"]) if pd.notna(row["z_score_30d"]) else 0.0
+        spread_pct = float(row["spread_pct"]) if pd.notna(row["spread_pct"]) else 0.0
+        days_to_exp = int(row["days_to_expiry"]) if pd.notna(row["days_to_expiry"]) else 30
         is_thin = bool(row["is_thin_liquidity"] == 1)
-        conf = float(row["confidence"])
+        conf = float(row["confidence"]) if pd.notna(row["confidence"]) else 0.50
 
         # Signal Discipline Evaluation Rules
         signal_type = "NO_SIGNAL"
@@ -127,6 +128,7 @@ def get_active_signals(target_date: Optional[str] = None) -> Dict[str, Any]:
     """
     Query market signals, discipline breakdown, and confidence metrics for target_date.
     If target_date is given or DB is empty, evaluates signals dynamically on that date.
+    Enforces Benchmark Dislocation synthesis when all front-month pairs move synchronously.
     """
     with get_session() as session:
         if target_date:
@@ -163,14 +165,60 @@ def get_active_signals(target_date: Optional[str] = None) -> Dict[str, Any]:
         front_signal_list = [s.to_dict() for s in front_month_signals.values()]
         active_signals = [s for s in front_signal_list if s["is_active"]]
 
-        avg_conf = round(float(np.mean([s["confidence"] for s in front_signal_list])), 3) if front_signal_list else 0.0
+        # Quant Rule: Benchmark Dislocation Detection
+        # When all front-month contracts are dislocated in the SAME direction by > 2.0 sigma,
+        # it is mathematically an anomaly in GOLDM (the benchmark), NOT 3 separate contract failures!
+        all_dislocated_same_dir = (
+            len(front_signal_list) >= 3 and
+            all(abs(s["z_score"]) >= 2.0 for s in front_signal_list) and
+            (all(s["z_score"] > 0 for s in front_signal_list) or all(s["z_score"] < 0 for s in front_signal_list))
+        )
 
+        if all_dislocated_same_dir:
+            # If all are rich vs GOLDM (Z > +2.0), GOLDM is underpriced -> Long GOLDM
+            # If all are cheap vs GOLDM (Z < -2.0), GOLDM is overpriced -> Short GOLDM
+            direction_goldm = "BUY_SPREAD" if front_signal_list[0]["z_score"] > 0 else "SELL_SPREAD"
+            avg_z = float(np.mean([s["z_score"] for s in front_signal_list]))
+            max_conf = float(np.max([s["confidence"] for s in front_signal_list]))
+            avg_spread = float(np.mean([s["spread_pct"] for s in front_signal_list]))
+            min_dte = int(np.min([s["days_to_expiry"] for s in front_signal_list]))
+
+            benchmark_signal = {
+                "id": 9999,
+                "trade_date": front_signal_list[0]["trade_date"],
+                "symbol": "GOLDM (Benchmark Dislocation)",
+                "expiry_date": front_signal_list[0]["expiry_date"],
+                "signal_type": direction_goldm,
+                "confidence": max_conf,
+                "z_score": round(-avg_z, 2),  # Opposite sign for GOLDM
+                "spread_pct": round(-avg_spread, 4),
+                "regime": "HIGH_DISLOCATION",
+                "stay_quiet_reason": None,
+                "days_to_expiry": min_dte,
+                "is_active": True,
+                "is_benchmark_dislocation": True
+            }
+
+            best_opp = benchmark_signal
+            return {
+                "signals": [benchmark_signal] + front_signal_list,
+                "has_actionable_signals": True,
+                "discipline_status": "ACTIVE_OPPORTUNITY",
+                "active_count": 1,
+                "total_evaluated": len(front_signal_list),
+                "avg_confidence": max_conf,
+                "best_opportunity": best_opp
+            }
+
+        # Normal single-contract relative-value processing
         best_opp = None
         if active_signals:
             best_opp = max(active_signals, key=lambda x: (x["confidence"], abs(x["z_score"])))
         else:
-            # Select highest absolute z-score candidate in front-month even if staying quiet
             best_opp = max(front_signal_list, key=lambda x: abs(x["z_score"])) if front_signal_list else None
+
+        # Conf of top-ranked signal for honest alignment
+        top_conf = best_opp["confidence"] if best_opp else (round(float(np.mean([s["confidence"] for s in front_signal_list])), 3) if front_signal_list else 0.0)
 
         return {
             "signals": front_signal_list,
@@ -178,6 +226,6 @@ def get_active_signals(target_date: Optional[str] = None) -> Dict[str, Any]:
             "discipline_status": "ACTIVE_OPPORTUNITY" if len(active_signals) > 0 else "STAY_QUIET",
             "active_count": len(active_signals),
             "total_evaluated": len(front_signal_list),
-            "avg_confidence": avg_conf,
+            "avg_confidence": top_conf,
             "best_opportunity": best_opp
         }

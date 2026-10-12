@@ -83,9 +83,9 @@ export default function DashboardPage() {
         fetchSignals(selectedDate),
         fetchCalendar(selectedDate),
         fetchTermStructure(selectedTermSymbol, selectedDate),
-        fetchBacktestSummary(),
-        fetchBacktestTrades(50),
-        fetchAttribution(),
+        fetchBacktestSummary(selectedDate),
+        fetchBacktestTrades(50, selectedDate),
+        fetchAttribution(selectedDate),
         fetchDataQuality(),
       ]);
 
@@ -287,8 +287,12 @@ export default function DashboardPage() {
                 <ValidationBacktest
                   summary={backtestSummary}
                   trades={backtestTrades}
+                  asOfDate={selectedDate}
                 />
-                <AttributionChart attribution={attribution} />
+                <AttributionChart
+                  attribution={attribution}
+                  asOfDate={selectedDate}
+                />
               </div>
             )}
           </>

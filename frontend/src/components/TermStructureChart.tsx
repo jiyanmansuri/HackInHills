@@ -28,8 +28,8 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
   const curve = termStructure?.curve || [];
   const isContango = termStructure?.is_contango ?? true;
 
-  const chartData = curve.map((pt) => ({
-    expiry: formatDate(pt.expiry_date),
+  const chartData = curve.map((pt, idx) => ({
+    expiry: `${formatDate(pt.expiry_date)} (M${idx + 1})`,
     price: pt.price_per_gram,
     carry: pt.annualized_carry_pct,
     spread: pt.calendar_spread_inr,
@@ -76,13 +76,19 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
         <div className="lg:col-span-2 h-[260px] min-h-[260px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={chartData} margin={{ top: 15, right: 12, left: 0, bottom: 5 }}>
+            <LineChart data={chartData} margin={{ top: 20, right: 30, left: 30, bottom: 10 }}>
               <CartesianGrid stroke="#EEF0F3" vertical={false} />
-              <XAxis dataKey="expiry" tick={{ fontSize: 11, fill: "#8A94A3" }} tickLine={false} axisLine={false} />
+              <XAxis
+                dataKey="expiry"
+                padding={{ left: 40, right: 40 }}
+                tick={{ fontSize: 11, fill: "#5B6676", fontFamily: "var(--font-mono)" }}
+                tickLine={false}
+                axisLine={false}
+              />
               <YAxis
                 domain={["auto", "auto"]}
                 tickFormatter={(v) => `₹${Math.round(v)}`}
-                tick={{ fontSize: 11, fill: "#8A94A3" }}
+                tick={{ fontSize: 11, fill: "#8A94A3", fontFamily: "var(--font-mono)" }}
                 tickLine={false}
                 axisLine={false}
                 width={56}
@@ -97,7 +103,7 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
                 dataKey="price"
                 stroke="#A8741A"
                 strokeWidth={2}
-                dot={{ r: 4, fill: "#11161C", stroke: "#A8741A" }}
+                dot={{ r: 5, fill: "#11161C", stroke: "#A8741A", strokeWidth: 2 }}
                 isAnimationActive={false}
               />
             </LineChart>
@@ -106,7 +112,7 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
 
         {/* Expiry Details */}
         <div className="space-y-2">
-          <span className="text-[11px] font-medium uppercase tracking-wider text-muted block">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-muted block font-mono">
             Calendar Expiry Details
           </span>
           {curve.map((pt, idx) => (
@@ -118,7 +124,7 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
                 <div className="font-medium text-ink">
                   {idx === 0 ? "Near Month (T1)" : idx === 1 ? "Middle Month (T2)" : "Far Month (T3)"}
                 </div>
-                <div className="text-[11px] text-muted">{formatDate(pt.expiry_date)}</div>
+                <div className="text-[11px] text-muted font-mono">{formatDate(pt.expiry_date)} &bull; {pt.days_to_expiry}d exp</div>
               </div>
               <div className="text-right">
                 <div className="font-mono font-medium text-ink tabular-nums">{formatINR(pt.price_per_gram)}/g</div>

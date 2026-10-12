@@ -55,13 +55,20 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
       {/* 2. Reversion Confidence */}
       <Card className="p-5 flex flex-col justify-between">
         <div>
-          <Label>Reversion Confidence</Label>
+          <div className="flex items-center justify-between">
+            <Label>Reversion Confidence</Label>
+            {bestOpportunity && (
+              <span className="text-[10px] font-mono text-muted">
+                {bestOpportunity.symbol.split(" ")[0]}
+              </span>
+            )}
+          </div>
           <div className="mt-2 flex items-baseline justify-between">
             <span className="font-mono text-2xl font-bold tabular-nums text-ink">
               {(avgConfidence * 100).toFixed(1)}%
             </span>
-            <span className="text-[11px] font-mono text-muted">
-              {avgConfidence >= 0.62 ? (
+            <span className="text-[11px] font-mono">
+              {activeCount > 0 || avgConfidence >= 0.62 ? (
                 <span className="text-[#067647] font-semibold">Above Hurdle</span>
               ) : (
                 <span className="text-[#5B6676]">Below 62% Hurdle</span>
@@ -82,7 +89,7 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
               className="h-full rounded-full transition-all duration-500 ease-out flex items-center justify-end pr-1 text-[9px] font-bold text-white"
               style={{
                 width: `${Math.min(100, Math.max(8, avgConfidence * 100))}%`,
-                backgroundColor: avgConfidence >= 0.62 ? "#067647" : "#A8741A",
+                backgroundColor: (activeCount > 0 || avgConfidence >= 0.62) ? "#067647" : "#A8741A",
               }}
             />
           </div>

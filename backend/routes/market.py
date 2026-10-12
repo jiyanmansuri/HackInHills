@@ -97,9 +97,12 @@ def contract_calendar_route():
 def attribution_route():
     """
     Get return attribution decomposing spread alpha vs gold beta.
+    Query params:
+        date: Target trade date (optional, defaults to latest)
     """
     try:
-        attribution = compute_performance_attribution()
+        target_date = request.args.get("date")
+        attribution = compute_performance_attribution(target_date=target_date)
         return jsonify(attribution), 200
     except Exception as e:
         logger.error(f"Error in /api/attribution: {e}")

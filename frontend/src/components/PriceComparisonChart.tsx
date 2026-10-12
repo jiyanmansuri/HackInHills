@@ -37,12 +37,17 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
 }) => {
   const [selectedRange, setSelectedRange] = useState<"1M" | "3M" | "6M" | "ALL">("3M");
   const [chartMode, setChartMode] = useState<"ZSCORE" | "PRICE">("ZSCORE");
-  const [focusedSymbol, setFocusedSymbol] = useState<string>(defaultSymbol);
+  const [focusedSymbol, setFocusedSymbol] = useState<string>(
+    defaultSymbol.includes("GOLD") ? defaultSymbol.split(" ")[0] : "GOLDTEN"
+  );
 
   // Synchronize focusedSymbol if defaultSymbol changes from parent
   React.useEffect(() => {
-    if (defaultSymbol && defaultSymbol !== "GOLDM") {
-      setFocusedSymbol(defaultSymbol);
+    if (defaultSymbol) {
+      const cleanSym = defaultSymbol.split(" ")[0];
+      if (cleanSym === "GOLDTEN" || cleanSym === "GOLDGUINEA" || cleanSym === "GOLDPETAL") {
+        setFocusedSymbol(cleanSym);
+      }
     }
   }, [defaultSymbol]);
 
@@ -124,7 +129,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
             </h3>
             <p className="mt-0.5 text-[12.5px] text-muted">
               {chartMode === "ZSCORE"
-                ? "Rolling 30-day standardized basis relative to GOLDM zero baseline. Focus pair shown with statistical boundaries."
+                ? "Rolling 30-day standardized basis relative to GOLDM zero baseline. Focus pair shown with statistical corridors."
                 : "All 4 contracts normalized to per-gram baseline (GOLDM ÷10g, GOLDTEN ÷1g, GOLDGUINEA ÷8g, GOLDPETAL ÷1g)."}
             </p>
           </div>
@@ -165,7 +170,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
           </div>
         </div>
 
-        {/* Pair Focus Selector & Legend */}
+        {/* Pair Focus Selector & Legend with high contrast text */}
         {chartMode === "ZSCORE" ? (
           <div className="flex flex-wrap items-center justify-between gap-2 my-3 text-xs">
             <div className="flex items-center space-x-1.5">
@@ -178,17 +183,17 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                   <button
                     key={p.key}
                     onClick={() => setFocusedSymbol(p.key)}
-                    className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded text-xs cursor-pointer transition-all ${
+                    className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded text-xs cursor-pointer transition-all border ${
                       isSelected
-                        ? "bg-ink text-white font-semibold shadow-xs"
-                        : "bg-white border border-line text-muted hover:text-ink"
+                        ? "bg-[#11161C] text-white font-semibold border-[#11161C] shadow-xs"
+                        : "bg-white border-line text-[#5B6676] hover:text-[#11161C] hover:border-[#11161C]"
                     }`}
                   >
                     <span
                       className="w-2 h-2 rounded-full shrink-0"
                       style={{ backgroundColor: isSelected ? "#C8963E" : p.color }}
                     />
-                    <span>{p.shortName}</span>
+                    <span className={isSelected ? "text-white" : "text-ink"}>{p.shortName}</span>
                   </button>
                 );
               })}
@@ -198,14 +203,14 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
             <div className="flex items-center space-x-3 text-[11px] font-mono text-muted">
               <span className="inline-flex items-center space-x-1">
                 <span className="w-3 h-0.5 bg-[#11161C] inline-block" />
-                <span>GOLDM (0 Baseline)</span>
+                <span className="text-ink font-medium">GOLDM (0 Baseline)</span>
               </span>
               <span className="inline-flex items-center space-x-1">
-                <span className="w-2 h-2 bg-[#E2E8F0] border border-[#CBD5E1] inline-block" />
+                <span className="w-2.5 h-2.5 bg-[#EEF2F6] border border-[#CBD5E1] inline-block" />
                 <span>±1σ Zone</span>
               </span>
               <span className="inline-flex items-center space-x-1">
-                <span className="w-2 h-2 bg-[#F1F5F9] border border-[#E2E8F0] inline-block" />
+                <span className="w-2.5 h-2.5 bg-[#F8FAFC] border border-[#E2E8F0] inline-block" />
                 <span>±2σ Zone</span>
               </span>
             </div>
@@ -231,8 +236,8 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
           </div>
         )}
 
-        {/* 300px Recharts Container */}
-        <div className="h-[300px] min-h-[300px] w-full mt-2">
+        {/* 300px Recharts Container with ±5σ Range and Internal Band Labels */}
+        <div className="h-[300px] min-h-[300px] w-full mt-2 relative">
           {chartData.length === 0 ? (
             <div className="grid h-full place-items-center text-sm text-muted">
               No data available for this range
@@ -287,7 +292,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                   ))}
                 </LineChart>
               ) : (
-                <LineChart data={chartData} margin={{ top: 12, right: 48, bottom: 12, left: 0 }}>
+                <LineChart data={chartData} margin={{ top: 12, right: 36, bottom: 12, left: 8 }}>
                   {/* Outer ±2σ Band */}
                   <ReferenceArea y1={-2} y2={2} fill="#F8FAFC" fillOpacity={0.8} />
                   {/* Inner ±1σ Band */}
@@ -296,11 +301,11 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                   {/* Zero Baseline for Benchmark */}
                   <ReferenceLine y={0} stroke="#11161C" strokeWidth={1.5} />
                   
-                  {/* Labeled Threshold Boundaries with Explicit Annotations */}
-                  <ReferenceLine y={2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "+2σ Zone", position: "right", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
-                  <ReferenceLine y={1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "+1σ Zone", position: "right", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
-                  <ReferenceLine y={-1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "-1σ Zone", position: "right", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
-                  <ReferenceLine y={-2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "-2σ Zone", position: "right", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  {/* Clean reference boundaries with internal left placement to avoid Y-axis collision */}
+                  <ReferenceLine y={2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "+2σ Zone", position: "insideTopLeft", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  <ReferenceLine y={1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "+1σ Zone", position: "insideTopLeft", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  <ReferenceLine y={-1} stroke="#E2E8F0" strokeDasharray="2 2" label={{ value: "-1σ Zone", position: "insideBottomLeft", fill: "#8A94A3", fontSize: 10, fontFamily: "var(--font-mono)" }} />
+                  <ReferenceLine y={-2} stroke="#CBD5E1" strokeDasharray="3 3" label={{ value: "-2σ Zone", position: "insideBottomLeft", fill: "#5B6676", fontSize: 10, fontFamily: "var(--font-mono)" }} />
 
                   <CartesianGrid stroke="#EEF0F3" vertical={false} />
                   <XAxis
@@ -312,12 +317,12 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                     tickFormatter={(d) => formatDate(d)}
                   />
                   <YAxis
-                    domain={[-4, 4]}
-                    ticks={[-4, -2, 0, 2, 4]}
+                    domain={[-5, 5]}
+                    ticks={[-5, -4, -2, 0, 2, 4, 5]}
                     tick={{ fontSize: 11, fill: "#5B6676", fontFamily: "var(--font-mono)" }}
                     tickLine={false}
                     axisLine={false}
-                    width={40}
+                    width={36}
                     orientation="right"
                     tickFormatter={(v) => (v === 0 ? "0σ" : `${v > 0 ? "+" : ""}${v}σ`)}
                   />
