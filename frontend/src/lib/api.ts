@@ -95,16 +95,24 @@ export async function fetchTermStructure(
   );
 }
 
-export async function fetchCalendar(): Promise<CalendarItem[]> {
+export async function fetchCalendar(targetDate?: string): Promise<CalendarItem[]> {
+  const params = new URLSearchParams();
+  if (targetDate) params.append("date", targetDate);
+  const query = params.toString() ? `?${params.toString()}` : "";
+
   return fetchWithFallback<CalendarItem[]>(
-    "/api/calendar",
+    `/api/calendar${query}`,
     "/fallback/calendar.json"
   );
 }
 
-export async function fetchSignals(): Promise<SignalsResponse> {
+export async function fetchSignals(targetDate?: string): Promise<SignalsResponse> {
+  const params = new URLSearchParams();
+  if (targetDate) params.append("date", targetDate);
+  const query = params.toString() ? `?${params.toString()}` : "";
+
   return fetchWithFallback<SignalsResponse>(
-    "/api/signals",
+    `/api/signals${query}`,
     "/fallback/signals.json"
   );
 }

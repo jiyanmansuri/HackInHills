@@ -106,15 +106,19 @@ def get_term_structure(
         }
 
 
-def get_contract_calendar() -> List[Dict[str, Any]]:
+def get_contract_calendar(target_date: Optional[str] = None) -> List[Dict[str, Any]]:
     """
-    Return the active contract lifecycle calendar for the latest available session.
-    Tracks all (symbol, expiry_date) pairs, days to expiry, roll alerts, and liquidity.
+    Return the active contract lifecycle calendar for target_date (or latest available session).
+    Tracks all (symbol, expiry_date) pairs, days to expiry relative to replay date, roll alerts, and liquidity.
     """
     with get_session() as session:
-        latest_date = session.query(func.max(NormalizedPrice.trade_date)).scalar()
-        if not latest_date:
-            return []
+        if target_date:
+            active_date = target_date
+        else:
+            latest_date_val = session.query(func.max(NormalizedPrice.trade_date)).scalar()
+            if not latest_date_val:
+                return []
+            active_date = latest_date_val.isoformat() if hasattr(latest_date_val, "isoformat") else str(latest_date_val)
 
         # Join NormalizedPrice with BhavcopyClean to get raw contract volumes
         query = session.query(
@@ -134,9 +138,9 @@ def get_contract_calendar() -> List[Dict[str, Any]]:
             (NormalizedPrice.trade_date == BhavcopyClean.trade_date) &
             (NormalizedPrice.expiry_date == BhavcopyClean.expiry_date)
         ).filter(
-            NormalizedPrice.trade_date == latest_date
+            NormalizedPrice.trade_date == active_date
         ).order_by(
-            NormalizedPrice.days_to_expiry if hasattr(NormalizedPrice, "days_to_expiry") else NormalizedPrice.expiry_date.asc(),
+            NormalizedPrice.expiry_date.asc(),
             NormalizedPrice.symbol.asc()
         )
 

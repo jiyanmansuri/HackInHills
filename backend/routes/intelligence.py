@@ -16,9 +16,12 @@ intelligence_bp = Blueprint("intelligence", __name__)
 def signals_route():
     """
     Get active daily ML relative-value signals and disciplined stay-quiet status.
+    Query params:
+        date: Target trade date (optional, defaults to latest)
     """
     try:
-        data = get_active_signals()
+        target_date = request.args.get("date")
+        data = get_active_signals(target_date=target_date)
         return jsonify(data), 200
     except Exception as e:
         logger.error(f"Error in /api/signals: {e}")

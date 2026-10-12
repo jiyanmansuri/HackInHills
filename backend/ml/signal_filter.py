@@ -22,33 +22,35 @@ from backend.ml.models import train_model, predict_confidence
 logger = logging.getLogger(__name__)
 
 
-def evaluate_daily_signals() -> int:
+def evaluate_daily_signals(target_date: Optional[str] = None) -> int:
     """
-    Run daily signal evaluation for the latest trading date.
+    Run daily signal evaluation for target_date (defaults to latest available date).
     Emits BUY_SPREAD, SELL_SPREAD, or disciplined NO_SIGNAL with explicit rationale.
-
-    Returns:
-        int: Total signals generated.
     """
-    df = build_feature_dataset()
-    if df.empty:
+    df_all = build_feature_dataset(include_unlabeled=True)
+    if df_all.empty:
         logger.warning("Feature dataset is empty, cannot generate daily signals.")
         return 0
 
-    latest_date = df["trade_date"].max()
+    if target_date:
+        eval_date = pd.to_datetime(target_date)
+    else:
+        eval_date = df_all["trade_date"].max()
 
-    # Train model on all historical data prior to latest_date (strictly no lookahead)
-    train_slice = df[df["trade_date"] < latest_date].copy()
-    today_slice = df[df["trade_date"] == latest_date].copy()
+    # Train model on all historical data prior to eval_date with labeled targets (strictly no lookahead)
+    labeled_history = df_all[(df_all["trade_date"] < eval_date) & (df_all["future_spread_5d"].notna())].copy()
+    today_slice = df_all[df_all["trade_date"] == eval_date].copy()
 
-    if train_slice.empty or today_slice.empty:
-        # Fall back to using 85% chronological train split
-        split_idx = int(len(df) * 0.85)
-        train_slice = df.iloc[:split_idx].copy()
-        today_slice = df.iloc[split_idx:].copy()
+    if labeled_history.empty or today_slice.empty:
+        # Fall back to using labeled slice
+        labeled_slice = df_all[df_all["future_spread_5d"].notna()].copy()
+        split_idx = int(len(labeled_slice) * 0.85)
+        labeled_history = labeled_slice.iloc[:split_idx].copy()
+        if today_slice.empty:
+            today_slice = labeled_slice.iloc[split_idx:].copy()
 
-    X_train = train_slice[FEATURE_NAMES].values
-    y_train = train_slice["target_revert_5d"].values
+    X_train = labeled_history[FEATURE_NAMES].values
+    y_train = labeled_history["target_revert_5d"].values
 
     # Fit model & scaler
     model, scaler = train_model(X_train, y_train, model_type="xgboost")
@@ -59,7 +61,7 @@ def evaluate_daily_signals() -> int:
     today_slice["confidence"] = confidences
 
     signal_objects = []
-    trade_d = latest_date.date() if hasattr(latest_date, "date") else latest_date
+    trade_d = eval_date.date() if hasattr(eval_date, "date") else eval_date
 
     for _, row in today_slice.iterrows():
         sym = str(row["symbol"])
@@ -121,12 +123,24 @@ def evaluate_daily_signals() -> int:
     return len(signal_objects)
 
 
-def get_active_signals() -> Dict[str, Any]:
+def get_active_signals(target_date: Optional[str] = None) -> Dict[str, Any]:
     """
-    Query current market signals, discipline breakdown, and confidence metrics.
+    Query market signals, discipline breakdown, and confidence metrics for target_date.
+    If target_date is given or DB is empty, evaluates signals dynamically on that date.
     """
     with get_session() as session:
-        signals = session.query(Signal).order_by(Signal.is_active.desc(), Signal.confidence.desc()).all()
+        if target_date:
+            signals = session.query(Signal).filter(Signal.trade_date == target_date).order_by(Signal.is_active.desc(), Signal.confidence.desc()).all()
+        else:
+            signals = session.query(Signal).order_by(Signal.is_active.desc(), Signal.confidence.desc()).all()
+
+        if not signals:
+            # Dynamically evaluate for target_date
+            evaluate_daily_signals(target_date=target_date)
+            if target_date:
+                signals = session.query(Signal).filter(Signal.trade_date == target_date).order_by(Signal.is_active.desc(), Signal.confidence.desc()).all()
+            else:
+                signals = session.query(Signal).order_by(Signal.is_active.desc(), Signal.confidence.desc()).all()
 
         if not signals:
             return {

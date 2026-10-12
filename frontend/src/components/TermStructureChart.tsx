@@ -114,7 +114,8 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
                 dataKey="price"
                 stroke="#B8860B"
                 strokeWidth={2}
-                dot={false}
+                dot={{ r: 4, fill: "#0F172A", stroke: "#B8860B" }}
+                isAnimationActive={false}
               />
             </LineChart>
           </ResponsiveContainer>

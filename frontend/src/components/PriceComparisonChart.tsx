@@ -39,18 +39,30 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
     GOLDPETAL: true,
   });
 
-  // Pivot data by trade_date for multi-line charting
+  // Pivot data by trade_date, matching front-month contract per symbol and clipping to asOfDate
   const chartData = useMemo(() => {
     if (!data || data.length === 0) return [];
 
+    // Clip data to the active replay date so chart matches the replay horizon
+    const dataClipped = data.filter((item) => !asOfDate || item.trade_date <= asOfDate);
+
+    // Filter for the front-month contract (earliest expiry) per symbol on each trade date
+    const dateSymMap = new Map<string, NormalizedPriceRecord>();
+    dataClipped.forEach((item) => {
+      const key = `${item.trade_date}_${item.symbol}`;
+      if (!dateSymMap.has(key) || item.expiry_date < dateSymMap.get(key)!.expiry_date) {
+        dateSymMap.set(key, item);
+      }
+    });
+
     const dateMap = new Map<string, any>();
-    data.forEach((item) => {
+    dateSymMap.forEach((item) => {
       const d = item.trade_date;
       if (!dateMap.has(d)) {
         dateMap.set(d, { date: d });
       }
       const entry = dateMap.get(d);
-      entry[item.symbol] = item.norm_close;
+      entry[item.symbol] = Number(item.norm_close);
     });
 
     const sorted = Array.from(dateMap.values()).sort((a, b) =>
@@ -66,12 +78,12 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
       const goldm = sorted[i].GOLDM;
 
       ["GOLDTEN", "GOLDGUINEA", "GOLDPETAL"].forEach((sym) => {
-        if (sorted[i][sym] && goldm) {
+        if (sorted[i][sym] !== undefined && goldm !== undefined) {
           const spread = sorted[i][sym] - goldm;
           sorted[i][`${sym}_spread`] = spread;
 
           const spreadsInWindow = windowSlice
-            .filter((row) => row[sym] && row.GOLDM)
+            .filter((row) => row[sym] !== undefined && row.GOLDM !== undefined)
             .map((row) => row[sym] - row.GOLDM);
 
           if (spreadsInWindow.length >= 5) {
@@ -91,7 +103,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
     if (selectedRange === "ALL") return sorted;
     const daysCount = selectedRange === "1M" ? 22 : selectedRange === "3M" ? 65 : 130;
     return sorted.slice(-daysCount);
-  }, [data, selectedRange]);
+  }, [data, selectedRange, asOfDate]);
 
   const toggleSymbol = (sym: string) => {
     setActiveSymbols((prev) => ({ ...prev, [sym]: !prev[sym] }));
@@ -108,8 +120,9 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
           </div>
           <div className="space-y-1">
             {payload.map((entry: any) => {
-              const sym = entry.dataKey.replace("_zscore", "");
+              const sym = entry.dataKey?.replace("_zscore", "");
               const val = entry.value;
+              if (val === undefined || val === null) return null;
               return (
                 <div key={sym} className="flex items-center justify-between space-x-3">
                   <div className="flex items-center space-x-1.5">
@@ -141,6 +154,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
           {payload.map((entry: any) => {
             const sym = entry.dataKey;
             const val = entry.value;
+            if (val === undefined || val === null) return null;
             const spreadVsGoldM = goldmVal && sym !== "GOLDM" ? val - goldmVal : 0;
 
             return (
@@ -267,7 +281,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
           })}
         </div>
 
-        {/* Chart View with Responsive Container */}
+        {/* Chart View with Responsive Container & isAnimationActive={false} */}
         <div className="h-[280px] min-h-[280px] w-full pt-1">
           {chartData.length === 0 ? (
             <div className="h-full w-full rounded-xl bg-slate-50 border border-slate-100 grid place-items-center text-xs text-slate-400">
@@ -277,19 +291,23 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
             <ResponsiveContainer width="100%" height="100%">
               {chartMode === "PRICE" ? (
                 <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#EEF0F3" vertical={false} />
                   <XAxis
                     dataKey="date"
                     tickFormatter={(d) => formatDate(d)}
-                    tick={{ fontSize: 11, fill: "#64748B" }}
+                    tick={{ fontSize: 11, fill: "#94A3B8" }}
                     stroke="#E2E8F0"
+                    tickLine={false}
+                    axisLine={false}
                   />
                   <YAxis
                     domain={["auto", "auto"]}
                     tickFormatter={(v) => `₹${Math.round(v)}`}
-                    tick={{ fontSize: 11, fill: "#64748B" }}
+                    tick={{ fontSize: 11, fill: "#94A3B8" }}
                     stroke="#E2E8F0"
                     orientation="right"
+                    tickLine={false}
+                    axisLine={false}
                   />
                   <Tooltip content={<CustomTooltip />} />
 
@@ -300,6 +318,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                       stroke={CONTRACT_COLORS.GOLDM}
                       strokeWidth={2}
                       dot={false}
+                      isAnimationActive={false}
                       name="GOLDM (100g)"
                     />
                   )}
@@ -310,6 +329,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                       stroke={CONTRACT_COLORS.GOLDTEN}
                       strokeWidth={2}
                       dot={false}
+                      isAnimationActive={false}
                       name="GOLDTEN (10g)"
                     />
                   )}
@@ -320,6 +340,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                       stroke={CONTRACT_COLORS.GOLDGUINEA}
                       strokeWidth={1.5}
                       dot={false}
+                      isAnimationActive={false}
                       name="GOLDGUINEA (8g)"
                     />
                   )}
@@ -330,25 +351,30 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                       stroke={CONTRACT_COLORS.GOLDPETAL}
                       strokeWidth={1.5}
                       dot={false}
+                      isAnimationActive={false}
                       name="GOLDPETAL (1g)"
                     />
                   )}
                 </LineChart>
               ) : (
                 <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#EEF0F3" vertical={false} />
                   <XAxis
                     dataKey="date"
                     tickFormatter={(d) => formatDate(d)}
-                    tick={{ fontSize: 11, fill: "#64748B" }}
+                    tick={{ fontSize: 11, fill: "#94A3B8" }}
                     stroke="#E2E8F0"
+                    tickLine={false}
+                    axisLine={false}
                   />
                   <YAxis
                     domain={[-3.0, 3.0]}
                     tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}σ`}
-                    tick={{ fontSize: 11, fill: "#64748B" }}
+                    tick={{ fontSize: 11, fill: "#94A3B8" }}
                     stroke="#E2E8F0"
                     orientation="right"
+                    tickLine={false}
+                    axisLine={false}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <ReferenceLine y={2.0} stroke="#EF4444" strokeDasharray="3 3" />
@@ -364,6 +390,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                       stroke={CONTRACT_COLORS.GOLDTEN}
                       strokeWidth={2}
                       dot={false}
+                      isAnimationActive={false}
                       name="GOLDTEN (Z)"
                     />
                   )}
@@ -374,6 +401,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                       stroke={CONTRACT_COLORS.GOLDGUINEA}
                       strokeWidth={2}
                       dot={false}
+                      isAnimationActive={false}
                       name="GOLDGUINEA (Z)"
                     />
                   )}
@@ -384,6 +412,7 @@ export const PriceComparisonChart: React.FC<PriceComparisonChartProps> = ({
                       stroke={CONTRACT_COLORS.GOLDPETAL}
                       strokeWidth={2}
                       dot={false}
+                      isAnimationActive={false}
                       name="GOLDPETAL (Z)"
                     />
                   )}

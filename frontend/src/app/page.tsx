@@ -54,6 +54,7 @@ export default function DashboardPage() {
   const [dataQuality, setDataQuality] = useState<DataQualityReport | null>(null);
 
   // Interactive controls
+  const [activeTab, setActiveTab] = useState<"overview" | "spreads" | "term-structure" | "validation">("overview");
   const [selectedTermSymbol, setSelectedTermSymbol] = useState<string>("GOLDM");
   const [selectedDate, setSelectedDate] = useState<string>("2026-09-22");
   const [explainSignal, setExplainSignal] = useState<Partial<SignalItem> | null>(null);
@@ -77,10 +78,10 @@ export default function DashboardPage() {
         attRes,
         dqRes,
       ] = await Promise.all([
-        fetchNormalizedPrices(),
+        fetchNormalizedPrices(undefined, undefined, selectedDate),
         fetchRelativeValue(selectedDate),
-        fetchSignals(),
-        fetchCalendar(),
+        fetchSignals(selectedDate),
+        fetchCalendar(selectedDate),
         fetchTermStructure(selectedTermSymbol, selectedDate),
         fetchBacktestSummary(),
         fetchBacktestTrades(50),
@@ -99,7 +100,6 @@ export default function DashboardPage() {
       setDataQuality(dqRes);
     } catch (err: any) {
       console.error("Dashboard data load error:", err);
-      // Notice: with fallback insurance, errors are caught silently unless completely broken
       setError(err.message || "Failed to load derivatives intelligence data.");
     } finally {
       setLoading(false);
@@ -141,7 +141,7 @@ export default function DashboardPage() {
         {error && (
           <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between">
             <span>
-              <strong>Notice:</strong> Using cached demo dataset snapshots while calibrating live connection.
+              <strong>Notice:</strong> Using demo dataset snapshots while calibrating live connection.
             </span>
             <button
               onClick={loadDashboardData}
@@ -157,7 +157,7 @@ export default function DashboardPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-32 bg-slate-200/60 rounded-2xl animate-pulse" />
+                <div key={i} className="h-28 bg-slate-200/60 rounded-2xl animate-pulse" />
               ))}
             </div>
             <div className="h-80 bg-slate-200/60 rounded-2xl animate-pulse" />
@@ -165,7 +165,7 @@ export default function DashboardPage() {
           </div>
         ) : (
           <>
-            {/* 1. Hero 4-card strip */}
+            {/* 1. Hero 4-card KPI strip */}
             <HeroKPIs
               activeCount={signalsData?.active_count || 0}
               totalEvaluated={signalsData?.total_evaluated || 3}
@@ -179,7 +179,7 @@ export default function DashboardPage() {
               onSelectSignal={handleOpenExplain}
             />
 
-            {/* 2. Two-Column Hero: 65% Price/Z-Score Parity Chart + 35% Signal Discipline Panel */}
+            {/* 2. Primary Hero Visualizer (65% Parity / ±Z-Bands Chart + 35% ML Signal Discipline) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 items-stretch">
               <div className="lg:col-span-8">
                 <PriceComparisonChart data={prices} asOfDate={selectedDate} />
@@ -192,30 +192,89 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* 3. Cross-Contract Relative Value Matrix */}
-            <RelativeValuePanel
-              spreads={spreads}
-              onSelectSignal={handleOpenExplain}
-            />
+            {/* 3. Navigation Tabs */}
+            <div className="flex items-center space-x-1.5 border-b border-slate-200 mb-6 pb-2 text-xs font-semibold">
+              <button
+                onClick={() => setActiveTab("overview")}
+                className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeTab === "overview"
+                    ? "bg-slate-900 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 bg-white border border-slate-200"
+                }`}
+              >
+                Overview &amp; Calendar
+              </button>
+              <button
+                onClick={() => setActiveTab("spreads")}
+                className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeTab === "spreads"
+                    ? "bg-slate-900 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 bg-white border border-slate-200"
+                }`}
+              >
+                Relative-Value Spreads
+              </button>
+              <button
+                onClick={() => setActiveTab("term-structure")}
+                className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeTab === "term-structure"
+                    ? "bg-slate-900 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 bg-white border border-slate-200"
+                }`}
+              >
+                Forward Term Structure
+              </button>
+              <button
+                onClick={() => setActiveTab("validation")}
+                className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeTab === "validation"
+                    ? "bg-slate-900 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 bg-white border border-slate-200"
+                }`}
+              >
+                Walk-Forward Validation &amp; Alpha
+              </button>
+            </div>
 
-            {/* 4. Forward Term Structure Curve */}
-            <TermStructureChart
-              termStructure={termStructure}
-              selectedSymbol={selectedTermSymbol}
-              onSelectSymbol={handleTermSymbolChange}
-            />
+            {/* Tab Contents */}
+            {activeTab === "overview" && (
+              <div className="space-y-6">
+                <RelativeValuePanel
+                  spreads={spreads}
+                  onSelectSignal={handleOpenExplain}
+                />
+                <ContractCalendar calendar={calendar} />
+              </div>
+            )}
 
-            {/* 5. Contract Lifecycle & Expiry Schedule */}
-            <ContractCalendar calendar={calendar} />
+            {activeTab === "spreads" && (
+              <div>
+                <RelativeValuePanel
+                  spreads={spreads}
+                  onSelectSignal={handleOpenExplain}
+                />
+              </div>
+            )}
 
-            {/* 6. Walk-Forward Backtesting Validation */}
-            <ValidationBacktest
-              summary={backtestSummary}
-              trades={backtestTrades}
-            />
+            {activeTab === "term-structure" && (
+              <div>
+                <TermStructureChart
+                  termStructure={termStructure}
+                  selectedSymbol={selectedTermSymbol}
+                  onSelectSymbol={handleTermSymbolChange}
+                />
+              </div>
+            )}
 
-            {/* 7. Performance Attribution (Alpha vs Beta) */}
-            <AttributionChart attribution={attribution} />
+            {activeTab === "validation" && (
+              <div className="space-y-6">
+                <ValidationBacktest
+                  summary={backtestSummary}
+                  trades={backtestTrades}
+                />
+                <AttributionChart attribution={attribution} />
+              </div>
+            )}
           </>
         )}
       </main>

@@ -26,9 +26,10 @@ FEATURE_NAMES = [
 ]
 
 
-def build_feature_dataset() -> pd.DataFrame:
+def build_feature_dataset(include_unlabeled: bool = False) -> pd.DataFrame:
     """
     Construct cross-contract feature matrix and 5-day mean reversion target.
+    If include_unlabeled=True, includes trailing unlabelled dates for inference.
 
     Features:
     - z_score_30d: Rolling 30d standardized basis vs benchmark
@@ -129,8 +130,11 @@ def build_feature_dataset() -> pd.DataFrame:
     overpriced_reversion = (merged["z_score_30d"] > 0) & (delta_spread <= -sigma_threshold)
     underpriced_reversion = (merged["z_score_30d"] < 0) & (delta_spread >= sigma_threshold)
 
-    merged["target_revert_5d"] = (overpriced_reversion | underpriced_reversion).astype(int)
-
+    merged["target_revert_5d"] = (overpriced_reversion | underpriced_reversion).fillna(0).astype(int)
+ 
+    if include_unlabeled:
+        return merged
+ 
     # Drop the trailing rows where future_spread_5d is NaN (the last 5 trading days cannot be labeled yet)
     labeled_df = merged.dropna(subset=["future_spread_5d"]).copy()
     labeled_df["target_revert_5d"] = labeled_df["target_revert_5d"].astype(int)

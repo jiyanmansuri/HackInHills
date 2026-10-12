@@ -81,9 +81,12 @@ def term_structure_route():
 def contract_calendar_route():
     """
     Get contract calendar with days to expiry, roll alerts, and liquidity.
+    Query params:
+        date: Target trade date (optional, defaults to latest)
     """
     try:
-        calendar = get_contract_calendar()
+        target_date = request.args.get("date")
+        calendar = get_contract_calendar(target_date=target_date)
         return jsonify(calendar), 200
     except Exception as e:
         logger.error(f"Error in /api/calendar: {e}")

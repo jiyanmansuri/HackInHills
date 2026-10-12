@@ -104,14 +104,16 @@ export const AttributionChart: React.FC<AttributionChartProps> = ({ attribution 
               stackId="1"
               stroke="#059669"
               fill="#D1FAE5"
+              isAnimationActive={false}
               name="Spread-Capture Return (Alpha)"
             />
             <Area
               type="monotone"
               dataKey="cum_gold_drift_pnl"
               stackId="1"
-              stroke="#C8963E"
+              stroke="#B8860B"
               fill="#FEF3C7"
+              isAnimationActive={false}
               name="Underlying Gold Price Drift (Beta)"
             />
           </AreaChart>

@@ -161,16 +161,18 @@ export const ValidationBacktest: React.FC<ValidationBacktestProps> = ({
                 type="monotone"
                 dataKey="strategy_equity"
                 stroke="#059669"
-                strokeWidth={2.5}
+                strokeWidth={2}
                 dot={false}
+                isAnimationActive={false}
               />
               <Line
                 type="monotone"
                 dataKey="gold_buy_and_hold"
-                stroke="#0B192C"
+                stroke="#0F172A"
                 strokeWidth={1.5}
                 strokeDasharray="4 4"
                 dot={false}
+                isAnimationActive={false}
               />
             </LineChart>
           </ResponsiveContainer>
