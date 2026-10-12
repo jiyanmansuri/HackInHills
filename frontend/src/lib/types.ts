@@ -1,7 +1,24 @@
 /**
  * TypeScript Data Models for Commodity Derivatives Intelligence.
  * Hack in Hills '26 - Team Holyknight
+ *
+ * Core Product Thesis:
+ * Raw Spread -> Expiry/Carry Adjustment -> Tick & Liquidity Noise -> Residual -> Net Edge after Costs.
+ * "No signal" is a first-class, intentional state representing capital discipline.
  */
+
+export type NavigationTab =
+  | "command-center"
+  | "contract-compare"
+  | "relative-value"
+  | "expiry-calendar"
+  | "signals"
+  | "validation"
+  | "attribution"
+  | "methodology";
+
+export type SignalState = "signal" | "watch" | "no_signal";
+export type DataSource = "real" | "synthetic";
 
 export interface ContractSpec {
   symbol: string;
@@ -26,6 +43,34 @@ export interface NormalizedPriceRecord {
   volume_grams: number;
   open_interest_grams: number;
   is_thin_liquidity: boolean;
+  days_to_expiry?: number;
+  expiry_offset_days_vs_reference?: number;
+  liquidity_score?: number;
+  data_source?: DataSource;
+  as_of?: string;
+}
+
+export interface SpreadDecomposition {
+  pair: string;
+  trade_date: string;
+  raw_spread_pct: number;
+  raw_spread_inr_g: number;
+  carry_adjustment_pct: number;
+  carry_adjustment_inr_g: number;
+  carry_adjusted_spread_pct: number;
+  tick_noise_pct: number;
+  residual_pct: number;
+  residual_inr_g: number;
+  cost_bps: number;
+  cost_pct: number;
+  net_edge_pct: number;
+  net_edge_inr_g: number;
+  signal_state: SignalState;
+  no_signal_reason?: string | null;
+  confidence: number;
+  z_score: number;
+  is_thin_liquidity: boolean;
+  days_to_expiry: number;
 }
 
 export interface RelativeValueRecord {
@@ -43,6 +88,14 @@ export interface RelativeValueRecord {
   regime: "HIGH_DISLOCATION" | "MODERATE_DISLOCATION" | "EQUILIBRIUM" | "MEAN_REVERTING";
   direction: "UP" | "DOWN" | "FLAT";
   opportunity_score: number;
+  // Product Thesis Decomposition attributes
+  carry_adjusted_spread_pct?: number;
+  residual_pct?: number;
+  cost_bps?: number;
+  net_edge_pct?: number;
+  signal_state?: SignalState;
+  no_signal_reason?: string | null;
+  liquidity_score?: number;
 }
 
 export interface SignalItem {
@@ -51,15 +104,24 @@ export interface SignalItem {
   symbol: string;
   expiry_date: string;
   signal_type: "BUY_SPREAD" | "SELL_SPREAD" | "NO_SIGNAL";
+  signal_state?: SignalState;
   confidence: number;
   z_score: number;
   spread_pct: number;
   spread_abs?: number;
+  carry_adjusted_spread_pct?: number;
+  residual_pct?: number;
+  cost_bps?: number;
+  net_edge_pct?: number;
   is_thin_liquidity?: boolean;
+  liquidity_score?: number;
   regime: string;
   stay_quiet_reason?: string | null;
+  no_signal_reason?: string | null;
   days_to_expiry: number;
   is_active: boolean;
+  data_source?: DataSource;
+  as_of?: string;
 }
 
 export interface SignalsResponse {
@@ -103,6 +165,9 @@ export interface CalendarItem {
   expiry_date: string;
   days_to_expiry: number;
   is_roll_window: boolean;
+  is_tender_period?: boolean;
+  expiry_day_type?: "5TH_OF_MONTH" | "MONTH_END";
+  offset_days_vs_ref?: number;
   roll_status: "ROLL_ACTIVE" | "NORMAL";
   price_per_gram: number;
   raw_close: number;
@@ -111,6 +176,7 @@ export interface CalendarItem {
   volume_grams: number;
   lot_size_g: number;
   is_thin_liquidity: boolean;
+  liquidity_score?: number;
 }
 
 export interface AttributionPoint {
@@ -138,6 +204,7 @@ export interface EquityPoint {
   date: string;
   strategy_equity: number;
   gold_buy_and_hold: number;
+  naive_equity?: number;
   trade_pnl: number;
   symbol: string;
   direction: string;

@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:wght@700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --font-sans: var(--font-sans, system-ui, -apple-system, sans-serif);
-  --font-mono: var(--font-mono, monospace);
-  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: monospace;
+
   --color-ground: #EDEFF2;
   --color-ink: #11161C;
   --color-line: #DDE1E7;
@@ -11,25 +12,77 @@
   --color-gold: #A8741A;
   --color-pos: #067647;
   --color-neg: #B42318;
+
+  --bg: #FBFAF7;
+  --surface: #FFFFFF;
+  --surface-subtle: #F4EFE6;
+  --border: #E8E2D4;
+  --border-focus: #C8963E;
+  
+  --navy: #0E1B2E;
+  --ink: #1B2A41;
+  --ink-muted: #5A6E85;
+  
+  --gold: #C8963E;
+  --gold-hover: #B5822F;
+  --gold-soft: #F4E9D2;
+  --gold-border: #DFC79E;
+  
+  --green: #1F7A4D;
+  --green-soft: #E6F4EA;
+  --amber: #D99A1B;
+  --amber-soft: #FEF7E0;
+  --red: #C8452F;
+  --red-soft: #FCE8E6;
+}
+
+.dark {
+  --bg: #070D15;
+  --surface: #0E1B2E;
+  --surface-subtle: #132238;
+  --border: #1F334E;
+  --border-focus: #E2B258;
+  
+  --navy: #F8FAFC;
+  --ink: #E2E8F0;
+  --ink-muted: #8E9EA9;
+  
+  --gold: #E2B258;
+  --gold-hover: #F2C779;
+  --gold-soft: #2A2415;
+  --gold-border: #5A4820;
+  
+  --green: #2EAA6E;
+  --green-soft: #0E291B;
+  --amber: #E8AA2B;
+  --amber-soft: #2B2109;
+  --red: #E25C47;
+  --red-soft: #301410;
 }
 
 body {
-  background-color: #EDEFF2;
-  color: #11161C;
+  background-color: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.bg-ground { background-color: #EDEFF2; }
-.text-ink { color: #11161C; }
-.text-muted { color: #5B6676; }
-.border-line { border-color: #DDE1E7; }
-.text-gold { color: #A8741A; }
-.text-pos { color: #067647; }
-.text-neg { color: #B42318; }
-.bg-pos { background-color: #067647; }
-.bg-neg { background-color: #B42318; }
-.bg-gold { background-color: #A8741A; }
+.bg-ground { background-color: var(--color-ground, #EDEFF2); }
+.text-ink { color: var(--color-ink, #11161C); }
+.text-muted { color: var(--color-muted, #5B6676); }
+.border-line { border-color: var(--color-line, #DDE1E7); }
+.text-gold { color: var(--color-gold, #A8741A); }
+.text-pos { color: var(--color-pos, #067647); }
+.text-neg { color: var(--color-neg, #B42318); }
+.bg-pos { background-color: var(--color-pos, #067647); }
+.bg-neg { background-color: var(--color-neg, #B42318); }
+.bg-gold { background-color: var(--color-gold, #A8741A); }
+
+.font-display {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+}
 
 .font-mono,
 code,
@@ -40,17 +93,42 @@ samp,
   font-variant-numeric: tabular-nums;
 }
 
+/* Present mode for high-contrast projector (1280x720) */
+body.present-mode {
+  font-size: 1.125rem;
+}
+body.present-mode .present-hide {
+  display: none !important;
+}
+body.present-mode .present-enlarge {
+  transform: scale(1.05);
+  transform-origin: top center;
+}
+
+/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #EDEFF2;
+  background: var(--surface-subtle);
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
+  background: var(--border);
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: var(--gold);
+}
+
+/* Glassmorphism card surfaces */
+.surface-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+}
+
+.surface-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
 }
