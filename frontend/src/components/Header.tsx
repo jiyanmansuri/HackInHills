@@ -7,16 +7,22 @@ interface HeaderProps {
   onOpenUpload: () => void;
   dataHealth?: number;
   totalTradingDays?: number;
+  asOfDate?: string;
+  onSelectDate?: (date: string) => void;
+  selectedDate?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenUpload,
   dataHealth = 88,
   totalTradingDays = 252,
+  asOfDate = "2026-09-22",
+  onSelectDate,
+  selectedDate = "2026-09-22",
 }) => {
   return (
     <header className="border-b border-slate-200 bg-white sticky top-0 z-30 shadow-xs">
-      {/* Synthetic Calibration Notice Banner */}
+      {/* Top Demo Data / Status Notice Banner */}
       <div className="bg-[#FEF9F0] border-b border-[#E8D3AE] px-4 py-1.5 text-xs text-[#8A5816] flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <span className="inline-block w-2 h-2 rounded-full bg-[#C8963E] animate-pulse"></span>
@@ -24,10 +30,13 @@ export const Header: React.FC<HeaderProps> = ({
           <span>
             Calibrated on {totalTradingDays} sessions of Multi-Contract Settlement Data (GBM + Carry + Dislocation Regime).
           </span>
+          <span className="ml-1 inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
+            DEMO DATASET
+          </span>
         </div>
         <div className="flex items-center space-x-3 text-xs">
-          <span className="hidden sm:inline text-slate-500">
-            Database: <strong className="text-slate-700">Auto-Synced (SQLite/Supabase)</strong>
+          <span className="hidden sm:inline text-slate-500 font-mono">
+            As of: <strong className="text-slate-800">{asOfDate}</strong>
           </span>
           <button
             onClick={onOpenUpload}
@@ -50,20 +59,36 @@ export const Header: React.FC<HeaderProps> = ({
               <h1 className="text-xl font-bold tracking-tight text-[#0B192C]">
                 Commodity Derivatives Intelligence
               </h1>
-              <span className="bg-[#0B192C]/5 text-[#0B192C] border border-[#0B192C]/10 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+              <span className="bg-[#0B192C]/5 text-[#0B192C] border border-[#0B192C]/10 text-[10px] font-semibold px-2 py-0.5 rounded-full font-mono">
                 Hack in Hills '26
               </span>
             </div>
             <p className="text-xs text-slate-500">
-              India MCX Gold Cross-Contract Relative-Value &amp; Basis Surveillance &bull; Team Holyknight
+              India MCX Gold Cross-Contract Relative-Value &amp; Basis Surveillance Engine
             </p>
           </div>
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-medium">
+          {/* Historical Replay Selector */}
+          {onSelectDate && (
+            <div className="flex items-center space-x-1.5 bg-slate-50 border border-slate-200 px-2.5 py-1.5 rounded-lg text-xs font-mono">
+              <span className="text-slate-500">Replay Date:</span>
+              <select
+                value={selectedDate}
+                onChange={(e) => onSelectDate(e.target.value)}
+                className="bg-white border border-slate-300 rounded px-1.5 py-0.5 text-xs text-slate-800 font-bold cursor-pointer"
+              >
+                <option value="2026-09-22">2026-09-22 (Latest - 30d Equilibrium)</option>
+                <option value="2026-09-15">2026-09-15 (Historical Dislocation &bull; Z = -1.46σ)</option>
+                <option value="2026-08-17">2026-08-17 (High Dislocation Reversion &bull; +4.2% Alpha)</option>
+              </select>
+            </div>
+          )}
+
+          <div className="flex items-center space-x-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-medium font-mono">
             <Activity className="w-3.5 h-3.5" />
-            <span>Health Score: <strong>{dataHealth}%</strong></span>
+            <span>Health: <strong>{dataHealth}%</strong></span>
           </div>
 
           <button

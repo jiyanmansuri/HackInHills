@@ -15,6 +15,7 @@ interface HeroKPIsProps {
   tradingDays: number;
   thinLiquidityCount: number;
   onSelectSignal?: (signal: SignalItem) => void;
+  asOfDate?: string;
 }
 
 export const HeroKPIs: React.FC<HeroKPIsProps> = ({
@@ -27,6 +28,7 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
   tradingDays,
   thinLiquidityCount,
   onSelectSignal,
+  asOfDate = "2026-09-22",
 }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -43,8 +45,8 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
 
         <div className="my-3">
           <div className="flex items-baseline space-x-2">
-            <span className="text-3xl font-bold text-[#0B192C]">{activeCount}</span>
-            <span className="text-xs text-slate-400">/ {totalEvaluated} pairs evaluated</span>
+            <span className="text-3xl font-bold text-[#0B192C] font-mono tabular-nums">{activeCount}</span>
+            <span className="text-xs text-slate-400 font-mono">/ {totalEvaluated} pairs evaluated</span>
           </div>
           <div className="mt-2 flex items-center space-x-2">
             {disciplineStatus === "ACTIVE_OPPORTUNITY" ? (
@@ -59,7 +61,7 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
           </div>
         </div>
 
-        <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-100">
+        <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-100 font-mono">
           Strict filtering: Suppressed if thin volume or &lt;62% confidence.
         </div>
       </div>
@@ -77,7 +79,7 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
 
         <div className="my-3">
           <div className="flex items-baseline space-x-2">
-            <span className="text-3xl font-bold text-[#0B192C]">
+            <span className="text-3xl font-bold text-[#0B192C] font-mono tabular-nums">
               {(avgConfidence * 100).toFixed(1)}%
             </span>
             <span className="text-xs text-slate-400">calibrated XGBoost</span>
@@ -90,13 +92,13 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
           </div>
         </div>
 
-        <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-100 flex justify-between">
+        <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-100 flex justify-between font-mono">
           <span>Hurdle Rate: 62.0%</span>
           <span className="text-[#C8963E] font-medium">Platt Calibrated</span>
         </div>
       </div>
 
-      {/* 3. Top Mispriced Opportunity */}
+      {/* 3. Top Mispriced Opportunity (Reconciled with Table) */}
       <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-all">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -111,23 +113,25 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
           {bestOpportunity ? (
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-lg font-bold text-[#0B192C]">
+                <span className="text-lg font-bold text-[#0B192C] font-mono">
                   {bestOpportunity.symbol} vs GOLDM
                 </span>
-                <span className="text-xs font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">
+                <span className="text-xs font-semibold bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono tabular-nums">
                   {formatZScore(bestOpportunity.z_score)}
                 </span>
               </div>
-              <div className="flex items-center space-x-1.5 mt-1">
+              <div className="flex items-center space-x-1.5 mt-1 font-mono text-xs">
                 {bestOpportunity.spread_pct > 0 ? (
                   <ArrowUpRight className="w-4 h-4 text-rose-500" />
                 ) : (
                   <ArrowDownRight className="w-4 h-4 text-emerald-500" />
                 )}
-                <span className="text-sm font-semibold text-slate-700">
+                <span className="font-semibold text-slate-700 tabular-nums">
                   {formatPct(bestOpportunity.spread_pct)} basis
                 </span>
-                <span className="text-xs text-slate-400">({bestOpportunity.days_to_expiry}d to exp)</span>
+                <span className="text-slate-400">
+                  ({bestOpportunity.days_to_expiry}d to exp as of {asOfDate})
+                </span>
               </div>
             </div>
           ) : (
@@ -135,7 +139,7 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
           )}
         </div>
 
-        <div className="text-[11px] pt-2 border-t border-slate-100">
+        <div className="text-[11px] pt-2 border-t border-slate-100 flex justify-between items-center">
           {bestOpportunity ? (
             <button
               onClick={() => onSelectSignal && onSelectSignal(bestOpportunity)}
@@ -146,10 +150,11 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
           ) : (
             <span className="text-slate-400">Market in structural equilibrium</span>
           )}
+          <span className="text-[10px] text-slate-400 font-mono">As of {asOfDate}</span>
         </div>
       </div>
 
-      {/* 4. Data Quality & Liquidity Health */}
+      {/* 4. Data Quality & Liquidity Health (Fixed Raw LaTeX) */}
       <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-all">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -162,17 +167,17 @@ export const HeroKPIs: React.FC<HeroKPIsProps> = ({
 
         <div className="my-3">
           <div className="flex items-baseline space-x-2">
-            <span className="text-3xl font-bold text-emerald-600">{healthScore}%</span>
+            <span className="text-3xl font-bold text-emerald-600 font-mono tabular-nums">{healthScore}%</span>
             <span className="text-xs text-slate-500 font-medium">HEALTHY</span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            {tradingDays} Trading Days Verified &bull; Strict $T \ge t$ Expiry Parity
+            {tradingDays} Trading Days Verified &bull; Strict Expiry Parity (T &ge; t)
           </p>
         </div>
 
-        <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-100 flex justify-between">
+        <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-100 flex justify-between font-mono">
           <span>Thin Liquidity Tagged:</span>
-          <span className="font-semibold text-amber-600">{thinLiquidityCount} rows</span>
+          <span className="font-semibold text-amber-600 tabular-nums">{thinLiquidityCount} rows</span>
         </div>
       </div>
     </div>

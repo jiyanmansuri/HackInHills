@@ -80,7 +80,7 @@ export const TermStructureChart: React.FC<TermStructureChartProps> = ({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4 items-center">
         {/* Term Structure Chart */}
-        <div className="lg:col-span-2 h-64 w-full">
+        <div className="lg:col-span-2 h-[320px] min-h-[320px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData} margin={{ top: 15, right: 15, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />

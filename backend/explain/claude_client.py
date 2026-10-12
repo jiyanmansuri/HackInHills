@@ -6,7 +6,7 @@ Hack in Hills '26 - Team Holyknight
 
 import logging
 from typing import Dict, Any
-from backend.config import ANTHROPIC_API_KEY
+from backend.config import ANTHROPIC_API_KEY, CLAUDE_MODEL
 from backend.explain.template_fallback import generate_deterministic_explanation
 
 logger = logging.getLogger(__name__)
@@ -61,7 +61,7 @@ def explain_signal(payload: Dict[str, Any]) -> Dict[str, Any]:
 Provide your structured quantitative analysis for this trade."""
 
         response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model=CLAUDE_MODEL,
             max_tokens=600,
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": prompt}]
@@ -70,7 +70,7 @@ Provide your structured quantitative analysis for this trade."""
         content = response.content[0].text
         return {
             "explanation": content,
-            "model_used": "claude-3-5-sonnet",
+            "model_used": CLAUDE_MODEL,
             "is_fallback": False
         }
 

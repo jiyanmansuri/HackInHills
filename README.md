@@ -5,7 +5,7 @@
 ---
 
 > **Core Philosophy:**  
-> *"Raw settlement data $\rightarrow$ comparable contracts $\rightarrow$ validated relationships $\rightarrow$ defensible market intelligence."*
+> *"Raw settlement data → comparable contracts → validated relationships → defensible market intelligence."*
 
 ---
 
@@ -93,23 +93,31 @@ All contract specifications are centrally maintained in `backend/config.py`:
 ## 4. Quantitative Formulations
 
 ### 1. Per-Gram Normalization
-$$\text{PricePerGram} = \frac{\text{RawClosePrice}}{\text{QuotationBaseG}}$$
-$$\text{VolumeGrams} = \text{VolumeLots} \times \text{ContractSizeG}$$
+```
+PricePerGram = RawClosePrice / QuotationBaseG
+VolumeGrams  = VolumeLots * ContractSizeG
+```
 
 ### 2. Expiry-Aware Relative Value vs Benchmark (`GOLDM`)
-For trade date $t$ and matching contract expiry $T$:
-$$\text{Spread}_{\text{abs}}(t, T) = \text{PricePerGram}(t, T, \text{SYM}) - \text{PricePerGram}(t, T, \text{GOLDM})$$
-$$\text{Spread}_{\%}(t, T) = \frac{\text{Spread}_{\text{abs}}(t, T)}{\text{PricePerGram}(t, T, \text{GOLDM})} \times 100$$
-$$Z\text{-Score}_{30d}(t) = \frac{\text{Spread}_{\text{abs}}(t) - \mu_{30}(t)}{\sigma_{30}(t)}$$
+For trade date `t` and matching contract expiry `T`:
+```
+Spread_abs(t, T) = PricePerGram(t, T, SYM) - PricePerGram(t, T, GOLDM)
+Spread_pct(t, T) = (Spread_abs(t, T) / PricePerGram(t, T, GOLDM)) * 100
+Z-Score_30d(t)   = (Spread_abs(t) - Mean_30d(t)) / StdDev_30d(t)
+```
 
 ### 3. Term Structure and Annualized Carry
-For forward expiries $T_1 < T_2$:
-$$\text{CalendarSpread} = P(t, T_2) - P(t, T_1)$$
-$$\text{AnnualizedCarry} = \left(\frac{P(t, T_2) - P(t, T_1)}{P(t, T_1)}\right) \times \frac{365}{T_2 - T_1} \times 100\%$$
+For forward expiries `T1 < T2`:
+```
+CalendarSpread  = P(t, T2) - P(t, T1)
+AnnualizedCarry = ((P(t, T2) - P(t, T1)) / P(t, T1)) * (365 / (T2 - T1)) * 100%
+```
 
 ### 4. Performance Attribution
-$$\text{PnL}_{\text{total}} = \underbrace{\text{PnL}_{\text{spread}}}_{\text{Alpha: Spread Capture}} + \underbrace{\beta \times \Delta P_{\text{gold}}}_{\text{Beta: Residual Gold Drift}}$$
-Our empirical attribution proves **over 90% of returns originate from spread-capture alpha** ($\beta_{\text{gold}} \approx 0.02$), validating true market neutrality.
+```
+PnL_total = PnL_spread (Alpha: Spread Capture) + Beta * Delta P_gold (Beta: Residual Gold Drift)
+```
+Our empirical attribution demonstrates that **99.8% of returns originate from spread-capture alpha** (`beta_gold ≈ 0.02`), validating true market neutrality.
 
 ---
 
@@ -134,7 +142,7 @@ Our empirical attribution proves **over 90% of returns originate from spread-cap
 
 ### Step 1: Clone and Configure Environment
 ```bash
-git clone https://github.com/jiyanmansuri/CrimeShield.git
+git clone https://github.com/jiyanmansuri/HackInHills.git
 cd HackInHills
 
 # Copy environment file

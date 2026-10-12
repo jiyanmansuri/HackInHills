@@ -55,6 +55,7 @@ export default function DashboardPage() {
 
   // Interactive controls
   const [selectedTermSymbol, setSelectedTermSymbol] = useState<string>("GOLDM");
+  const [selectedDate, setSelectedDate] = useState<string>("2026-09-22");
   const [explainSignal, setExplainSignal] = useState<Partial<SignalItem> | null>(null);
   const [isExplainOpen, setIsExplainOpen] = useState(false);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
@@ -77,10 +78,10 @@ export default function DashboardPage() {
         dqRes,
       ] = await Promise.all([
         fetchNormalizedPrices(),
-        fetchRelativeValue(),
+        fetchRelativeValue(selectedDate),
         fetchSignals(),
         fetchCalendar(),
-        fetchTermStructure(selectedTermSymbol),
+        fetchTermStructure(selectedTermSymbol, selectedDate),
         fetchBacktestSummary(),
         fetchBacktestTrades(50),
         fetchAttribution(),
@@ -102,7 +103,7 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
     }
-  }, [selectedTermSymbol]);
+  }, [selectedTermSymbol, selectedDate]);
 
   useEffect(() => {
     loadDashboardData();
@@ -131,6 +132,9 @@ export default function DashboardPage() {
         onOpenUpload={() => setIsUploadOpen(true)}
         dataHealth={dataQuality?.health_score || 88}
         totalTradingDays={dataQuality?.trading_days || 252}
+        asOfDate={selectedDate}
+        selectedDate={selectedDate}
+        onSelectDate={setSelectedDate}
       />
 
       {/* Main Container */}
@@ -172,6 +176,7 @@ export default function DashboardPage() {
               healthScore={dataQuality?.health_score || 88}
               tradingDays={dataQuality?.trading_days || 252}
               thinLiquidityCount={dataQuality?.thin_liquidity_count || 0}
+              asOfDate={selectedDate}
               onSelectSignal={handleOpenExplain}
             />
 

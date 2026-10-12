@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Commodity Derivatives Intelligence | MCX Gold Surveillance",
@@ -12,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-900 antialiased">
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-900 antialiased font-sans">
         <main className="flex-1">{children}</main>
 
         {/* Regulatory & Institutional Footer */}
@@ -25,7 +38,7 @@ export default function RootLayout({
               <span>Hack in Hills '26 (Team Holyknight)</span>
             </div>
 
-            <div className="text-center sm:text-right text-[11px] text-slate-400">
+            <div className="text-center sm:text-right text-[11px] text-slate-400 font-mono">
               <span className="font-semibold text-slate-600 block sm:inline">
                 Decision-support analytics. Not investment advice.
               </span>

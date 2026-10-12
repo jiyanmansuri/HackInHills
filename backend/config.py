@@ -119,6 +119,7 @@ else:
 # AI EXPLANATION ENGINE
 # -----------------------------------------------------------------------------
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "").strip()
+CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-3-5-sonnet-20241022").strip()
 
 # Flask API settings
 API_PORT = int(os.getenv("PORT", 5000))

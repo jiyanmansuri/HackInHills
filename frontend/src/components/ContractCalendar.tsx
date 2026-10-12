@@ -36,15 +36,14 @@ export const ContractCalendar: React.FC<ContractCalendarProps> = ({ calendar }) 
       </div>
 
       <div className="overflow-x-auto mt-4">
-        <table className="w-full text-left text-xs">
+        <table className="w-full text-left text-xs whitespace-nowrap">
           <thead>
             <tr className="border-b border-slate-100 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
-              <th className="pb-3 pr-4">Symbol &amp; Lot</th>
+              <th className="pb-3 pr-4">Symbol</th>
               <th className="pb-3 px-3">Expiry Date</th>
               <th className="pb-3 px-3">Days to Expiry</th>
               <th className="pb-3 px-3">Lifecycle Status</th>
               <th className="pb-3 px-3">Settlement / g</th>
-              <th className="pb-3 px-3">Raw Quote</th>
               <th className="pb-3 px-3">Volume (Lots)</th>
               <th className="pb-3 pl-3 text-right">Open Interest</th>
             </tr>
@@ -66,7 +65,7 @@ export const ContractCalendar: React.FC<ContractCalendarProps> = ({ calendar }) 
                       <span>{item.symbol}</span>
                     </div>
                     <span className="text-[10px] text-slate-400 font-normal">
-                      Physical Lot: {item.lot_size_g}g
+                      Lot: {item.lot_size_g}g
                     </span>
                   </td>
 
@@ -85,7 +84,7 @@ export const ContractCalendar: React.FC<ContractCalendarProps> = ({ calendar }) 
                       }`}
                     >
                       <Clock className="w-3 h-3" />
-                      <span>{item.days_to_expiry} days</span>
+                      <span>{item.days_to_expiry}d</span>
                     </span>
                   </td>
 
@@ -103,24 +102,20 @@ export const ContractCalendar: React.FC<ContractCalendarProps> = ({ calendar }) 
                     )}
                   </td>
 
-                  <td className="py-3 px-3 font-bold text-slate-900">
+                  <td className="py-3 px-3 font-bold text-slate-900 tabular-nums">
                     {formatINR(item.price_per_gram)}/g
                   </td>
 
-                  <td className="py-3 px-3 text-slate-600 font-mono">
-                    ₹{item.raw_close.toLocaleString()}
-                  </td>
-
-                  <td className="py-3 px-3 text-slate-700 font-medium">
+                  <td className="py-3 px-3 text-slate-700 font-medium tabular-nums">
                     {item.volume_contracts.toLocaleString()}
                     {item.is_thin_liquidity && (
-                      <span className="ml-1 text-[10px] text-amber-600 bg-amber-50 px-1 rounded">
+                      <span className="ml-1 text-[10px] text-amber-600 bg-amber-50 px-1 rounded border border-amber-200">
                         thin
                       </span>
                     )}
                   </td>
 
-                  <td className="py-3 pl-3 text-right font-medium text-slate-700">
+                  <td className="py-3 pl-3 text-right font-medium text-slate-700 tabular-nums">
                     {item.oi_contracts.toLocaleString()}
                   </td>
                 </tr>
