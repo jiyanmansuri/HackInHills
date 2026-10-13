@@ -71,6 +71,16 @@ def init_db():
     logger.info(f"Initializing database ({DB_TYPE}) at {DATABASE_URI}...")
     Base.metadata.create_all(bind=engine)
 
+    # Defensive SQLite column migration
+    if DB_TYPE == "sqlite":
+        from sqlalchemy import text
+        with engine.connect() as conn:
+            try:
+                conn.execute(text("ALTER TABLE signals ADD COLUMN spread_abs FLOAT DEFAULT 0.0"))
+                conn.commit()
+            except Exception:
+                pass
+
     # Seed contract specs if not present
     with get_session() as session:
         existing = session.query(ContractSpec).count()

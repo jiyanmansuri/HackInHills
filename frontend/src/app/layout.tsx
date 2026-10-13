@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`}>
-      <body className="min-h-screen flex flex-col bg-ground text-ink antialiased font-sans">
+      <body className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--ink)] antialiased font-sans transition-colors">
         <main className="flex-1">{children}</main>
 
         <footer className="border-t border-line bg-white py-6">
