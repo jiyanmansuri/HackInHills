@@ -1,7 +1,7 @@
 """
 Database Seed and Synthetic Pipeline Orchestrator.
 Usage: python -m backend.seed or python backend/seed.py
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import sys

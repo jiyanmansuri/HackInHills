@@ -1,5 +1,4 @@
 # Commodity Derivatives Intelligence (CDI)
-**Hack in Hills '26 | Team Holyknight**  
 *AI-Powered Cross-Contract Relative-Value and Market Intelligence for India's MCX Gold Futures*
 
 ---
@@ -211,4 +210,4 @@ npm run dev
 
 > [!WARNING]
 > **Decision-support analytics. Not investment advice.**  
-> *Commodity Derivatives Intelligence is an academic and quantitative prototype developed for Hack in Hills '26 (Team Holyknight). It is designed strictly for surveillance and decision support. Derivatives trading involves substantial risk of loss.*
+> *Commodity Derivatives Intelligence is an academic and quantitative surveillance prototype. It is designed strictly for surveillance and decision support. Derivatives trading involves substantial risk of loss.*

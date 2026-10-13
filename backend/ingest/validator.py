@@ -1,6 +1,6 @@
 """
 Bhavcopy Data Cleaning, Expiry Validation, Liquidity Flagging, and Quality Reporter.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

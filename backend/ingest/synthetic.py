@@ -1,6 +1,6 @@
 """
 Realistic Synthetic MCX Gold Futures Bhavcopy Data Generator.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 
 Features:
 - ~12 months (252 trading days) of multi-contract settlement data

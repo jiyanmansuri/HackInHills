@@ -2,7 +2,7 @@
 Walk-Forward Out-of-Sample Backtesting Engine.
 Enforces strict chronological train/test separation (zero look-ahead bias),
 transaction friction modeling, and thin-liquidity exclusion.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

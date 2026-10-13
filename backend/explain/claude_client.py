@@ -1,7 +1,7 @@
 """
 Anthropic Claude AI Explanation Client.
 Provides institutional trader-grade commentary with automatic fallback.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

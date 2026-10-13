@@ -1,6 +1,6 @@
 """
 Flask Application Factory for Commodity Derivatives Intelligence.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

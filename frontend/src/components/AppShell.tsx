@@ -154,7 +154,7 @@ export function AppShell({
                   </span>
                 </div>
                 <div className="text-[10px] text-stone-400 dark:text-stone-500 font-medium">
-                  Team Holyknight &bull; Hack in Hills '26
+                  Cross-Contract Relative Value &bull; Surveillance Terminal
                 </div>
               </div>
             </div>

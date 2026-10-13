@@ -1,6 +1,6 @@
 """
 Single Source of Truth Configuration for Commodity Derivatives Intelligence (CDI).
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import os

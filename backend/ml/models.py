@@ -1,6 +1,6 @@
 """
 Machine Learning Model Architectures and Probability Calibration.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

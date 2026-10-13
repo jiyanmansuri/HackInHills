@@ -1,6 +1,6 @@
 """
 Quant Analytics Engine: Normalization, Relative Value, Term Structure, and Attribution.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 from backend.analytics.normalizer import compute_and_store_normalized_prices

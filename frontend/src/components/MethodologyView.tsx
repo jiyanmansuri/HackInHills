@@ -273,7 +273,7 @@ export function MethodologyView({
         </div>
         <p className="leading-relaxed text-[11px]">
           <strong>Decision-support analytics. Not investment advice.</strong> This software is engineered
-          strictly as a quantitative surveillance demonstration prototype for Hack in Hills '26 (Team Holyknight).
+          strictly as an institutional quantitative surveillance and research prototype.
           Historical backtests and walk-forward evaluations do not guarantee future returns.
         </p>
       </div>

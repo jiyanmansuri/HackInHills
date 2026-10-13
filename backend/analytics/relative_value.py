@@ -1,7 +1,7 @@
 """
 Cross-Contract Relative Value Analytics.
 Calculates pairwise spreads, rolling 30-day z-scores, and convergence metrics vs GOLDM.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

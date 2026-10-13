@@ -1,6 +1,6 @@
 """
 Machine Learning Signals and Walk-Forward Backtesting REST Endpoints.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

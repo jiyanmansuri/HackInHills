@@ -1,6 +1,6 @@
 """
 Unit Tests for Walk-Forward Splitting, Look-Ahead Bias Prevention, and Signal Discipline.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import pytest

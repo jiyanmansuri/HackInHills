@@ -1,6 +1,6 @@
 """
 ML and Walk-Forward Backtesting Engine.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 from backend.ml.features import build_feature_dataset

@@ -1,6 +1,6 @@
 """
 Unit Tests for Per-Gram Normalization Logic.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import pytest

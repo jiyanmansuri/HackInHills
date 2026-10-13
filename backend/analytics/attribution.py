@@ -2,7 +2,7 @@
 Performance Attribution Analytics.
 Decomposes strategy returns into Pure Spread-Capture Alpha vs Underlying Gold Price Beta
 strictly aligned with out-of-sample backtest trades and respects target replay dates.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

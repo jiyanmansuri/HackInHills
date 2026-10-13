@@ -1,6 +1,6 @@
 """
 Unit Tests for AI Explanation Layer and POST /api/explain.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import pytest

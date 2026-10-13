@@ -1,6 +1,6 @@
 """
 Quantitative Feature Engineering and Target Generation Pipeline.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

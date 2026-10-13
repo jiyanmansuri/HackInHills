@@ -1,6 +1,5 @@
 /**
  * Utility and Formatting Functions for Fintech Visualizations.
- * Hack in Hills '26 - Team Holyknight
  *
  * Implements the core mathematical decomposition:
  * raw spread -> carry adjustment -> noise -> residual -> costs (12 bps) -> net edge.

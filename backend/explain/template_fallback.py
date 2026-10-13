@@ -1,7 +1,7 @@
 """
 Deterministic Quantitative Narrative Generator.
 High-fidelity fallback engine when ANTHROPIC_API_KEY is not configured or offline.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 from typing import Dict, Any

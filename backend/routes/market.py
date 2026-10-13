@@ -1,6 +1,6 @@
 """
 Market and Quant Analytics REST Endpoints.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

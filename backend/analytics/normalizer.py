@@ -1,7 +1,7 @@
 """
 Per-Gram Normalization Engine.
 Converts MCX contract quotations to a unified INR per gram (INR/g) baseline.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

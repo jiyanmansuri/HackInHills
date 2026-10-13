@@ -3,7 +3,7 @@ Signal Generation and Discipline Engine.
 Enforces the core rule: "The system must be allowed to stay quiet."
 Filters signals on confidence hurdles, liquidity regimes, and roll window safety.
 Detects Benchmark (GOLDM) dislocations when all pairs dislocate in the same direction.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

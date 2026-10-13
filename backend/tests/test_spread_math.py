@@ -1,6 +1,6 @@
 """
 Unit Tests for Spread Math, Term Structure, Attribution, and Market API.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import pytest

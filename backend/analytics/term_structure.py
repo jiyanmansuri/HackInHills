@@ -1,7 +1,7 @@
 """
 Term Structure and Contract Calendar Analytics.
 Calculates forward curve, calendar spreads, annualized carry, and roll-window lifecycles.
-Hack in Hills '26 - Team Holyknight
+Commodity Derivatives Intelligence
 """
 
 import logging

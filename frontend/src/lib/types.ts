@@ -1,6 +1,5 @@
 /**
  * TypeScript Data Models for Commodity Derivatives Intelligence.
- * Hack in Hills '26 - Team Holyknight
  *
  * Core Product Thesis:
  * Raw Spread -> Expiry/Carry Adjustment -> Tick & Liquidity Noise -> Residual -> Net Edge after Costs.
